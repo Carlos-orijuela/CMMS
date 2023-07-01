@@ -1,0 +1,65 @@
+*{
+    margin: 0 auto;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh ;
+    background: rgb(243, 235, 235);
+}
+.login{
+   max-width: 440px;
+    max-height: 480;
+    padding: 30px;
+}
+.logo{
+    margin-bottom: 15px;
+}
+.logo h1{
+    text-align: center;
+    font-size: 3rem;
+    color: #333;
+}
+
+.input .User{
+    padding: 30px;
+    height: 30px;
+    width: 100%;
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+    border-radius: 25px;
+    border: none;
+}
+.check  label {
+    font-size: 1.1rem;
+}
+.check  .box {
+   padding: 22px;
+}
+.check{
+    display: inline-block;
+    vertical-align: middle;
+    width: 50%;
+}
+.signin{
+    width: 47%;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: right;
+}
+.signin .enter{
+    padding: 5px;
+    background-color: white;
+    border-radius: 5px;
+    width: 85px;
+    font-size: 1rem;
+}
+.signin .enter:hover{
+    background: rgb(39, 111, 245);
+    border-color: white;
+    color: white;
+}
