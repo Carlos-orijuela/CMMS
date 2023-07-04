@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>USER</title>
+
+    <!-- Montserrat Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/dashboard.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/user.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0-alpha3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.5/apexcharts.min.js"></script>
+    <!-- Custom JS -->
+    <script defer src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script defer src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script defer src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+  </head>
+  <body>
+    <div class="grid-container">
+
+      <!-- Header -->
+      <header class="header">
+        <div class="menu-icon" onclick="openSidebar()">
+          <span class="material-icons-outlined">menu</span>
+        </div>
+        <div class="header-left">
+          <span class="material-icons-outlined">search</span>
+        </div>
+        <div class="header-right">
+          <span class="material-icons-outlined">notifications</span>
+          <span class="material-icons-outlined">email</span>
+          <span class="material-icons-outlined">account_circle</span>
+        </div>
+      </header>
+      <!-- End Header -->
+
+      <!-- Sidebar -->
+      <aside id="sidebar">
+        <div class="sidebar-title">
+          <div class="sidebar-brand">
+            <span class="material-icons-outlined"></span> Sailorcom
+          </div>
+          <span class="material-icons-outlined" onclick="closeSidebar()">close</span>
+        </div>
+
+        <ul class="sidebar-list">
+          <li class="sidebar-list-item">
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">dashboard</span> Dashboard
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">inventory_2</span> Assets
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">category</span> Supplies
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">groups</span> Users
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">fact_check</span> Maintenance
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">poll</span> Reports
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">settings</span> Settings
+            </a>
+          </li>
+        </ul>
+      </aside>
+      <!-- End Sidebar -->
+
+      <!-- Main -->
+      <main class="main-container">
+        <div class="main-title">
+          <h2>USERS <style color:black;></style></h2>
+        </div>
+        <div class="user-credentials">
+            <div class="btn-cont">
+                <div class="btn-main">
+                    <button class="btn1">Add User</button>
+                </div>
+            </div>
+          <table id="example" class="table table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Department</th>
+                    <th>User Status</th>
+                    <th>Start date</th>
+                    <th>Option</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>John</td>
+                    <td>System Architect</td>
+                    <td>Edinburgh</td>
+                    <td>Admin</td>
+                    <td>2011-04-25</td>
+                    <td><input type="button" value="Delete">
+                        <input type="button" value="Settings">                    </td>
+                    </td>               
+                 </tr>
+                <tr>
+                    <td>R.m</td>
+                    <td>Accountant</td>
+                    <td>Tokyo</td>
+                    <td>Admin</td>
+                    <td>2011-07-25</td>
+                    <td><input type="button" value="Delete">
+                        <input type="button" value="Settings">                    </td>
+                    </td>
+                </tr>
+                <tr>
+                    <td>carlos</td>
+                    <td>Junior Technical Author</td>
+                    <td>San Francisco</td>
+                    <td>Admin</td>
+                    <td>2009-01-12</td>
+                    <td><input type="button" value="Delete">
+                        <input type="button" value="Settings">                    </td>
+                </tr>
+                <tr>
+                    <td>dave</td>
+                    <td>Senior Javascript Developer</td>
+                    <td>Edinburgh</td>
+                    <td>Admin</td>
+                    <td>2012-03-29</td>
+                    <td><input type="button" value="Delete">
+                        <input type="button" value="Settings">                    </td>
+                    </td>
+                </tr>
+                <tr>
+                    <td>mark</td>
+                    <td>Accountant</td>
+                    <td>Tokyo</td>
+                    <td>User</td>
+                    <td>2008-11-28</td>
+                    <td><input type="button" value="Delete">
+                        <input type="button" value="Settings">                    </td>
+                    </td>
+                </tr>
+                <tr>
+                    <td>angel</td>
+                    <td>Integration Specialist</td>
+                    <td>New York</td>
+                    <td>User</td>
+                    <td>2012-12-02</td>
+                    <td><input type="button" value="Delete">
+                        <input type="button" value="Settings">                    </td>
+                    </td>                </tr>
+                <tr>
+                    <td>Herrod </td>
+                    <td>Sales Assistant</td>
+                    <td>San Francisco</td>
+                    <td>User</td>
+                    <td>2012-08-06</td>
+                    <td><input type="button" value="Delete">
+                        <input type="button" value="Settings">                    </td>
+                    </td>                </tr>
+                <tr>
+                    <td>Rhona </td>
+                    <td>Integration Specialist</td>
+                    <td>Tokyo</td>
+                    <td>User</td>
+                    <td>2010-10-14</td>
+                    <td><input type="button" value="Delete">
+                        <input type="button" value="Settings">                    </td>
+                    </td>                
+                </tr>
+                <tr>
+                    <td>Colleen </td>
+                    <td>Javascript Developer</td>
+                    <td>San Francisco</td>
+                    <td>User</td>
+                    <td>2009-09-15</td>
+                    <td><input type="button" value="Delete">
+                        <input type="button" value="Settings">                    </td>
+                    </td>                
+                </tr>
+                <tr>
+                    <td>Sonya </td>
+                    <td>Software Engineer</td>
+                    <td>Edinburgh</td>
+                    <td>User</td>
+                    <td>2008-12-13</td>
+                    <td><input type="button" value="Delete">
+                        <input type="button" value="Settings">                    </td>
+                    </td>              
+                 </tr>
+                <tr>
+                    <td>Jena </td>
+                    <td>Office Manager</td>
+                    <td>London</td>
+                    <td>Super Admin</td>
+                    <td>2008-12-19</td>
+                    <td><input type="button" value="Delete">
+                        <input type="button" value="Settings">                    </td>
+                    </td>                
+                </tr>
+                <tr>
+                    <td>Quinn </td>
+                    <td>Support Lead</td>
+                    <td>Edinburgh</td>
+                    <td>Super Admin</td>
+                    <td>2013-03-03</td>
+                    <td><input type="button" value="Delete">
+                        <input type="button" value="Settings">                    </td>
+                    </td>                
+                </tr>
+                <tr>
+                    <td>Charde </td>
+                    <td>Regional Director</td>
+                    <td>San Francisco</td>
+                    <td>Super Admin</td>
+                    <td>2008-10-16</td>
+                    <td><input type="button" value="Delete">
+                        <input type="button" value="Settings">                    </td>
+                    </td>               
+                 </tr>
+                <tr>
+                    <td>Haley </td>
+                    <td>Senior Marketing Designer</td>
+                    <td>London</td>
+                    <td>Super Admin</td>
+                    <td>2012-12-18</td>
+                    <td><input type="button" value="Delete">
+                        <input type="button" value="Settings">                    </td>
+                    </td>               
+                 </tr>
+                <tr>
+                    <td>Tatyana </td>
+                    <td>Regional Director</td>
+                    <td>London</td>
+                    <td>Super Admin</td>
+                    <td>2010-03-17</td>
+                    <td><input type="button" value="Delete">
+                        <input type="button" value="Settings">                    </td>
+                    </td>               
+                 </tr>
+                <tr>
+                    <td>Michael </td>
+                    <td>Marketing Designer</td>
+                    <td>London</td>
+                    <td>Admin</td>
+                    <td>2012-11-27</td>
+                    <td><input type="button" value="Delete">
+                        <input type="button" value="Settings">                    </td>
+                    </td>               
+                 </tr>
+                <tr>
+                    <td>Paul </td>
+                    <td>Chief Financial Officer (CFO)</td>
+                    <td>New York</td>
+                    <td>User</td>
+                    <td>2010-06-09</td>
+                    <td><input type="button" value="Delete">
+                        <input type="button" value=" Settings">                    </td>
+                    </td>                
+                </tr>
+              
+            </tbody>
+        </table>
+    
+        </div>
+        
+      </main>
+      <!-- End Main -->
+
+    </div>
+
+     <script defer src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <script
+    src="https://code.jquery.com/jquery-3.6.1.min.js"
+    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+    crossorigin="anonymous"
+  ></script>
+  <script src="/management/JS/user.js"></script>
+  </body>
+</html>
