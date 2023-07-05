@@ -23,16 +23,12 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	// datetime := now.Format("15:04:05")
 	// t := fmt.Sprint(time.Now().Nanosecond())
 
-
-
 	db.Where("username = ?", username).Find(&user)
 	db.Where("username = ?", username).Find(&report)
 
 	println(username, user.ID)
 
 	db.Where("id", user.ID).Find(&user)
-	
-	
 
 	// if (user.Date == date){
 	// 	user.LoginTime = date + " " + datetime
@@ -50,17 +46,16 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	// 		operator := models.SMS{}
 	// 		operator.Type = "SEMAPHORE"
 	// 		operator.SenderName = "Thesis"
-	
+
 	// 		operator.Username = "b6a29200f850ca721fb33b63470473c2"
-	
+
 	// 		operator.Message = t[:6] + " " + "is your One-Time Password(OTP). Valid for 1 day."
-	
+
 	// 		operator.Phone = user.Number
 	// 		operator.Sendsms(false)
 	// 		db.Save(&user)
 	// 	}
 	// }
-	
 
 	if CheckPasswordHash(password, user.Password) {
 		result := "1"
@@ -112,7 +107,7 @@ func CheckPasswordHash(pass, hash string) bool {
 }
 
 func GormDB() *gorm.DB {
-	dsn := "root:a@tcp(127.0.0.1:3306)/flight_app?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := "root:a@tcp(127.0.0.1:3306)/CMMS?charset=utf8mb4&parseTime=True&loc=Local"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 
 	if err != nil {

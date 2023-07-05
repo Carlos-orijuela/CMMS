@@ -9,7 +9,11 @@ import (
 	"github.com/dafalo/CMMS/api"
 	"github.com/dafalo/CMMS/models"
 	"github.com/dafalo/CMMS/views"
+
+	// hash password
 	"golang.org/x/crypto/bcrypt"
+
+	// mysql
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -31,7 +35,6 @@ func main() {
 	http.ListenAndServe(Port, nil)
 }
 
-
 func Handlers() {
 	fmt.Println("Handlers")
 	http.Handle("/templates/", http.StripPrefix("/templates/", http.FileServer(http.Dir("./templates/"))))
@@ -40,10 +43,15 @@ func Handlers() {
 	http.HandleFunc("/", views.LoginHandler)
 	http.HandleFunc("/api/", api.APIHandler)
 
+	http.HandleFunc("/dashboard", views.DashboardHandler)
+	http.HandleFunc("/clientdashboard", views.ClientDashboardHandler)
+
 }
 
 func CreateDB(name string) *sql.DB {
 	fmt.Println("Database Created")
+
+	//user:password ======= root:a
 	db, err := sql.Open("mysql", "root:a@tcp(127.0.0.1:3306)/")
 	if err != nil {
 		panic(err)
@@ -71,8 +79,6 @@ func MigrateDB() {
 	db.AutoMigrate(&user)
 }
 
-
-
 func CreateDefaultUser() {
 
 	db := GormDB()
@@ -86,10 +92,8 @@ func CreateDefaultUser() {
 			Password: hashPassword("admin"),
 			Name:     "Software Developer",
 			Type:     "Administrator",
-			OTP : "1",
-			Default: "1",
-
-			
+			OTP:      "1",
+			Default:  "1",
 		},
 
 		{
@@ -97,10 +101,9 @@ func CreateDefaultUser() {
 			Password: hashPassword("user"),
 			Name:     "Software Developer",
 			Type:     "User",
-			OTP : "1",
-			Default: "1",
+			OTP:      "1",
+			Default:  "1",
 		},
-		
 	}
 
 	isExisting := false
@@ -121,14 +124,13 @@ func CreateDefaultUser() {
 
 }
 
-
 func hashPassword(pass string) string {
 	bytes, _ := bcrypt.GenerateFromPassword([]byte(pass), 14)
 	return string(bytes)
 }
 
 func GormDB() *gorm.DB {
-	dsn := "root:a@tcp(127.0.0.1:3306)/flight_app?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := "root:a@tcp(127.0.0.1:3306)/CMMS?charset=utf8mb4&parseTime=True&loc=Local"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 
 	if err != nil {
@@ -137,4 +139,3 @@ func GormDB() *gorm.DB {
 
 	return db
 }
-

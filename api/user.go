@@ -18,13 +18,11 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	password := r.FormValue("password")
 	stat := r.FormValue("position")
 
-
 	product.Name = name
 	product.Username = username
 	product.Password = hashPassword(password)
 	product.Type = stat
 	product.OTP = "0"
-	
 
 	db.Save(&product)
 
@@ -49,14 +47,12 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 	sqlDB.Close()
 }
 
-
 func ChangePassword(w http.ResponseWriter, r *http.Request) {
 
 	db := GormDB()
 	product := models.User{}
 	username := r.FormValue("username")
 	password := r.FormValue("password")
-
 
 	db.Where("username", username).Find(&product)
 	product.Password = hashPassword(password)
@@ -71,7 +67,6 @@ func OTP(w http.ResponseWriter, r *http.Request) {
 	product := models.User{}
 	otp := r.FormValue("otp")
 	user, _ := r.Cookie("id")
-
 
 	db.Where("id", user.Value).Find(&product)
 	product.OTP = otp

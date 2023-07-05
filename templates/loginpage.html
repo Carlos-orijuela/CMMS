@@ -14,19 +14,130 @@
         <div class="login">
             <div class="logo"><h1>Sailorcom</h1></div>
             <div class="input">
-                <input class="User" type="text" placeholder="User" required>    
+                <input class="User" type="text" id="username" placeholder="User" required>    
             </div>
             <div class="input">
-                <input class="User" type="password" placeholder="Password" required>    
+                <input class="User" type="password" id="password" placeholder="Password" required>    
             </div>
             <div class="check">
                 <input class="box" type="checkbox" id="check">
                 <label for="check">Remember me</label>
             </div>
             <div class="signin">
-                <input class="enter" type="Button" value="Sign In" required>    
+                <input class="enter" type="Submit" value="Sign In" required onclick="Login()" />    
             </div>
         </div>
     </section>
+    <!-- SCRIPT -->
+
+    <script type="text/javascript" src="/assets/js/main.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.min.js"
+      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      type="text/javascript"
+      src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"
+    ></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+      var dataresult = "";
+      function Login() {
+        var username = $("#username").val();
+        var password = $("#password").val();
+
+        if (username == "" || password == "") {
+          $("#username").val("");
+          $("#password").val("");
+          Swal.fire({
+            toast: true,
+            position: "center",
+            icon: "warning",
+            title: "Please Complete Required Details",
+            showConfirmButton: false,
+            timer: 3000,
+          });
+        } else {
+          $.get("/api/get_user", function (index) {
+            var result = JSON.parse(index).item;
+            $.each(result, function (_, v) {
+              if (v.Username == username) {
+                dataresult = v.Default;
+              }
+            });
+            if (dataresult == 0) {
+              localStorage.setItem("username", username);
+              location.replace("/password");
+            } else {
+              $.ajax({
+                url: "/api/login",
+                data: {
+                  username: username,
+                  password: password,
+                },
+                success: function (res) {
+                  var result = JSON.parse(res).results;
+                  var user = JSON.parse(res).reports;
+                  if (result == 1) {
+                    console.log(user[0].Type);
+                    if (user[0].Type == "Administrator") {
+                      localStorage.setItem("name", user[0].Name);
+                      localStorage.setItem("type", user[0].Type);
+                      Swal.fire({
+                        toast: true,
+                        position: "center",
+                        icon: "success",
+                        title: "Admin Login Successful",
+                        showConfirmButton: false,
+                        timer: 3000,
+                      }).then(function () {
+                        alert(user[0].OTP);
+                        if (user[0].OTP == "1") {
+                          window.location.replace("/dashboard");
+                        } else {
+                          window.location.replace("/code");
+                        }
+                      });
+                    }
+                    if (user[0].Type == "User") {
+                      localStorage.setItem("name", user[0].Name);
+                      localStorage.setItem("type", user[0].Type);
+                      Swal.fire({
+                        toast: true,
+                        position: "center",
+                        icon: "success",
+                        title: "User Login Successful",
+                        showConfirmButton: false,
+                        timer: 3000,
+                      }).then(function () {
+                        if (user[0].OTP == "1") {
+                          window.location.replace("/clientdashboard");
+                        } else {
+                          window.location.replace("/code");
+                        }
+                      });
+                    }
+                  } else {
+                    Swal.fire({
+                      toast: true,
+                      position: "center",
+                      icon: "warning",
+                      title: "Please Check your Email and Password!",
+                      showConfirmButton: false,
+                      timer: 3000,
+                    });
+                    $("#username").val("");
+                    $("#password").val("");
+                  }
+                },
+              });
+            }
+          });
+        }
+      }
+    </script>
+    <!-- END -->
 </body>
 </html>
