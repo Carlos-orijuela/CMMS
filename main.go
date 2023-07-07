@@ -46,6 +46,8 @@ func Handlers() {
 	http.HandleFunc("/dashboard", views.DashboardHandler)
 	http.HandleFunc("/clientdashboard", views.ClientDashboardHandler)
 
+	http.HandleFunc("/adduser", views.AddUserHandler)
+
 }
 
 func CreateDB(name string) *sql.DB {
