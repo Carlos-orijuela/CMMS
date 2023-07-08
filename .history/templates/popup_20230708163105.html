@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/css/popup.css">
+    <title>popup</title>
+</head>
+<body>
+    <div class="form">
+        <header><h1>Create User</h1></header>
+        <div class="name same"><h3>Name</h3><input type="text" placeholder="Full Name" id="name"></div>
+        <div class="username same"><h3>Username</h3><input type="Username" placeholder="Username" id="username" required></div>
+        <div class="pass same"><h3>Password</h3><input type="password" placeholder="Password" id="password" required></div>
+
+        <div class="pos same"><h3>Position</h3>
+          <select id="position" name="position" required>
+          <option value="">Select an option</option>
+          <option value="option1">Option 1</option>
+          <option value="option2">Option 2</option>
+          <option value="option3">Option 3</option>
+          <option value="option4">Option 4</option>
+        </select></div>
+
+        <div class="dept same"><h3>Department</h3> <div>
+          <select id="department" name="department" required>
+            <option value="">Select an option</option>
+            <option value="option1">Option 1</option>
+            <option value="option2">Option 2</option>
+            <option value="option3">Option 3</option>
+            <option value="option4">Option 4</option>
+          </select>
+        </div></div>
+        <div class="btns">
+            <button class="btn-a" onclick="Submit()">Create User</button>
+            <button class="btn-a">close</button>
+        </div>
+
+    </div>
+
+<script>
+  
+</script>
+<script src="/assets/js/script.js"></script>
+    <script
+    src="https://code.jquery.com/jquery-3.6.1.min.js"
+    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+    crossorigin="anonymous">
+</script>
+<script
+    type="text/javascript"
+    src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
+<script>  
+
+//   $(document).ready(function () {
+//     getdata()
+//     getmetar()
+//     $("#user_name").empty()
+//     dataname = localStorage.getItem("name")
+//     $("#user_name").html(dataname)  
+//   })
+  
+//   function getmetar(){
+//     $("#details").empty()
+//           $.get("/api/get_metar", function (index) {
+//             var result = JSON.parse(index).item
+//             $.each(result, function (_, v) {
+//               $("#details").append(`
+//               <tr>
+//                     <td>`+v.Location.Name+`</td>
+//                     <td>`+v.Details+`</td>
+//                     <td>`+v.Remarks+`</td>
+//                     <td>`+v.User.Name+`</td>
+//                     <td>`+v.LastUpdate+`</td>
+//                   </tr>
+//               `)
+//           })
+//         })
+//   }
+//     function getdata(){
+//           $("#loc").empty()
+//           $("#loc").append(`
+//           <option value="">Select Location</option>
+//           `)
+//           $.get("/api/get_location", function (index) {
+//             var result = JSON.parse(index).item
+//             $.each(result, function (_, v) {
+//               $("#loc").append(`
+//           <option value="`+v.ID+`">`+v.Name+` - `+v.Acronym+`</option>
+//           `)
+//             })
+//           })
+//     }
+  
+    function Submit(){
+    //   var loc =  $("#loc").val()
+    //   var metar =  $("#metar").val()
+    //   var remarks =  $("#remarks").val()
+    var name =  $("#name").val()
+    var username =  $("#username").val()
+    var password =  $("#password").val()
+    var position =  $("#position").val()
+    var department =  $("#department").val()
+
+      if (name == "" || password == "" || position == "" || department == "") {
+            Swal.fire({
+              toast: true,
+              position: "center",
+              icon: "warning",
+              title: "Please Complete Required Details",
+              showConfirmButton: false,
+              timer: 3000,
+            });
+          } else {
+            $.ajax({
+              url: "/api/user",
+              data: {
+                // location: loc,
+                // metar: metar,
+                // remarks: remarks,
+                name: name,
+                username: username,
+                password: password,
+                position: position,
+                department: department,
+              },
+              success: function () {
+                Swal.fire({
+                  toast: true,
+                  position: "center",
+                  icon: "success",
+                  title: "New User Added",
+                  showConfirmButton: false,
+                  timer: 3000,
+                });
+                // .then(function () {
+                //   getmetar()
+                // $("#loc").val("")
+                //  $("#metar").val("")
+                //  $("#remarks").val("")
+  
+                // });
+              },
+            });
+          }
+    }
+  
+</script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
