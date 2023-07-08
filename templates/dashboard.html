@@ -1,23 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>Admin Dashboard</title>
 
     <!-- Montserrat Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Material Icons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+      rel="stylesheet"
+    />
 
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="/assets/css/dashboard.css" />
-    
   </head>
   <body>
     <div class="grid-container">
-
       <!-- Header -->
       <header class="header">
         <div class="menu-icon" onclick="openSidebar()">
@@ -31,8 +35,10 @@
           <span class="material-icons-outlined">email</span>
           <span class="material-icons-outlined">account_circle</span>
           <a href="/loginpage" class="logout">
-            <span class="material-icons-outlined" title="Logout">call_made</span>
-    </a>
+            <span class="material-icons-outlined" title="Logout"
+              >call_made</span
+            >
+          </a>
         </div>
       </header>
       <!-- End Header -->
@@ -43,7 +49,9 @@
           <div class="sidebar-brand">
             <span class="material-icons-outlined"></span> Sailorcom
           </div>
-          <span class="material-icons-outlined" onclick="closeSidebar()">close</span>
+          <span class="material-icons-outlined" onclick="closeSidebar()"
+            >close</span
+          >
         </div>
 
         <ul class="sidebar-list">
@@ -69,7 +77,8 @@
           </li>
           <li class="sidebar-list-item">
             <a href="#" target="_blank">
-              <span class="material-icons-outlined">fact_check</span> Maintenance
+              <span class="material-icons-outlined">fact_check</span>
+              Maintenance
             </a>
           </li>
           <li class="sidebar-list-item">
@@ -78,7 +87,7 @@
             </a>
           </li>
           <li class="sidebar-list-item">
-            <a href="Department.html" target="_blank">
+            <a href="/department">
               <span class="material-icons-outlined">sort</span> Department
             </a>
           </li>
@@ -98,7 +107,6 @@
         </div>
 
         <div class="main-cards">
-
           <div class="card">
             <div class="card-inner">
               <h3>TOTAL ASSETS</h3>
@@ -126,15 +134,15 @@
           <div class="card">
             <div class="card-inner">
               <h3>NOTIFICATION</h3>
-              <span class="material-icons-outlined">notification_important</span>
+              <span class="material-icons-outlined"
+                >notification_important</span
+              >
             </div>
             <h1>56</h1>
           </div>
-
         </div>
 
         <div class="charts">
-
           <div class="charts-card">
             <h2 class="chart-title">Assets Maintenance Graph</h2>
             <div id="bar-chart"></div>
@@ -144,11 +152,9 @@
             <h2 class="chart-title">Supplies Purchase</h2>
             <div id="area-chart"></div>
           </div>
-
         </div>
       </main>
       <!-- End Main -->
-
     </div>
 
     <!-- Scripts -->

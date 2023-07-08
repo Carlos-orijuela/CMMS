@@ -45,9 +45,8 @@ func Handlers() {
 
 	http.HandleFunc("/dashboard", views.DashboardHandler)
 	http.HandleFunc("/clientdashboard", views.ClientDashboardHandler)
-
 	http.HandleFunc("/adduser", views.AddUserHandler)
-
+	http.HandleFunc("/department", views.DepartmentHandler)
 }
 
 func CreateDB(name string) *sql.DB {
@@ -77,8 +76,10 @@ func CreateDB(name string) *sql.DB {
 func MigrateDB() {
 	fmt.Println("Database Migrated")
 	user := models.User{}
+	department := models.Department{}
+	position := models.Position{}
 	db := GormDB()
-	db.AutoMigrate(&user)
+	db.AutoMigrate(&user,&department,&position)
 }
 
 func CreateDefaultUser() {

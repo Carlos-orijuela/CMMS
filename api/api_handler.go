@@ -37,6 +37,26 @@ func APIHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	if strings.HasPrefix(r.URL.Path, "department") {
+		CreateDepartment(w, r)
+		return
+	}
+
+	if strings.HasPrefix(r.URL.Path, "get_department") {
+		GetDepartment(w, r)
+		return
+	}
+
+	if strings.HasPrefix(r.URL.Path, "edit_department") {
+		EditDepartment(w, r)
+		return
+	}
+
+	if strings.HasPrefix(r.URL.Path, "delete_department") {
+		DeleteDepartment(w, r)
+		return
+	}
+
 
 	
 
