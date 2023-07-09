@@ -110,7 +110,9 @@
     background-color:aliceblue;
     padding: 2%;
 }
-.ecard{
-    display: flex;
 
+.dept .note{
+    display: inline-block;
+    vertical-align: top;
+    width: 40%;
 }
