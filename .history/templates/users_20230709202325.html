@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Users</title>
+
+    <!-- Montserrat Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/dashboard.css" />
+    
+  </head>
+  <body>
+    <div class="grid-container">
+
+      <!-- Header -->
+      <header class="header">
+        <div class="menu-icon" onclick="openSidebar()">
+          <span class="material-icons-outlined">menu</span>
+        </div>
+        <div class="header-left">
+          <span class="material-icons-outlined">search</span>
+        </div>
+        <div class="header-right">
+          <span class="material-icons-outlined">notifications</span>
+          <span class="material-icons-outlined">email</span>
+          <span class="material-icons-outlined">account_circle</span>
+        <a href="/loginpage" class="logout">
+                <span class="material-icons-outlined" title="Logout">call_made</span>
+        </a>
+        </div>
+      </header>
+      <!-- End Header -->
+
+      <!-- Sidebar -->
+      <aside id="sidebar">
+        <div class="sidebar-title">
+          <div class="sidebar-brand">
+            <span class="material-icons-outlined"></span> Sailorcom
+          </div>
+          <span class="material-icons-outlined" onclick="closeSidebar()">close</span>
+        </div>
+
+        <ul class="sidebar-list">
+          <li class="sidebar-list-item">
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">dashboard</span> Dashboard
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">inventory_2</span> Assets
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">category</span> Supplies
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="/users">
+              <span class="material-icons-outlined">groups</span> Users
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">fact_check</span> Maintenance
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">poll</span> Reports
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="/department">
+              <span class="material-icons-outlined">sort</span> Department
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">settings</span> Settings
+            </a>
+          </li>
+        </ul>
+      </aside>
+      <!-- End Sidebar -->
+
+      <!-- Main -->
+      <main class="main-container">
+        <div class="main-title">
+          <h2>ADD USER</h2>
+        </div>
+
+        
+
+        <div class="card-content">
+            <div>
+                <input class="search" type="text" placeholder="Search...">
+                <button class="buttons" id="openModalBtn"><span class="material-icons-outlined" title="Add User">person_add</span> </button>
+            </div>
+
+            <div class="card-content">
+                <div class="card-table">
+                    <table class="custom-table">
+                        <thead>
+                          <tr>
+                            <th>Full Name</th>
+                            <th>Username</th>
+                            <!-- <th>Password</th> -->
+                            <th>Account Type</th>
+                            <th>Department</th>
+                            <th>Position</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody id="details">
+                          <!-- APPEND TABLE DATA HERE -->
+                        </tbody>
+                      </table>
+                  </div> 
+              </div>
+            </div>
+      </main>
+      <!-- End Main -->
+
+      <!--Modal-->
+      <div id="myModal" class="modal">
+        <div class="modal-content">
+          <h2 class="h2h2">Add User</h2>
+            <div class="centered-container">
+                <input class="input-dept" type="text" placeholder="FULLNAME" id="name" required><h5>FULLNAME</h5>
+            </div>
+            <div class="centered-container">
+                <input class="input-dept" type="text" placeholder="USERNAME" id="username" required>
+            </div>
+            <div class="centered-container">
+                <input class="input-dept" type="password" placeholder="PASSWORD" id="password" required>
+            </div>
+            <div class="centered-container">
+                <select id="accntType" required>
+                    <option value="">ACCOUNT TYPE</option>
+                    <option value="Administrator">Administrator</option>
+                    <option value="User">User</option>
+                </select>
+            </div>
+            <div class="centered-container">
+              <select id="department" name="department" required>
+                    <option value="">DEPARTMENT</option>
+                    <!-- <option value="option1">Option 1</option>
+                    <option value="option2">Option 2</option> -->
+                </select>
+            </div>
+            <div class="centered-container">
+              <select id="position" name="position" required> 
+                    <option value=""></option>
+                    <option value="Admin">Admin</option>
+                    <option value="Tech Support">Tech Support</option>
+                </select>
+            </div>
+            <div class="centered-container">
+                <button class="custom-button" onclick="Submit()"><span class="material-icons-outlined" title="CREATE" >create</span></button>
+                <button class="custom-button"><span class="material-icons-outlined" title="CANCEL" onclick="Cancel(1)"></span>CANCEL</button>
+            </div>         
+        </div>
+      </div>
+      <!--End Modal-->
+      <!--Edit Modal Start-->
+      <div id="myModaledit" class="modaledit">
+        <div class="modalcontentedit">
+          <h2 class="h2h2">Update User</h2>
+            <div class="centered-container">
+                <input class="input-dept" type="text" placeholder="FULLNAME">
+            </div>
+            <div class="centered-container">
+                <input class="input-dept" type="text" placeholder="USERNAME">
+            </div>
+            <div class="centered-container">
+                <input class="input-dept" type="password" placeholder="PASSWORD">
+            </div>
+            <div class="centered-container">
+                <select>
+                    <option value=""></option>
+                    <option value="Administrator">Administrator</option>
+                    <option value="User">User</option>
+                </select>
+            </div>
+            <div class="centered-container">
+              <select id="department" name="department" required>
+                    <!-- <option value="option1">DEPARTMENT</option>
+                    <option value="option1">Option 1</option>
+                    <option value="option2">Option 2</option> -->
+                </select>
+            </div>
+            <div class="centered-container">
+                <select>
+                    <option value=""></option>
+                    <option value="Admin">Admin</option>
+                    <option value="Tech Support">Tech Support</option>
+                </select>
+            </div>
+            <div class="centered-container">
+                <button class="custom-button"><span class="material-icons-outlined" title="Update" onclick="Edit()">Update</span></button>
+                <button class="custom-button" onclick="Cancel(2)">CANCEL</button>
+            </div>         
+        </div>
+      </div>
+      <!--End edit Modal-->
+
+    </div>
+
+    <!--Start Modal Delete-->
+        <div id="myModaldelete" class="modaldelete">
+        <div class="modalcontentdelete">
+            <h2 class="h2h2">ARE YOU SURE YOU WANT TO DELETE THIS?</h2>
+            <div class="centered-container">
+                <h2 class="h2black">PANGALAN</h2>
+            </div>
+            <div class="centered-container">
+                <button class="custom-button"><span class="material-icons-outlined" title="Delete" onclick="Remove()">delete</span></button>
+                <button class="custom-button" onclick="Cancel(3)">CANCEL</button>
+            </div>
+        </div>
+        </div>
+    <!--Delete end modal-->
+
+    <!-- Scripts -->
+    <!-- ApexCharts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.5/apexcharts.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.min.js"
+      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      type="text/javascript"
+      src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"
+    ></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Custom JS -->
+    <script>
+      $(document).ready(function () {
+        getdata();
+        get_department();
+      });
+
+      // display Data in the table
+      function getdata() {
+        $("#details").empty();
+        $.get("/api/get_user", function (index) {
+          var result = JSON.parse(index).item;
+          $.each(result, function (_, v) {
+            $("#details").append(
+              `
+            <tr>
+              <td>` +v.Name +`</td>
+              <td>` +v.Username +`</td>
+              <td>` +v.AccountType +`</td>
+              <td>` +v.Department +`</td>
+              <td>` +v.Position +`</td>
+
+              <td>
+                <button class="custom-button" id="openModalBtneditdept-` +v.ID +`">
+                <span class="material-icons-outlined" title="Update Account" onclick="Modify(` +v.ID +`)" >create</span></button>
+
+                <button class="custom-button delete" id="openModalBtndeletedept">
+                <span class="material-icons-outlined" title="Delete" onclick="Delete(` +v.ID +`)">delete</span></button>
+            </td>
+            </tr>
+          `
+            );
+          });
+        });
+      }
+
+    // ADD USER ACCOUNT
+    function Submit(){
+    var name =  $("#name").val()
+    var username =  $("#username").val()
+    var password =  $("#password").val()
+    var accntType =  $("#accntType").val()
+    var position =  $("#position").val()
+    var department =  $("#department").val()
+
+      if (name == "" || password == "" || position == "" || department == "" || accntType == "") {
+            Swal.fire({
+              toast: true,
+              position: "center",
+              icon: "warning",
+              title: "Please Complete Required Details",
+              showConfirmButton: false,
+              timer: 3000,
+            });
+          } else {
+            $.ajax({
+              url: "/api/user",
+              data: {
+                name: name,
+                username: username,
+                password: password,
+                accntType: accntType,
+                position: position,
+                department: department,
+              },
+              success: function () {
+                Swal.fire({
+                  toast: true,
+                  position: "center",
+                  icon: "success",
+                  title: "New User Added",
+                  showConfirmButton: false,
+                  timer: 3000,
+                }).then(function(){
+                  window.location.reload();
+                });
+              },
+            });
+          }
+    }
+
+
+    //DDL DEPARTMENT
+    function get_department() {
+        $("#department").empty();
+        $("#department").append($("<option />").val(""));
+        $.get("/api/get_department", function (index) {
+          var result = JSON.parse(index).item;
+          $.each(result, function (_, v) {
+            $("#department").append(
+              `
+              
+              <option value="`+ v.Name +`">`+ v.Name +`</option>
+          `
+            );
+          });
+        });
+      }
+ 
+    // Cancel Function
+    function Cancel(id) {
+        if (id == 1) {
+          var modal = document.getElementById("myModal");
+          modal.style.display = "none";
+        } else if (id == 2) {
+          var modal = document.getElementById("myModaledit");
+          modal.style.display = "none";
+        } else {
+          var modal = document.getElementById("myModaldelete");
+          modal.style.display = "none";
+        }
+      }
+    </script>
+    
+    <!--ADD USER JS-->
+    <script>
+        var openModalBtn = document.getElementById("openModalBtn");
+        var closeModalBtn = document.getElementById("closeModalBtn");
+        var modal = document.getElementById("myModal");
+
+        openModalBtn.addEventListener("click", function() {
+        modal.style.display = "block";
+        });
+
+        closeModalBtn.addEventListener("click", function() {
+        modal.style.display = "none";
+        });
+
+        window.addEventListener("click", function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+        });  
+    </script>
+
+    <!--EDIT USER JS-->
+    <script>
+        var openModalBtnedit = document.getElementById("openModalBtnedit");
+        var closeModalBtnedit = document.getElementById("closeModalBtnedit");
+        var modaledit = document.getElementById("myModaledit");
+
+        openModalBtnedit.addEventListener("click", function() {
+        modaledit.style.display = "block";
+        });
+
+        closeModalBtnedit.addEventListener("click", function() {
+        modaledit.style.display = "none";
+        });
+
+        window.addEventListener("click", function(event) {
+        if (event.target == modaledit) {
+            modaledit.style.display = "none";
+        }
+        });  
+    </script>
+    <!--DELETE USER JS-->
+    <script>
+        var openModalBtndelete = document.getElementById("openModalBtndelete");
+        var closeModalBtndelete = document.getElementById("closeModalBtndelete");
+        var modaldelete = document.getElementById("myModaldelete");
+
+        openModalBtndelete.addEventListener("click", function() {
+        modaldelete.style.display = "block";
+        });
+
+        closeModalBtndelete.addEventListener("click", function() {
+        modaldelete.style.display = "none";
+        });
+
+        window.addEventListener("click", function(event) {
+        if (event.target == modaledit) {
+            modaldelete.style.display = "none";
+        }
+        });  
+    </script>
+  </body>
+</html>
