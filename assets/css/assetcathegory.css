@@ -1,6 +1,9 @@
 *{
     color:black;
 }
+#sidebar{
+    color: white;
+}
 .main-container{
     background-color: rgb(211, 203, 203);
 }
