@@ -18,10 +18,6 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	password := r.FormValue("password")
 	user := models.User{}
 	report := []models.User{}
-	// now := time.Now()
-	// date := now.Format("2006-01-02")
-	// datetime := now.Format("15:04:05")
-	// t := fmt.Sprint(time.Now().Nanosecond())
 
 	db.Where("username = ?", username).Find(&user)
 	db.Where("username = ?", username).Find(&report)
@@ -29,33 +25,6 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	println(username, user.ID)
 
 	db.Where("id", user.ID).Find(&user)
-
-	// if (user.Date == date){
-	// 	user.LoginTime = date + " " + datetime
-	// 	user.OTP = "1";
-	// 	db.Save(&user)
-	// }else{
-	// 	if user.Username == "admin" || user.Username == "user"{
-
-	// 	}else{
-
-	// 		user.LoginTime = date + " " + datetime
-	// 		user.Date = date;
-	// 		user.OTP = "0"
-	// 		user.Code = t[:6]
-	// 		operator := models.SMS{}
-	// 		operator.Type = "SEMAPHORE"
-	// 		operator.SenderName = "Thesis"
-
-	// 		operator.Username = "b6a29200f850ca721fb33b63470473c2"
-
-	// 		operator.Message = t[:6] + " " + "is your One-Time Password(OTP). Valid for 1 day."
-
-	// 		operator.Phone = user.Number
-	// 		operator.Sendsms(false)
-	// 		db.Save(&user)
-	// 	}
-	// }
 
 	if CheckPasswordHash(password, user.Password) {
 		result := "1"

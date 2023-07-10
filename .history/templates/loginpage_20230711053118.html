@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/css/superad.css" />
+    <title>Log-in</title>
+</head>
+<body>
+    <section class="main">
+        <div class="login">
+            <div class="logo"><h1>Sailorcom</h1></div>
+            <div class="input">
+                <input class="User" type="text" id="username" placeholder="User" required>    
+            </div>
+            <div class="input">
+                <input class="User" type="password" id="password" placeholder="Password" required>    
+            </div>
+            <div class="check">
+                <input class="box" type="checkbox" id="check">
+                <label for="check">Remember me</label>
+            </div>
+            <div class="signin">
+                <input class="enter" type="Submit" value="Sign In" required onclick="Login()" />    
+            </div>
+        </div>
+    </section>
+    <!-- SCRIPT -->
+
+    <script type="text/javascript" src="/assets/js/main.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.min.js"
+      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      type="text/javascript"
+      src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"
+    ></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+      function Login() {
+        var username = $("#username").val();
+        var password = $("#password").val();
+
+        if (username == "" || password == "") {
+         // $("#username").val("");
+         // $("#password").val("");
+          Swal.fire({
+            toast: true,
+            position: "center",
+            icon: "warning",
+            title: "Please Complete Required Details",
+            showConfirmButton: false,
+            timer: 3000,
+          });
+        } else {
+          $.get("/api/get_user", function (index) {
+            var result = JSON.parse(index).item;
+            $.each(result, function (_, v) {
+            console.log(result);
+            });
+              $.ajax({
+                url: "/api/login",
+                data: {
+                  username: username,
+                  password: password,
+                },
+                success: function (res) {
+                  var result = JSON.parse(res).results;
+                  var user = JSON.parse(res).reports;
+                  console.log(user);
+                  if (result == 1) {
+                    console.log(user[0].AccountType);
+                    //if (user[0].AccountType == "Administrator") {
+                      console.log(user[0].AccountType);
+
+                      localStorage.setItem("name", user[0].Name);
+                      localStorage.setItem("type", user[0].Type);
+                      Swal.fire({
+                        toast: true,
+                        position: "center",
+                        icon: "success",
+                        title: "Admin Login Successful",
+                        showConfirmButton: false,
+                        timer: 3000,
+                      }).then(function () {
+                          window.location.replace("/dashboard");
+                      });
+                   // }
+                    if (user[0].AccountType == "User") {
+                      localStorage.setItem("name", user[0].Name);
+                      localStorage.setItem("type", user[0].AccountType);
+                      Swal.fire({
+                        toast: true,
+                        position: "center",
+                        icon: "success",
+                        title: "User Login Successful",
+                        showConfirmButton: false,
+                        timer: 3000,
+                      }).then(function () {
+                          window.location.replace("/clientdashboard");
+                      });
+                    }} 
+                    else {
+                    Swal.fire({
+                      toast: true,
+                      position: "center",
+                      icon: "warning",
+                      title: "Please Check your Username and Password!",
+                      showConfirmButton: false,
+                      timer: 3000,
+                    });
+                    $("#username").val("");
+                    $("#password").val("");
+                  }
+                },
+              });
+            
+          });
+        }
+      }
+    </script>
+    <!-- END -->
+</body>
+</html>

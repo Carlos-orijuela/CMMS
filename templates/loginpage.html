@@ -43,14 +43,13 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-      var dataresult = "";
       function Login() {
         var username = $("#username").val();
         var password = $("#password").val();
 
         if (username == "" || password == "") {
-          $("#username").val("");
-          $("#password").val("");
+         // $("#username").val("");
+         // $("#password").val("");
           Swal.fire({
             toast: true,
             position: "center",
@@ -63,9 +62,8 @@
           $.get("/api/get_user", function (index) {
             var result = JSON.parse(index).item;
             $.each(result, function (_, v) {
-              if (v.Username == username) {
-                dataresult = v.Default;
-              }
+           // console.log(result.Username);
+
             });
               $.ajax({
                 url: "/api/login",
@@ -76,9 +74,13 @@
                 success: function (res) {
                   var result = JSON.parse(res).results;
                   var user = JSON.parse(res).reports;
+                  console.log(res);
+
                   if (result == 1) {
                     console.log(user[0].AccountType);
                     if (user[0].AccountType == "Administrator") {
+                     // console.log(user[0].AccountType);
+
                       localStorage.setItem("name", user[0].Name);
                       localStorage.setItem("type", user[0].Type);
                       Swal.fire({
@@ -105,13 +107,13 @@
                       }).then(function () {
                           window.location.replace("/clientdashboard");
                       });
-                    }
-                  } else {
+                    }} 
+                    else {
                     Swal.fire({
                       toast: true,
                       position: "center",
                       icon: "warning",
-                      title: "Please Check your Email and Password!",
+                      title: "Please Check your Username and Password!",
                       showConfirmButton: false,
                       timer: 3000,
                     });

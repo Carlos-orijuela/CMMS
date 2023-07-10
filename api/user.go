@@ -86,7 +86,7 @@ func EditUser(w http.ResponseWriter, r *http.Request) {
 	accntType := r.FormValue("accntType")
 	departID := r.FormValue("department")
 	username := r.FormValue("username")
-	password := r.FormValue("password")
+	//password := r.FormValue("password")
 	position := r.FormValue("position")
 	//action := r.FormValue("action")
 
@@ -94,7 +94,7 @@ func EditUser(w http.ResponseWriter, r *http.Request) {
 
 	product.Name = name
 	product.Username = username
-	product.Password = hashPassword(password)
+	//product.Password = hashPassword(password)
 	product.Name = name
 	product.AccountType = accntType
 	product.DepartmentID = departID

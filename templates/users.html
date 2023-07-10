@@ -389,14 +389,14 @@
 
       function Edit() {
         var name = $("#fullname").val();
-        var password = $("#pw").val();
+       var password = $("#pw").val();
         var username = $("#user").val();
         var accntType = $("#xAccntType").val();
         var department = $("#xdepartment").val();
         var position = $("#xposition").val();
         var id = localStorage.getItem("user_id");
 
-        console.log(name, password, username, accntType, department, position,id);
+       // console.log(name, password, username, accntType, department, position,id);
 
         if (name == "") {
           Swal.fire({
