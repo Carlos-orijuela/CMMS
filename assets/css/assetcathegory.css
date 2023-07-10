@@ -32,7 +32,7 @@
 .title span{
     color: rgb(224, 176, 16);
     font-family: sans-serif;
-
+    font-weight: bold;
 }
 .img{
     width: 12%;
@@ -61,40 +61,43 @@
     background-color:aliceblue;
     padding: 2%;
 }
+.assetinfo h3{
+    font-size: 1rem;
+}
 
 .assetinfobuttons input:nth-of-type(1){
     width: 5%;
-    padding: .3%;
+    padding: .1%;
     background-color: rgb(224, 172, 92);
     border: .2px solid rgb(172, 152, 152);
 }
 .assetinfobuttons input:nth-of-type(2){
     width: 5%;
-    padding: .3%;
+    padding: .1%;
     background-color: rgb(224, 172, 92);
     border: .2px solid rgb(172, 152, 152);
 }
 .assetinfobuttons input:nth-of-type(3){
     width: 7%;
-    padding: .3%;
+    padding: .1%;
     background-color: rgb(224, 172, 92);
     border: .2px solid rgb(172, 152, 152);
 }
 .assetinfobuttons input:nth-of-type(4){
     width: 5%;
-    padding: .3%;
+    padding: .1%;
     background-color: rgb(224, 172, 92);
     border: .2px solid rgb(172, 152, 152);
 }
 .assetinfobuttons input:nth-of-type(5){
     width: 8%;
-    padding: .3%;
+    padding: .1%;
     background-color: rgb(224, 172, 92);
     border: .2px solid rgb(172, 152, 152);
 }
 .assetinfobuttons input:nth-of-type(6){
     width: 12%;
-    padding: .3%;
+    padding: .1%;
     background-color: rgb(224, 172, 92);
     border: .2px solid rgb(172, 152, 152);
 }
