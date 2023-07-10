@@ -55,6 +55,7 @@
     display: inline-block;
     vertical-align: middle;
     padding: 1%;
+    font-size: .75rem;
 }
 .assetinfo{
     background-color:aliceblue;
@@ -111,8 +112,26 @@
     padding: 2%;
 }
 
-.dept .note{
-    display: inline-block;
-    vertical-align: top;
+.lower{
+    padding: 1%;
+}
+.lower header{
+    border-bottom: 1px solid gray;
+    margin-bottom: 1%;
+}
+.ecard{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: .8rem;
+    padding: 0 1% 1% 1%;
+    
+}
+.note{
     width: 40%;
+    text-align: left;
+}
+.dept{
+    width: 50%;
 }
