@@ -109,15 +109,20 @@
 .data{
     width: 100%;
     background-color:aliceblue;
-    padding: 2%;
+    padding: 1%;
 }
-
+.data header h6{
+    font-size: .8rem;
+}
 .lower{
     padding: 1%;
 }
 .lower header{
     border-bottom: 1px solid gray;
     margin-bottom: 1%;
+}
+.lower header h5{
+    font-size: .8rem;
 }
 .ecard{
     display: flex;
@@ -134,4 +139,10 @@
 }
 .dept{
     width: 50%;
+}
+.dept input{
+    width: 10%;
+}
+.dept span{
+    color: rgb(179, 175, 175);
 }
