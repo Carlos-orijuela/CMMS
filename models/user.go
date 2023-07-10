@@ -13,8 +13,6 @@ type User struct {
 	Position     string
 	Date         string
 	Number       string
-	Default      string
-	Picture      string
 	Deleted      gorm.DeletedAt
 }
 

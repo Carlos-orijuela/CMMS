@@ -128,7 +128,6 @@ func CreateDefaultUser() {
 			Password:     hashPassword("admin"),
 			Name:         "Dave Falo",
 			AccountType:  "Administrator",
-			Default:      "1",
 			DepartmentID: "1",
 		},
 
@@ -137,7 +136,6 @@ func CreateDefaultUser() {
 			Password:     hashPassword("user"),
 			Name:         "John Wick",
 			AccountType:  "User",
-			Default:      "1",
 			DepartmentID: "1",
 		},
 	}

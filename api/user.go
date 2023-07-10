@@ -61,7 +61,6 @@ func ChangePassword(w http.ResponseWriter, r *http.Request) {
 
 	db.Where("username", username).Find(&product)
 	product.Password = hashPassword(password)
-	product.Default = "1"
 	db.Save(&product)
 
 }

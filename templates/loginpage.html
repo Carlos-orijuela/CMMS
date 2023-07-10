@@ -67,10 +67,6 @@
                 dataresult = v.Default;
               }
             });
-            if (dataresult == 0) {
-              localStorage.setItem("username", username);
-              location.replace("/password");
-            } else {
               $.ajax({
                 url: "/api/login",
                 data: {
@@ -93,12 +89,7 @@
                         showConfirmButton: false,
                         timer: 3000,
                       }).then(function () {
-                        //alert(user[0].OTP);
-                       // if (user[0].OTP == "1") {
                           window.location.replace("/dashboard");
-                       // } else {
-                          //window.location.replace("/code");
-                       // }
                       });
                     }
                     if (user[0].AccountType == "User") {
@@ -112,11 +103,7 @@
                         showConfirmButton: false,
                         timer: 3000,
                       }).then(function () {
-                        //if (user[0].OTP == "1") {
                           window.location.replace("/clientdashboard");
-                       // } else {
-                      //    window.location.replace("/code");
-                      //  }
                       });
                     }
                   } else {
@@ -133,7 +120,7 @@
                   }
                 },
               });
-            }
+            
           });
         }
       }
