@@ -1,23 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>System Role</title>
 
     <!-- Montserrat Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Material Icons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+      rel="stylesheet"
+    />
 
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="/assets/css/dashboard.css" />
-    
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css"
+    />
+    <script
+      defer
+      src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"
+    ></script>
   </head>
   <body>
     <div class="grid-container">
-
       <!-- Header -->
       <header class="header">
         <div class="menu-icon" onclick="openSidebar()">
@@ -30,9 +42,9 @@
           <span class="material-icons-outlined">notifications</span>
           <span class="material-icons-outlined">email</span>
           <span class="material-icons-outlined">account_circle</span>
-        <a href="/loginpage" class="logout">
-                <span class="material-icons-outlined" title="Logout">reply</span>
-        </a>
+          <a href="/loginpage" class="logout">
+            <span class="material-icons-outlined" title="Logout">reply</span>
+          </a>
         </div>
       </header>
       <!-- End Header -->
@@ -43,7 +55,9 @@
           <div class="sidebar-brand">
             <span class="material-icons-outlined"></span> SAILORCOM
           </div>
-          <span class="material-icons-outlined" onclick="closeSidebar()">close</span>
+          <span class="material-icons-outlined" onclick="closeSidebar()"
+            >close</span
+          >
         </div>
 
         <ul class="sidebar-list">
@@ -53,7 +67,8 @@
             </a>
           </li>
           <li class="sidebar-list-item">
-            <span class="material-icons-outlined">inventory_2</span> Asset Hierarchy
+            <span class="material-icons-outlined">inventory_2</span> Asset
+            Hierarchy
             <ul class="dropdown-menu">
               <li><a href="#" target="_blank">Location</a></li>
               <li><a href="#" target="_blank">Facility</a></li>
@@ -70,15 +85,16 @@
           </li>
           <li class="sidebar-list-item">
             <span class="material-icons-outlined">groups</span> User Management
-          <ul class="dropdown-menu">
-            <li><a href="/users">User</a></li>
-            <li><a href="/department">Department</a></li>
-            <li><a href="/position">System Role</a></li>
-          </ul>
-        </li>
+            <ul class="dropdown-menu">
+              <li><a href="/users">User</a></li>
+              <li><a href="/department">Department</a></li>
+              <li><a href="/position">System Role</a></li>
+            </ul>
+          </li>
           <li class="sidebar-list-item">
             <a href="#" target="_blank">
-              <span class="material-icons-outlined">fact_check</span> Maintenance
+              <span class="material-icons-outlined">fact_check</span>
+              Maintenance
             </a>
           </li>
           <li class="sidebar-list-item">
@@ -106,34 +122,43 @@
           <h2>SYSTEM ROLE</h2>
         </div>
         <div class="card-content">
-            <div>
-                <input class="search" type="text" placeholder="Search..."  id="search">
-                <button class="custom-button" id="openModalBtnasset"><span class="material-icons-outlined" title="Add Assets">plus_one</span> </button>
-            </div>
+          <div>
+            <input
+              class="search"
+              type="text"
+              placeholder="Search..."
+              id="search"
+            />
+            <button class="custom-button" id="openModalBtnasset">
+              <span class="material-icons-outlined" title="Add Assets"
+                >plus_one</span
+              >
+            </button>
+          </div>
 
-            <div class="card-content">
-                <div class="card-table">
-                    <div class="table-container">
-                        <table id="my-table" class="custom-table">
-                          <thead>
-                            <tr>
-                              <th>Department</th>
-                              <th>Position</th>
-                              <th>Action</th>
-                            </tr>
-                          </thead>
-                          <tbody id="details">
-                            <!-- APPEND TABLE DATA HERE -->
-                          </tbody>
-                        </table>
-                      
-                        <div id="pagination-container">
-                          <ul id="pagination"></ul>
-                        </div>
-                      </div>
-                  </div> 
+          <div class="card-content">
+            <div class="card-table">
+              <div class="table-container">
+                <table id="my-table" class="custom-table">
+                  <thead>
+                    <tr>
+                      <th>Department</th>
+                      <th>Position</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="details">
+                    <!-- APPEND TABLE DATA HERE -->
+                  </tbody>
+                </table>
+
+                <div id="pagination-container">
+                  <ul id="pagination"></ul>
+                </div>
               </div>
             </div>
+          </div>
+        </div>
       </main>
       <!-- End Main -->
 
@@ -141,23 +166,33 @@
       <div id="myModal" class="modal">
         <div class="modal-content">
           <h2 class="h2h2">Add System Role</h2>
-          <div class="centered-container"><h2 class="label">Department</h2></div>
           <div class="centered-container">
-            <select id="department" name="department" required> 
-                  <!-- Department APPEND HERE -->
-                  <!-- Department APPEND HERE -->
-                  <!-- Department APPEND HERE -->
-              </select>
+            <h2 class="label">Department</h2>
+          </div>
+          <div class="centered-container">
+            <select id="department" name="department" required>
+              <!-- Department APPEND HERE -->
+              <!-- Department APPEND HERE -->
+              <!-- Department APPEND HERE -->
+            </select>
           </div>
           <div class="centered-container"><h2 class="label">Position</h2></div>
-            <div class="centered-container">
-                <input class="input-dept" type="text" placeholder="Position" id="position" required>
-            </div>
-           
-            <div class="centered-container">
-                <button class="custom-button" onclick="Submit()"><span class="material-icons-outlined" title="CREATE" >create</span></button>
-                <button class="custom-button" onclick="Cancel(1)">Cancel</button>
-            </div>         
+          <div class="centered-container">
+            <input
+              class="input-dept"
+              type="text"
+              placeholder="Position"
+              id="position"
+              required
+            />
+          </div>
+
+          <div class="centered-container">
+            <button class="custom-button" onclick="Submit()">
+              <span class="material-icons-outlined" title="CREATE">create</span>
+            </button>
+            <button class="custom-button" onclick="Cancel(1)">Cancel</button>
+          </div>
         </div>
       </div>
       <!--End Modal-->
@@ -166,47 +201,60 @@
       <div id="myModaleditpos" class="modal">
         <div class="modal-content">
           <h2 class="h2h2">Edit System Role</h2>
-          <div class="centered-container"><h2 class="label">Department</h2></div>
           <div class="centered-container">
-            <input class="input-dept" type="text" placeholder="Department" id="dept" readonly>
-        </div>
-        <div class="centered-container"><h2 class="label">Position</h2></div>
-            <div class="centered-container">
-                <input class="input-dept" type="text" placeholder="Position" id="pos" required>
-            </div>
-            
+            <h2 class="label">Department</h2>
+          </div>
+          <div class="centered-container">
+            <input
+              class="input-dept"
+              type="text"
+              placeholder="Department"
+              id="dept"
+              readonly
+            />
+          </div>
+          <div class="centered-container"><h2 class="label">Position</h2></div>
+          <div class="centered-container">
+            <input
+              class="input-dept"
+              type="text"
+              placeholder="Position"
+              id="pos"
+              required
+            />
+          </div>
+
           <div class="centered-container">
             <button class="custom-button" onclick="Edit()">
               <span class="material-icons-outlined" title="Submit">create</span>
             </button>
             <button class="custom-button" onclick="Cancel(2)">Cancel</button>
-          </div>        
+          </div>
         </div>
       </div>
       <!--End edit Modal-->
-
     </div>
 
     <!--Start Modal Delete-->
-        <div id="myModaldelete" class="modal">
-        <div class="modal-content">
-            <h2 class="h2h2">ARE YOU SURE YOU WANT TO DELETE THIS?</h2>
-            <div class="centered-container">
-              <p class="h2black" id="del_name"></p>
-            </div>
-            <div class="centered-container">
-              <button class="custom-button">
-                <span
-                  class="material-icons-outlined"
-                  title="Submit"
-                  onclick="Remove()"
-                  >create</span
-                >
-              </button>
-              <button class="custom-button" onclick="Cancel(3)">Cancel</button>
-            </div>
+    <div id="myModaldelete" class="modal">
+      <div class="modal-content">
+        <h2 class="h2h2">ARE YOU SURE YOU WANT TO DELETE THIS?</h2>
+        <div class="centered-container">
+          <p class="h2black" id="del_name"></p>
         </div>
+        <div class="centered-container">
+          <button class="custom-button">
+            <span
+              class="material-icons-outlined"
+              title="Submit"
+              onclick="Remove()"
+              >create</span
+            >
+          </button>
+          <button class="custom-button" onclick="Cancel(3)">Cancel</button>
         </div>
+      </div>
+    </div>
     <!--Delete end modal-->
 
     <!-- Scripts -->
@@ -226,12 +274,11 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Custom JS -->
 
-        <script>
-
+    <script>
       //GET DATA
       $(document).ready(function () {
-      getdata();
-      get_department();
+        getdata();
+        get_department();
       });
 
       // display Data in the table
@@ -262,6 +309,7 @@
           `
             );
           });
+          $("#my-table").DataTable();
         });
       }
 
@@ -277,14 +325,13 @@
               localStorage.setItem("position_id", id);
               $("#pos").val(v.Name);
               $("#dept").val(v.Department.Name);
-
             }
           });
         });
       }
 
-    //DDL DEPARTMENT
-    function get_department() {
+      //DDL DEPARTMENT
+      function get_department() {
         $("#department").empty();
         $("#department").append($("<option />").val(""));
 
@@ -296,29 +343,35 @@
             $("#department").append(
               `
               
-              <option value="`+ v.ID +`">`+ v.Name +`</option>
+              <option value="` +
+                v.ID +
+                `">` +
+                v.Name +
+                `</option>
           `
             );
 
             $("#xdepartment").append(
               `
               
-              <option value="`+ v.ID +`">`+ v.Name +`</option>
+              <option value="` +
+                v.ID +
+                `">` +
+                v.Name +
+                `</option>
           `
             );
           });
         });
       }
 
-
-
-        // CREATE ======================
-        function Submit() {
+      // CREATE ======================
+      function Submit() {
         var position = $("#position").val();
         var departID = $("#department").val();
         console.log(departID);
 
-        if (position == "" || departID =="") {
+        if (position == "" || departID == "") {
           Swal.fire({
             toast: true,
             position: "center",
@@ -342,9 +395,7 @@
                 title: "New Position Added",
                 showConfirmButton: false,
                 timer: 3000,
-                
               }).then(function () {
-                
                 window.location.reload();
               });
             },
@@ -352,9 +403,9 @@
         }
       }
 
-        // EDIT ====================== save edit
-        // UPDATE ======================
-        function Edit() {
+      // EDIT ====================== save edit
+      // UPDATE ======================
+      function Edit() {
         var position = $("#pos").val();
         var id = localStorage.getItem("position_id");
 
@@ -390,10 +441,7 @@
         }
       }
 
-
-       
- 
-        // DELETE ======================
+      // DELETE ======================
       // Onclick Delete
       function Delete(id) {
         var modal = document.getElementById("myModaldelete");
@@ -410,7 +458,7 @@
         });
       }
 
-        function Remove() {
+      function Remove() {
         var id = localStorage.getItem("delete_id");
         $.ajax({
           url: "/api/delete_position",
@@ -432,8 +480,8 @@
         });
       }
 
-        // SEARCH ======================
-        $("#search").on("change keyup", function (e) {
+      // SEARCH ======================
+      $("#search").on("change keyup", function (e) {
         Search(this.value.toLowerCase());
       });
 
@@ -446,7 +494,7 @@
           $.each(result, function (_, v) {
             if (v.Name.toLowerCase().includes(search)) {
               tableBody.innerHTML +=
-              `
+                `
               <tr>
               <td>` +
                 v.Department.Name +
@@ -464,14 +512,14 @@
                 `)">delete</span></button>
                   </td>
             </tr>
-          `
+          `;
             }
           });
         });
       }
 
-        // CANCEL FUNC
-        function Cancel(id) {
+      // CANCEL FUNC
+      function Cancel(id) {
         if (id == 1) {
           var modal = document.getElementById("myModal");
           modal.style.display = "none";
@@ -483,76 +531,72 @@
           modal.style.display = "none";
         }
       }
+    </script>
 
-
-
-        </script>
-
-
-
-
- 
-    
     <!--ADD asset JS-->
-        <script>
-            var openModalBtnasset = document.getElementById("openModalBtnasset");
-        var closeModalBtnasset = document.getElementById("closeModalBtnasset");
-        var modalasset = document.getElementById("myModal");
+    <script>
+      var openModalBtnasset = document.getElementById("openModalBtnasset");
+      var closeModalBtnasset = document.getElementById("closeModalBtnasset");
+      var modalasset = document.getElementById("myModal");
 
-        openModalBtnasset.addEventListener("click", function() {
+      openModalBtnasset.addEventListener("click", function () {
         modalasset.style.display = "block";
-        });
+      });
 
-        closeModalBtnasset.addEventListener("click", function() {
+      closeModalBtnasset.addEventListener("click", function () {
         modalasset.style.display = "none";
-        });
+      });
 
-        window.addEventListener("click", function(event) {
+      window.addEventListener("click", function (event) {
         if (event.target == modalasset) {
-            modalasset.style.display = "none";
+          modalasset.style.display = "none";
         }
-        });
-        </script>
+      });
+    </script>
 
     <!--EDIT USER JS-->
     <script>
-       var openModalBtnassetupdate = document.getElementById("openModalBtnassetupdate");
-        var closeModalBtnassetupdate = document.getElementById("closeModalBtnassetupdate");
-        var modalassetupdate = document.getElementById("myModalassetupdate");
+      var openModalBtnassetupdate = document.getElementById(
+        "openModalBtnassetupdate"
+      );
+      var closeModalBtnassetupdate = document.getElementById(
+        "closeModalBtnassetupdate"
+      );
+      var modalassetupdate = document.getElementById("myModalassetupdate");
 
-        openModalBtnassetupdate.addEventListener("click", function() {
+      openModalBtnassetupdate.addEventListener("click", function () {
         modalassetupdate.style.display = "block";
-        });
+      });
 
-        closeModalBtnassetupdate.addEventListener("click", function() {
+      closeModalBtnassetupdate.addEventListener("click", function () {
         modalassetupdate.style.display = "none";
-        });
+      });
 
-        window.addEventListener("click", function(event) {
+      window.addEventListener("click", function (event) {
         if (event.target == modalassetupdate) {
-            modalassetupdate.style.display = "none";
+          modalassetupdate.style.display = "none";
         }
-        });
+      });
     </script>
     <!--DELETE USER JS-->
     <script>
-        var openModalBtndelete = document.getElementById("openModalBtndelete");
-        var closeModalBtndelete = document.getElementById("closeModalBtndelete");
-        var modaldelete = document.getElementById("myModaldelete");
+      var openModalBtndelete = document.getElementById("openModalBtndelete");
+      var closeModalBtndelete = document.getElementById("closeModalBtndelete");
+      var modaldelete = document.getElementById("myModaldelete");
 
-        openModalBtndelete.addEventListener("click", function() {
+      openModalBtndelete.addEventListener("click", function () {
         modaldelete.style.display = "block";
-        });
+      });
 
-        closeModalBtndelete.addEventListener("click", function() {
+      closeModalBtndelete.addEventListener("click", function () {
         modaldelete.style.display = "none";
-        });
+      });
 
-        window.addEventListener("click", function(event) {
+      window.addEventListener("click", function (event) {
         if (event.target == modaledit) {
-            modaldelete.style.display = "none";
+          modaldelete.style.display = "none";
         }
-        });  
+      });
     </script>
   </body>
 </html>
