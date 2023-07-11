@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>System Role</title>
+
+    <!-- Montserrat Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/dashboard.css" />
+    
+  </head>
+  <body>
+    <div class="grid-container">
+
+      <!-- Header -->
+      <header class="header">
+        <div class="menu-icon" onclick="openSidebar()">
+          <span class="material-icons-outlined">menu</span>
+        </div>
+        <div class="header-left">
+          <span class="material-icons-outlined">search</span>
+        </div>
+        <div class="header-right">
+          <span class="material-icons-outlined">notifications</span>
+          <span class="material-icons-outlined">email</span>
+          <span class="material-icons-outlined">account_circle</span>
+        <a href="/loginpage" class="logout">
+                <span class="material-icons-outlined" title="Logout">reply</span>
+        </a>
+        </div>
+      </header>
+      <!-- End Header -->
+
+      <!-- Sidebar -->
+      <aside id="sidebar">
+        <div class="sidebar-title">
+          <div class="sidebar-brand">
+            <span class="material-icons-outlined"></span> SAILORCOM
+          </div>
+          <span class="material-icons-outlined" onclick="closeSidebar()">close</span>
+        </div>
+
+        <ul class="sidebar-list">
+          <li class="sidebar-list-item">
+            <a href="dashboard.html" target="_blank">
+              <span class="material-icons-outlined">dashboard</span> Dashboard
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">inventory_2</span> Assets
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">category</span> Supplies
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="/users">
+              <span class="material-icons-outlined">groups</span> Users
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">fact_check</span> Maintenance
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">poll</span> Reports
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="/department">
+              <span class="material-icons-outlined">sort</span> Department
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">settings</span> Settings
+            </a>
+          </li>
+        </ul>
+      </aside>
+      <!-- End Sidebar -->
+
+      <!-- Main -->
+      <main class="main-container">
+        <div class="main-title">
+          <h2>SYSTEM ROLE</h2>
+        </div>
+        <div class="card-content">
+            <div>
+                <input class="search" type="text" placeholder="Search..."  id="search">
+                <button class="custom-button" id="openModalBtnasset"><span class="material-icons-outlined" title="Add Assets">plus_one</span> </button>
+                <button class="custom-button" ><span class="material-icons-outlined" title="Print">computer</span> </button>
+                <button class="custom-button" ><span class="material-icons-outlined" title="Print Asset tags">add_to_queue</span> </button>
+                <button class="custom-button" ><span class="material-icons-outlined" title="More">build</span> </button>
+            </div>
+
+            <div class="card-content">
+                <div class="card-table">
+                    <div class="table-container">
+                        <table id="my-table">
+                          <thead>
+                            <tr>
+                              <th>Department</th>
+                              <th>Position</th>
+                              <th>Action</th>
+                            </tr>
+                          </thead>
+                          <tbody id="details">
+                            <!-- APPEND TABLE DATA HERE -->
+                          </tbody>
+                        </table>
+                      
+                        <div id="pagination-container">
+                          <ul id="pagination"></ul>
+                        </div>
+                      </div>
+                  </div> 
+              </div>
+            </div>
+      </main>
+      <!-- End Main -->
+
+      <!--Modal-->
+      <div id="myModal" class="modal">
+        <div class="modal-content">
+          <h2 class="h2h2">Add System Role</h2>
+
+          <div class="centered-container">
+            <select id="departID" name="department" required> 
+                  <!-- Department APPEND HERE -->
+                  <!-- Department APPEND HERE -->
+                  <!-- Department APPEND HERE -->
+              </select>
+          </div>
+            <div class="centered-container">
+                <input class="input-dept" type="text" placeholder="Position" id="position" required>
+            </div>
+           
+            <div class="centered-container">
+                <button class="custom-button" onclick="Submit()"><span class="material-icons-outlined" title="CREATE" >create</span></button>
+                <button class="custom-button" onclick="Cancel(1)">Cancel</button>
+            </div>         
+        </div>
+      </div>
+      <!--End Modal-->
+
+      <!--Update Modal-->
+      <div id="myModaleditpos" class="modal">
+        <div class="modal-content">
+          <h2 class="h2h2">Edit System Role</h2>
+
+            <div class="centered-container">
+                <input class="input-dept" type="text" placeholder="Position" id="name" required>
+            </div>
+            <div class="centered-container">
+              <input class="input-dept" type="text" placeholder="Department" id="name" required>
+          </div>
+            <div class="centered-container">
+                <button class="custom-button"><span class="material-icons-outlined" title="CREATE" >create</span></button>
+                <button class="custom-button">CANCEL</button>
+            </div>         
+        </div>
+      </div>
+      <!--End edit Modal-->
+
+    </div>
+
+    <!--Start Modal Delete-->
+        <div id="myModaldelete" class="modal">
+        <div class="modal-content">
+            <h2 class="h2h2">ARE YOU SURE YOU WANT TO DELETE THIS?</h2>
+            <div class="centered-container">
+              <p class="h2black"></p>
+            </div>
+            <div class="centered-container">
+                <button class="custom-button"><span class="material-icons-outlined" title="Delete" >delete</span></button>
+                <button class="custom-button">CANCEL</button>
+            </div>
+        </div>
+        </div>
+    <!--Delete end modal-->
+
+    <!-- Scripts -->
+    <!-- ApexCharts -->
+    <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/dashboard.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.5/apexcharts.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.min.js"
+      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      type="text/javascript"
+      src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"
+    ></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Custom JS -->
+
+        <script>
+
+      //GET DATA
+      $(document).ready(function () {
+      getdata();
+      });
+
+      // display Data in the table
+      function getdata() {
+        $("#details").empty();
+        $.get("/api/get_department", function (index) {
+          var result = JSON.parse(index).item;
+          $.each(result, function (_, v) {
+            $("#details").append(
+              `
+              <tr>
+              <td>` +
+                v.Name +
+                `</td>
+              <td>Admin</td>
+              <td><button class="custom-button" id="openModalBtneditdept-` +
+                v.ID +
+                `"><span class="material-icons-outlined" title="Update Position" onclick="Modify(` +
+                v.ID +
+                `)" >create</span></button>
+                  <button class="custom-button delete" id="openModalBtndeletedept"><span class="material-icons-outlined" title="Delete" onclick="Delete(` +
+                v.ID +
+                `)">delete</span></button>
+                  <button class="custom-button"><span class="material-icons-outlined" title="Position" onclick="Position(` +
+                v.ID +
+                `)">directions_walk</span></button></td>
+            </tr>
+          `
+            );
+          });
+        });
+      }
+
+      // Onclick Edit
+      function Modify(id) {
+        var modal = document.getElementById("myModaleditpos");
+        modal.style.display = "block";
+
+        $.get("/api/get_position", function (index) {
+          var result = JSON.parse(index).item;
+          $.each(result, function (_, v) {
+            if (v.ID == id) {
+              localStorage.setItem("position_id", id);
+              $("#edit").val(v.Name);
+            }
+          });
+        });
+      }
+
+       //DDL DEPARTMENT
+    function get_department() {
+        $("#department").empty();
+        $("#department").append($("<option />").val(""));
+
+        $("#xdepartment").empty();
+        $("#xdepartment").append($("<option />").val(""));
+        $.get("/api/get_department", function (index) {
+          var result = JSON.parse(index).item;
+          $.each(result, function (_, v) {
+            $("#department").append(
+              `
+              
+              <option value="`+ v.ID +`">`+ v.Name +`</option>
+          `
+            );
+
+            $("#xdepartment").append(
+              `
+              
+              <option value="`+ v.ID +`">`+ v.Name +`</option>
+          `
+            );
+          });
+        });
+      }
+
+
+
+        // CREATE ======================
+        function Submit() {
+        var position = $("#position").val();
+        departID = $("#departID").val();
+
+        if (position == "") {
+          Swal.fire({
+            toast: true,
+            position: "center",
+            icon: "warning",
+            title: "Please Complete Required Details",
+            showConfirmButton: false,
+            timer: 3000,
+          });
+        } else {
+          $.ajax({
+            url: "/api/position",
+            data: {
+              departmentID: departID,
+              name: position,
+            },
+            success: function () {
+              Swal.fire({
+                toast: true,
+                position: "center",
+                icon: "success",
+                title: "New Position Added",
+                showConfirmButton: false,
+                timer: 3000,
+              }).then(function () {
+                window.location.reload();
+              });
+            },
+          });
+        }
+      }
+
+
+
+        // EDIT ======================
+
+        // UPDATE ======================
+ 
+        // DELETE ======================
+
+        // SEARCH ======================
+
+        // CANCEL FUNC
+        function Cancel(id) {
+        if (id == 1) {
+          var modal = document.getElementById("myModal");
+          modal.style.display = "none";
+        } else if (id == 2) {
+          var modal = document.getElementById("myModaleditpos");
+          modal.style.display = "none";
+        } else {
+          var modal = document.getElementById("myModaldeletepos");
+          modal.style.display = "none";
+        }
+      }
+
+
+
+        </script>
+
+
+
+
+ 
+    
+    <!--ADD asset JS-->
+        <script>
+            var openModalBtnasset = document.getElementById("openModalBtnasset");
+        var closeModalBtnasset = document.getElementById("closeModalBtnasset");
+        var modalasset = document.getElementById("myModal");
+
+        openModalBtnasset.addEventListener("click", function() {
+        modalasset.style.display = "block";
+        });
+
+        closeModalBtnasset.addEventListener("click", function() {
+        modalasset.style.display = "none";
+        });
+
+        window.addEventListener("click", function(event) {
+        if (event.target == modalasset) {
+            modalasset.style.display = "none";
+        }
+        });
+        </script>
+
+    <!--EDIT USER JS-->
+    <script>
+       var openModalBtnassetupdate = document.getElementById("openModalBtnassetupdate");
+        var closeModalBtnassetupdate = document.getElementById("closeModalBtnassetupdate");
+        var modalassetupdate = document.getElementById("myModalassetupdate");
+
+        openModalBtnassetupdate.addEventListener("click", function() {
+        modalassetupdate.style.display = "block";
+        });
+
+        closeModalBtnassetupdate.addEventListener("click", function() {
+        modalassetupdate.style.display = "none";
+        });
+
+        window.addEventListener("click", function(event) {
+        if (event.target == modalassetupdate) {
+            modalassetupdate.style.display = "none";
+        }
+        });
+    </script>
+    <!--DELETE USER JS-->
+    <script>
+        var openModalBtndelete = document.getElementById("openModalBtndelete");
+        var closeModalBtndelete = document.getElementById("closeModalBtndelete");
+        var modaldelete = document.getElementById("myModaldelete");
+
+        openModalBtndelete.addEventListener("click", function() {
+        modaldelete.style.display = "block";
+        });
+
+        closeModalBtndelete.addEventListener("click", function() {
+        modaldelete.style.display = "none";
+        });
+
+        window.addEventListener("click", function(event) {
+        if (event.target == modaledit) {
+            modaldelete.style.display = "none";
+        }
+        });  
+    </script>
+  </body>
+</html>
