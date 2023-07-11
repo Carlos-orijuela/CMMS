@@ -13,7 +13,7 @@ func CreateDepartment(w http.ResponseWriter, r *http.Request) {
 
 	depart := models.Department{}
 	name := r.FormValue("name")
-	
+
 	depart.Name = name
 	db.Save(&depart)
 
@@ -44,7 +44,6 @@ func EditDepartment(w http.ResponseWriter, r *http.Request) {
 	product := models.Department{}
 	name := r.FormValue("name")
 	id, _ := strconv.Atoi(r.FormValue("id"))
-	
 
 	db.Where("id", id).Find(&product)
 	product.Name = name
@@ -63,4 +62,3 @@ func DeleteDepartment(w http.ResponseWriter, r *http.Request) {
 	sqlDB.Close()
 
 }
-

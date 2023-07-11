@@ -18,7 +18,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	password := r.FormValue("password")
 	accntType := r.FormValue("accntType")
 	department := r.FormValue("department")
-	position := r.FormValue("position")
+	positionID := r.FormValue("position")
 
 	//stat := r.FormValue("position")
 
@@ -26,7 +26,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	product.Username = username
 	product.Password = hashPassword(password)
 	product.DepartmentID = department
-	product.Position = position
+	product.PositionID = positionID
 	product.AccountType = accntType
 
 	db.Save(&product)
@@ -87,7 +87,7 @@ func EditUser(w http.ResponseWriter, r *http.Request) {
 	departID := r.FormValue("department")
 	username := r.FormValue("username")
 	//password := r.FormValue("password")
-	position := r.FormValue("position")
+	positionID := r.FormValue("position")
 	//action := r.FormValue("action")
 
 	db.Where("id", id).Find(&product)
@@ -99,7 +99,7 @@ func EditUser(w http.ResponseWriter, r *http.Request) {
 	product.AccountType = accntType
 	product.DepartmentID = departID
 
-	product.Position = position
+	product.PositionID = positionID
 
 	db.Save(&product)
 

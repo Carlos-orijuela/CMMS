@@ -10,7 +10,8 @@ type User struct {
 	AccountType  string
 	Department   Department
 	DepartmentID string
-	Position     string
+	Position     Position
+	PositionID   string
 	Date         string
 	Number       string
 	Deleted      gorm.DeletedAt
