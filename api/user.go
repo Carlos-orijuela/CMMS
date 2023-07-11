@@ -41,7 +41,7 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 	db := GormDB()
 
 	item := []models.User{}
-	db.Preload("Department").Find(&item)
+	db.Preload("Department").Preload("Position").Find(&item)
 
 	data := map[string]interface{}{
 		"status": "ok",

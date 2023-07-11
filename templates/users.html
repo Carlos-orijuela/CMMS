@@ -170,8 +170,8 @@
             <div class="centered-container">
               <select id="position" name="position" required> 
                     <option value="">POSITION</option>
-                    <option value="Admin">Admin</option>
-                    <option value="Tech Support">Tech Support</option>
+                    <!-- <option value="Admin">Admin</option>
+                    <option value="Tech Support">Tech Support</option> -->
                 </select>
             </div>
             <div class="centered-container">
@@ -210,9 +210,7 @@
             </div>
             <div class="centered-container">
                 <select id="xposition">
-                    <option value=""></option>
-                    <option value="Admin">Admin</option>
-                    <option value="Tech Support">Tech Support</option>
+                  
                 </select>
             </div>
             <div class="centered-container">
@@ -274,7 +272,7 @@
               <td>` +v.Username +`</td>
               <td>` +v.AccountType +`</td>
               <td>` +v.Department.Name +`</td>
-              <td>` +v.Position +`</td>
+              <td>` +v.Position.Name +`</td>
 
               <td>
                 <button class="custom-button" id="openModalBtneditdept-` +v.ID +`">
@@ -339,10 +337,10 @@
     //DDL DEPARTMENT
     function get_department() {
         $("#department").empty();
-        $("#department").append($("<option />").val(""));
+        $("#department").append(`<option value="">Select Department</option>`);
 
         $("#xdepartment").empty();
-        $("#xdepartment").append($("<option />").val(""));
+        $("#xdepartment").append(`<option value="">Select Department</option>`);
         $.get("/api/get_department", function (index) {
           var result = JSON.parse(index).item;
           $.each(result, function (_, v) {
@@ -362,6 +360,55 @@
           });
         });
       }
+
+      //DDL POSITION FOR ADD
+      $("#department").change(function () {
+        var id = $("#department").val()
+        $("#position").empty();
+        $("#position").append(`
+        <option value="">Select Position</option>
+        `);
+
+        $.get("/api/get_position", function (index) {
+          var result = JSON.parse(index).item;
+          $.each(result, function (_, v) {
+            if (v.DepartmentID == id){
+              $("#position").append(
+              `
+              <option value="`+ v.ID +`">`+ v.Name +`</option>
+          `
+            );
+            }
+            
+          });
+        });
+      });
+
+
+      //DDL POSITION FOR EDIT
+      $("#xdepartment").change(function () {
+        var id = $("#xdepartment").val()
+        $("#xposition").empty();
+        $("#xposition").append(`
+        <option value="">Select Position</option>
+        `);
+
+        $.get("/api/get_position", function (index) {
+          var result = JSON.parse(index).item;
+          $.each(result, function (_, v) {
+            if (v.DepartmentID == id){
+              $("#xposition").append(
+              `
+              <option value="`+ v.ID +`">`+ v.Name +`</option>
+          `
+            );
+            }
+            
+          });
+        });
+      });
+
+   
  
     // Cancel Function
     function Cancel(id) {
@@ -391,7 +438,7 @@
               $("#user").val(v.Username);
               $("#xAccntType").val(v.AccountType);
               $("#pw").val(v.Password);
-              $("#xposition").val(v.Position);
+              $("#xposition").val(v.PositionID);
               $("#xdepartment").val(v.DepartmentID);
               
 
@@ -484,7 +531,7 @@
               <td>` +v.Username +`</td>
               <td>` +v.AccountType +`</td>
               <td>` +v.Department.Name +`</td>
-              <td>` +v.Position +`</td>
+              <td>` +v.Position.Name +`</td>
 
               <td>
                 <button class="custom-button" id="openModalBtneditdept-` +v.ID +`">
@@ -523,10 +570,6 @@
           },
         });
       }
-
-
-
-
     </script>
 
 
