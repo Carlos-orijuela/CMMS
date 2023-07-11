@@ -49,6 +49,8 @@ func Handlers() {
 
 	http.HandleFunc("/users", views.UserHandler)
 	http.HandleFunc("/department", views.DepartmentHandler)
+	http.HandleFunc("/position", views.PositionHandler)
+
 }
 
 func CreateDB(name string) *sql.DB {
@@ -129,6 +131,7 @@ func CreateDefaultUser() {
 			Name:         "Dave Falo",
 			AccountType:  "Administrator",
 			DepartmentID: "1",
+			PositionID:   "1",
 		},
 
 		{
@@ -137,6 +140,7 @@ func CreateDefaultUser() {
 			Name:         "John Wick",
 			AccountType:  "User",
 			DepartmentID: "1",
+			PositionID:   "1",
 		},
 	}
 
