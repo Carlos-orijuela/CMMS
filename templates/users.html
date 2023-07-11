@@ -14,6 +14,8 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="/assets/css/dashboard.css" />
     <link rel="stylesheet" href="/assets/css/users.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+    <script defer src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
   </head>
   <body>
     <div class="grid-container">
@@ -53,9 +55,15 @@
             </a>
           </li>
           <li class="sidebar-list-item">
-            <a href="asset.html" target="_blank">
-              <span class="material-icons-outlined">inventory_2</span> Assets
-            </a>
+            <span class="material-icons-outlined">inventory_2</span> Asset Hierarchy
+            <ul class="dropdown-menu">
+              <li><a href="#" target="_blank">Location</a></li>
+              <li><a href="#" target="_blank">Facility</a></li>
+              <li><a href="#" target="_blank">Equipment</a></li>
+              <li><a href="#" target="_blank">Spare part</a></li>
+              <li><a href="#" target="_blank">Special tools </a></li>
+              <li><a href="#" target="_blank">Supplies</a></li>
+            </ul>
           </li>
           <li class="sidebar-list-item">
             <a href="#" target="_blank">
@@ -63,10 +71,13 @@
             </a>
           </li>
           <li class="sidebar-list-item">
-            <a href="/users">
-              <span class="material-icons-outlined">groups</span> Users
-            </a>
-          </li>
+            <span class="material-icons-outlined">groups</span> User Management
+          <ul class="dropdown-menu">
+            <li><a href="/users">User</a></li>
+            <li><a href="/department">Department</a></li>
+            <li><a href="/position">System Role</a></li>
+          </ul>
+        </li>
           <li class="sidebar-list-item">
             <a href="#" target="_blank">
               <span class="material-icons-outlined">fact_check</span> Maintenance
@@ -104,7 +115,7 @@
 
             <div class="card-content">
                 <div class="card-table">
-                    <table class="custom-table">
+                    <table id="example" class="custom-table">
                         <thead>
                           <tr>
                             <th>Full Name</th>
@@ -133,15 +144,15 @@
           <h2 class="h2h2">Add User</h2>
 
             <div class="centered-container">
-                <div class="name">Full Name</div>
+                <div class="name">Full Name:</div>
                 <input class="input-dept" type="text" placeholder="FULLNAME" id="name" required>
             </div>
             <div class="centered-container">
-              <div class="name">Username</div>
+              <div class="name">Username:</div>
               <input class="input-dept" type="text" placeholder="USERNAME" id="username" required>
             </div>
             <div class="centered-container">
-              <div class="name">Password</div>
+              <div class="name">Password:</div>
                 <input class="input-dept" type="password" placeholder="PASSWORD" id="password" required>
             </div>
             <div class="centered-container">
@@ -161,8 +172,8 @@
             <div class="centered-container">
               <select id="position" name="position" required> 
                     <option value="">POSITION</option>
-                    <option value="Admin">Admin</option>
-                    <option value="Tech Support">Tech Support</option>
+                    <!-- <option value="Admin">Admin</option>
+                    <option value="Tech Support">Tech Support</option> -->
                 </select>
             </div>
             <div class="centered-container">
@@ -177,12 +188,15 @@
         <div class="modalcontentedit">
           <h2 class="h2h2">Update User</h2>
             <div class="centered-container">
+              <div class="name">Full Name:</div>
                 <input class="input-dept" type="text" placeholder="FULLNAME" id="fullname">
             </div>
             <div class="centered-container">
+              <div class="name">Username:</div>
                 <input class="input-dept" type="text" placeholder="USERNAME" id="user">
             </div>
             <div class="centered-container">
+              <div class="name">Password:</div>
                 <input class="input-dept" type="password" placeholder="PASSWORD" id="pw">
             </div>
             <div class="centered-container">
@@ -201,9 +215,7 @@
             </div>
             <div class="centered-container">
                 <select id="xposition">
-                    <option value=""></option>
-                    <option value="Admin">Admin</option>
-                    <option value="Tech Support">Tech Support</option>
+                  
                 </select>
             </div>
             <div class="centered-container">
@@ -265,7 +277,7 @@
               <td>` +v.Username +`</td>
               <td>` +v.AccountType +`</td>
               <td>` +v.Department.Name +`</td>
-              <td>` +v.Position +`</td>
+              <td>` +v.Position.Name +`</td>
 
               <td>
                 <button class="custom-button" id="openModalBtneditdept-` +v.ID +`">
@@ -278,6 +290,7 @@
           `
             );
           });
+          $('#example').DataTable();
         });
       }
 
@@ -330,10 +343,10 @@
     //DDL DEPARTMENT
     function get_department() {
         $("#department").empty();
-        $("#department").append($("<option />").val(""));
+        $("#department").append(`<option value="">Select Department</option>`);
 
         $("#xdepartment").empty();
-        $("#xdepartment").append($("<option />").val(""));
+        $("#xdepartment").append(`<option value="">Select Department</option>`);
         $.get("/api/get_department", function (index) {
           var result = JSON.parse(index).item;
           $.each(result, function (_, v) {
@@ -353,6 +366,55 @@
           });
         });
       }
+
+      //DDL POSITION FOR ADD
+      $("#department").change(function () {
+        var id = $("#department").val()
+        $("#position").empty();
+        $("#position").append(`
+        <option value="">Select Position</option>
+        `);
+
+        $.get("/api/get_position", function (index) {
+          var result = JSON.parse(index).item;
+          $.each(result, function (_, v) {
+            if (v.DepartmentID == id){
+              $("#position").append(
+              `
+              <option value="`+ v.ID +`">`+ v.Name +`</option>
+          `
+            );
+            }
+            
+          });
+        });
+      });
+
+
+      //DDL POSITION FOR EDIT
+      $("#xdepartment").change(function () {
+        var id = $("#xdepartment").val()
+        $("#xposition").empty();
+        $("#xposition").append(`
+        <option value="">Select Position</option>
+        `);
+
+        $.get("/api/get_position", function (index) {
+          var result = JSON.parse(index).item;
+          $.each(result, function (_, v) {
+            if (v.DepartmentID == id){
+              $("#xposition").append(
+              `
+              <option value="`+ v.ID +`">`+ v.Name +`</option>
+          `
+            );
+            }
+            
+          });
+        });
+      });
+
+   
  
     // Cancel Function
     function Cancel(id) {
@@ -382,7 +444,7 @@
               $("#user").val(v.Username);
               $("#xAccntType").val(v.AccountType);
               $("#pw").val(v.Password);
-              $("#xposition").val(v.Position);
+              $("#xposition").val(v.PositionID);
               $("#xdepartment").val(v.DepartmentID);
               
 
@@ -475,7 +537,7 @@
               <td>` +v.Username +`</td>
               <td>` +v.AccountType +`</td>
               <td>` +v.Department.Name +`</td>
-              <td>` +v.Position +`</td>
+              <td>` +v.Position.Name +`</td>
 
               <td>
                 <button class="custom-button" id="openModalBtneditdept-` +v.ID +`">
@@ -514,10 +576,6 @@
           },
         });
       }
-
-
-
-
     </script>
 
 
