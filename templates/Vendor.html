@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Asset List</title>
+    <title>Vendors</title>
 
     <!-- Montserrat Font -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -94,11 +94,11 @@
       <!-- Main -->
       <main class="main-container">
         <div class="main-title">
-          <h2>ASSET LISTS</h2>
+          <h2>Vendor Lists</h2>
         </div>
         <div class="card-content">
             <div>
-                <input class="search" type="text" placeholder="Search..."  id="search">
+                <input class="search" type="text" placeholder="Search Vendor"  id="search">
                 <button class="custom-button" id="openModalBtnasset"><span class="material-icons-outlined" title="Add Assets">plus_one</span> </button>
                 <button class="custom-button" ><span class="material-icons-outlined" title="Print">computer</span> </button>
                 <button class="custom-button" ><span class="material-icons-outlined" title="Print Asset tags">add_to_queue</span> </button>
@@ -111,13 +111,13 @@
                         <table id="my-table">
                           <thead>
                             <tr>
-                              <th>NAME</th>
-                              <th>CODE</th>
-                              <th>ASSET STATUS</th>
-                              <th>LAST PRICE</th>
-                              <th>VENDOR</th>
-                              <th>ASSET LOCATION</th>
-                              <th>BARCODE</th>
+                              <th>Company Name</th>
+                              <th>Services</th>
+                              <th>Price</th>
+                              <th>Location</th>
+                              <th>Contact Person</th>
+                              <th>Contact Number</th>
+                              <th>Email</th>
                               <th>ACTION</th>
                             </tr>
                           </thead>
@@ -149,43 +149,35 @@
       <!--Modal-->
       <div id="myModalasset" class="modal">
         <div class="modal-content">
-          <h2 class="h2h2">Add Asset List</h2>
+          <h2 class="h2h2">Add Vendor</h2>
 
             <div class="centered-container">
-              <div class="name">Name</div>
-                <input class="input-dept" type="text" placeholder="NAME" id="name" required>
+              <div class="name">Company</div>
+                <input class="input-dept" type="text" placeholder="Company Name" id="name" required>
             </div>
             <div class="centered-container">
-              <div class="name">Code</div>
-                <input class="input-dept" type="text" placeholder="CODE" id="username" required>
+              <div class="name">Services</div>
+                <input class="input-dept" type="text" placeholder="Services" id="username" required>
             </div>
             <div class="centered-container">
-              <div class="name">Status</div>
-                <input class="input-dept" type="text" placeholder="ASSET STATUS" id="password" required>
+              <div class="name">Price</div>
+                <input class="input-dept" type="text" placeholder=" Price" id="password" required>
             </div>
             <div class="centered-container">
-              <div class="name">Last Price</div>
-                <input class="input-dept" type="text" placeholder="LAST PRICE" id="password" required>
+              <div class="name">Location </div>
+                <input class="input-dept" type="text" placeholder="Location" id="password" required>
             </div>
             <div class="centered-container">
-              <div class="name">Vendor</div>
-                <select id="accntType" required>
-                  <option value="">Vendor</option>
-                  <option value="Administrator">Ph Developers</option>
-                  <option value="User">Isuzu</option>
-              </select>
+              <div class="name">Contact Person</div>
+              <input class="input-dept" type="text" placeholder="Contact Person" id="password" required>
             </div>
             <div class="centered-container">
-              <div class="name">Location</div>
-                <select id="accntType" required>
-                  <option value="">Locations</option>
-                  <option value="Administrator">cebu</option>
-                  <option value="User">Davao</option>
-              </select>
+              <div class="name">Contact Number</div>
+              <input class="input-dept" type="text" placeholder="Contact Number" id="password" required>
             </div>
             <div class="centered-container">
-              <div class="name">Barcode</div>
-                <input class="input-dept" type="text" placeholder="BARCODE" id="password" required>
+              <div class="name">Email</div>
+                <input class="input-dept" type="text" placeholder="Email" id="password" required>
             </div>
             <div class="centered-container">
                 <button class="custom-button"><span class="material-icons-outlined" title="CREATE" >create</span></button>
@@ -198,48 +190,40 @@
       <!--Update Modal-->
       <div id="myModalassetupdate" class="modal">
         <div class="modal-content">
-          <h2 class="h2h2">Update Assets</h2>
+          <h2 class="h2h2">Update Vendor</h2>
 
-            <div class="centered-container">
-              <div class="name">Name</div>
-                <input class="input-dept" type="text" placeholder="NAME" id="name" required>
-            </div>
-            <div class="centered-container">
-              <div class="name">Code</div>
-                <input class="input-dept" type="text" placeholder="CODE" id="username" required>
-            </div>
-            <div class="centered-container">
-              <div class="name">Status</div>
-                <input class="input-dept" type="text" placeholder="ASSET STATUS" id="password" required>
-            </div>
-            <div class="centered-container">
-              <div class="name">Last Price</div>
-                <input class="input-dept" type="text" placeholder="LAST PRICE" id="password" required>
-            </div>
-            <div class="centered-container">
-              <div class="name">Vendor</div>
-              <select id="accntType" required>
-                <option value="">Vendor</option>
-                <option value="Administrator">Ph Developers</option>
-                <option value="User">isuzu</option>
-            </select>          
-            </div>
-            <div class="centered-container">
-              <div class="name">Location</div>
-              <select id="accntType" required>
-                <option value="">Locations</option>
-                <option value="Administrator">cebu</option>
-                <option value="User">Davao</option>
-            </select>
-            </div>
-            <div class="centered-container">
-              <div class="name">Barcode</div>
-                <input class="input-dept" type="text" placeholder="BARCODE" id="password" required>
-            </div>
-            <div class="centered-container">
-                <button class="custom-button"><span class="material-icons-outlined" title="CREATE" >create</span></button>
-                <button class="custom-button">CANCEL</button>
-            </div>         
+          <div class="centered-container">
+            <div class="name">Company</div>
+              <input class="input-dept" type="text" placeholder="Company Name" id="name" required>
+          </div>
+          <div class="centered-container">
+            <div class="name">Services</div>
+              <input class="input-dept" type="text" placeholder="Services" id="username" required>
+          </div>
+          <div class="centered-container">
+            <div class="name">Price</div>
+              <input class="input-dept" type="text" placeholder=" Price" id="password" required>
+          </div>
+          <div class="centered-container">
+            <div class="name">Location </div>
+              <input class="input-dept" type="text" placeholder="Location" id="password" required>
+          </div>
+          <div class="centered-container">
+            <div class="name">Contact Person</div>
+            <input class="input-dept" type="text" placeholder="Contact Person" id="password" required>
+          </div>
+          <div class="centered-container">
+            <div class="name">Contact Number</div>
+            <input class="input-dept" type="text" placeholder="Contact Number" id="password" required>
+          </div>
+          <div class="centered-container">
+            <div class="name">Email</div>
+              <input class="input-dept" type="text" placeholder="Email" id="password" required>
+          </div>
+          <div class="centered-container">
+              <button class="custom-button"><span class="material-icons-outlined" title="CREATE" >create</span></button>
+              <button class="custom-button">CANCEL</button>
+          </div>         
         </div>
       </div>
       <!--End edit Modal-->
