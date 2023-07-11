@@ -248,6 +248,7 @@ body {
   color: #fff;
   border-radius: 15px;
   cursor: pointer;
+  height: 40px;
 }
 
 .modal {
@@ -657,4 +658,43 @@ select option:hover {
 .logout{
   text-decoration: none;
   color: whitesmoke;
+}
+
+.table-container {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+th, td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid black;
+  color: #000;
+}
+
+th {
+  background-color: transparent;
+}
+
+#pagination-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+#pagination li {
+  display: inline-block;
+  margin: 0 5px;
+  cursor: pointer;
+  color: black;
+}
+
+#pagination li.active {
+  font-weight: bold;
 }
