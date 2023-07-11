@@ -164,12 +164,14 @@
                 <input class="input-dept" type="text" placeholder="Position" id="pos" required>
             </div>
             <div class="centered-container">
-              <input class="input-dept" type="text" placeholder="Department" id="dept" required>
+              <input class="input-dept" type="text" placeholder="Department" id="dept" readonly>
           </div>
-            <div class="centered-container">
-                <button class="custom-button"><span class="material-icons-outlined" title="CREATE" >create</span></button>
-                <button class="custom-button">CANCEL</button>
-            </div>         
+          <div class="centered-container">
+            <button class="custom-button" onclick="Edit()">
+              <span class="material-icons-outlined" title="Submit">create</span>
+            </button>
+            <button class="custom-button" onclick="Cancel(2)">Cancel</button>
+          </div>        
         </div>
       </div>
       <!--End edit Modal-->
@@ -181,11 +183,18 @@
         <div class="modal-content">
             <h2 class="h2h2">ARE YOU SURE YOU WANT TO DELETE THIS?</h2>
             <div class="centered-container">
-              <p class="h2black"></p>
+              <p class="h2black" id="del_name"></p>
             </div>
             <div class="centered-container">
-                <button class="custom-button"><span class="material-icons-outlined" title="Delete" >delete</span></button>
-                <button class="custom-button">CANCEL</button>
+              <button class="custom-button">
+                <span
+                  class="material-icons-outlined"
+                  title="Submit"
+                  onclick="Remove()"
+                  >create</span
+                >
+              </button>
+              <button class="custom-button" onclick="Cancel(3)">Cancel</button>
             </div>
         </div>
         </div>
@@ -239,9 +248,7 @@
                   <button class="custom-button delete" id="openModalBtndeletedept"><span class="material-icons-outlined" title="Delete" onclick="Delete(` +
                 v.ID +
                 `)">delete</span></button>
-                  <button class="custom-button"><span class="material-icons-outlined" title="Position" onclick="Position(` +
-                v.ID +
-                `)">directions_walk</span></button></td>
+                  </td>
             </tr>
           `
             );
@@ -336,15 +343,123 @@
         }
       }
 
-
-
-        // EDIT ======================
-
+        // EDIT ====================== save edit
         // UPDATE ======================
+        function Edit() {
+        var position = $("#pos").val();
+        var id = localStorage.getItem("position_id");
+
+        if (position == "") {
+          Swal.fire({
+            toast: true,
+            position: "center",
+            icon: "warning",
+            title: "Please Complete Required Details",
+            showConfirmButton: false,
+            timer: 3000,
+          });
+        } else {
+          $.ajax({
+            url: "/api/edit_position",
+            data: {
+              name: position,
+              id: id,
+            },
+            success: function () {
+              Swal.fire({
+                toast: true,
+                position: "center",
+                icon: "success",
+                title: "Department Name Updated",
+                showConfirmButton: false,
+                timer: 3000,
+              }).then(function () {
+                window.location.reload();
+              });
+            },
+          });
+        }
+      }
+
+
+       
  
         // DELETE ======================
+      // Onclick Delete
+      function Delete(id) {
+        var modal = document.getElementById("myModaldelete");
+        modal.style.display = "block";
+
+        $.get("/api/get_position", function (index) {
+          var result = JSON.parse(index).item;
+          $.each(result, function (_, v) {
+            if (v.ID == id) {
+              localStorage.setItem("delete_id", id);
+              $("#del_name").html(v.Name);
+            }
+          });
+        });
+      }
+
+        function Remove() {
+        var id = localStorage.getItem("delete_id");
+        $.ajax({
+          url: "/api/delete_position",
+          data: {
+            id: id,
+          },
+          success: function () {
+            Swal.fire({
+              toast: true,
+              position: "center",
+              icon: "success",
+              title: "Position Deleted",
+              showConfirmButton: false,
+              timer: 3000,
+            }).then(function () {
+              window.location.reload();
+            });
+          },
+        });
+      }
 
         // SEARCH ======================
+        $("#search").on("change keyup", function (e) {
+        Search(this.value.toLowerCase());
+      });
+
+      function Search(search) {
+        var tableBody = document.getElementById("details");
+        tableBody.innerHTML = "";
+
+        $.get("/api/get_position", function (index) {
+          var result = JSON.parse(index).item;
+          $.each(result, function (_, v) {
+            if (v.Name.toLowerCase().includes(search)) {
+              tableBody.innerHTML +=
+              `
+              <tr>
+              <td>` +
+                v.Department.Name +
+                `</td>
+              <td>` +
+                v.Name +
+                `</td>
+              <td><button class="custom-button" id="openModalBtneditdept-` +
+                v.ID +
+                `"><span class="material-icons-outlined" title="Update Position" onclick="Modify(` +
+                v.ID +
+                `)" >create</span></button>
+                  <button class="custom-button delete" id="openModalBtndeletedept"><span class="material-icons-outlined" title="Delete" onclick="Delete(` +
+                v.ID +
+                `)">delete</span></button>
+                  </td>
+            </tr>
+          `
+            }
+          });
+        });
+      }
 
         // CANCEL FUNC
         function Cancel(id) {
@@ -355,7 +470,7 @@
           var modal = document.getElementById("myModaleditpos");
           modal.style.display = "none";
         } else {
-          var modal = document.getElementById("myModaldeletepos");
+          var modal = document.getElementById("myModaldelete");
           modal.style.display = "none";
         }
       }
