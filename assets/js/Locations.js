@@ -25,7 +25,6 @@ var tableData = [
                        <td>${rowData.asset}</td>
                        <td>${rowData.lastprice}</td>
                        <td>${rowData.vendor}</td>
-                      
                        <td><button class="custom-button" id="openModalBtnassetupdate"><span class="material-icons-outlined" title="Update">create</span> </button>
                        <button class="custom-button" id="openModalBtndelete"><span class="material-icons-outlined" title="Delete">delete</span> </button>
                        <button class="custom-button" id="openModalBtn"><span class="material-icons-outlined" title="Settings">settings</span> </button></td>`;
