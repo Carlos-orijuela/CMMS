@@ -700,3 +700,30 @@ th {
 #pagination li.active {
   font-weight: bold;
 }
+.dropdown-menu {
+  display: none;
+  padding: 5px;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* Show the dropdown menu when the parent list item is hovered */
+.sidebar-list-item:hover .dropdown-menu {
+  display: block;
+}
+
+/* Style the dropdown menu links */
+.dropdown-menu li {
+  list-style: none;
+}
+
+.dropdown-menu li a {
+  display: block;
+  padding: 8px 16px;
+  text-decoration: none;
+  color: #9e9ea4;
+}
+
+.dropdown-menu li a:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Change the background color as desired */
+}
