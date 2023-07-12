@@ -141,7 +141,7 @@
       <div id="myModal" class="modal">
         <div class="modal-content">
           <h2 class="h2h2">Add System Role</h2>
-
+          <div class="centered-container"><h2 class="label">Department</h2></div>
           <div class="centered-container">
             <select id="department" name="department" required> 
                   <!-- Department APPEND HERE -->
@@ -149,6 +149,7 @@
                   <!-- Department APPEND HERE -->
               </select>
           </div>
+          <div class="centered-container"><h2 class="label">Position</h2></div>
             <div class="centered-container">
                 <input class="input-dept" type="text" placeholder="Position" id="position" required>
             </div>
@@ -165,13 +166,15 @@
       <div id="myModaleditpos" class="modal">
         <div class="modal-content">
           <h2 class="h2h2">Edit System Role</h2>
-
+          <div class="centered-container"><h2 class="label">Department</h2></div>
+          <div class="centered-container">
+            <input class="input-dept" type="text" placeholder="Department" id="dept" readonly>
+        </div>
+        <div class="centered-container"><h2 class="label">Position</h2></div>
             <div class="centered-container">
                 <input class="input-dept" type="text" placeholder="Position" id="pos" required>
             </div>
-            <div class="centered-container">
-              <input class="input-dept" type="text" placeholder="Department" id="dept" readonly>
-          </div>
+            
           <div class="centered-container">
             <button class="custom-button" onclick="Edit()">
               <span class="material-icons-outlined" title="Submit">create</span>

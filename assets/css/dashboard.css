@@ -727,3 +727,7 @@ th {
 .dropdown-menu li a:hover {
   background-color: rgba(255, 255, 255, 0.2); /* Change the background color as desired */
 }
+.label{
+  font-size: 16px;
+  color: #000;
+}
