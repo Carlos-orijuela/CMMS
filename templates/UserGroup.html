@@ -14,6 +14,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="/assets/css/dashboard.css" />
     <link rel="stylesheet" href="/assets/css/users.css">
+    <link rel="stylesheet" href="/assets/css/usergroup.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
     <script defer src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
   </head>
@@ -138,17 +139,51 @@
       <div id="myModal" class="modal">
         <div class="modal-content">
           <h2 class="h2h2">Add User Group</h2>
-
+          <div class="centered-container">
+            <h2 class="label">Name</h2></div>
             <div class="centered-container">
-                <div class="name"> Name:</div>
-                <input class="input-dept" type="text" placeholder="Full Name" id="name" required>
+             
+                <input class="input-dept " type="text" placeholder=" Name" id="name" required>
             </div>
             
-            <div class="centered-container"><h2 class="label">Description</h2></div>
+            <div class="centered-container">
+              <h2 class="label">Description</h2></div>
           <div class="centered-container">
-            <textarea rows="4" cols="50" name="comment" form="usrform">
+            <textarea rows="4" cols="60" name="comment" form="usrform">
               </textarea>
           </div>
+          <div class="centered-container">
+            <h2 class="label">Permission</h2></div>
+            <div class="container">
+              <div class="checkbox2">
+                <input type="checkbox" id="new1">
+              <label for="new1"> Enable all</label>
+              </div>
+              <div class="checkbox2">
+                <input type="checkbox" id="new1">
+              <label for="new1">Manage groups</label>
+              </div>
+              <div class="checkbox2">
+                <input type="checkbox" id="new1">
+              <label for="new1">Manage roles</label>
+              </div>
+              <div class="checkbox2">
+                <input type="checkbox" id="new1">
+              <label for="new1"> Manage direct report</label>
+              </div>
+              <div class="checkbox2">
+                <input type="checkbox" id="new1">
+              <label for="new1">Manage users</label>
+              </div>
+              <div class="checkbox2">
+                <input type="checkbox" id="new1">
+              <label for="new1">View groups</label>
+              </div>
+              <div class="checkbox2">
+                <input type="checkbox" id="new1">
+              <label for="new1">View user</label>
+              </div>
+        </div>
             <div class="centered-container">
                 <button class="custom-button" onclick="Submit()"><span class="material-icons-outlined" title="CREATE" >create</span></button>
                 <button class="custom-button" onclick="Cancel(1)">CANCEL</button>
