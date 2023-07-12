@@ -132,6 +132,12 @@
                           
                         </tbody>
                       </table>
+                      <button class="custom-button" id="prevButton" onclick="goToPreviousPage()" disabled><span class="material-icons-outlined" title="Previous Page"
+                        >arrow_back</span
+                      ></button>
+                      <button class="custom-button" id="nextButton" onclick="goToNextPage()" disabled><span class="material-icons-outlined" title="Next Page"
+                        >arrow_forward</span
+                      ></button>
                   </div> 
               </div>
             </div>
@@ -265,34 +271,75 @@
       });
 
       // display Data in the table
+      var currentPage = 1; // Current page number
+      var itemsPerPage = 5; // Number of items to display per page
+
       function getdata() {
         $("#details").empty();
+
         $.get("/api/get_user", function (index) {
           var result = JSON.parse(index).item;
-          $.each(result, function (_, v) {
-            $("#details").append(
-              `
-            <tr>
-              <td>` +v.Name +`</td>
-              <td>` +v.Username +`</td>
-              <td>` +v.AccountType +`</td>
-              <td>` +v.Department.Name +`</td>
-              <td>` +v.Position.Name +`</td>
+          var startIndex = (currentPage - 1) * itemsPerPage;
+          var endIndex = startIndex + itemsPerPage;
+          for (var i = startIndex; i < endIndex && i < result.length; i++) {
+            var v = result[i];
 
-              <td>
-                <button class="custom-button" id="openModalBtneditdept-` +v.ID +`">
-                <span class="material-icons-outlined" title="Update Account" onclick="Modify(` +v.ID +`)" >create</span></button>
+            $("#details").append(`
+              <tr>
+                <td>` + v.Name + `</td>
+                <td>` + v.Username + `</td>
+                <td>` + v.AccountType + `</td>
+                <td>` + v.Department.Name + `</td>
+                <td>` + v.Position.Name + `</td>
 
-                <button class="custom-button delete" id="openModalBtndeletedept">
-                <span class="material-icons-outlined" title="Delete" onclick="Delete(` +v.ID +`)">delete</span></button>
-            </td>
-            </tr>
-          `
-            );
-          });
-          $('#example').DataTable();
+                <td>
+                  <button class="custom-button" id="openModalBtneditdept-` + v.ID + `">
+                    <span class="material-icons-outlined" title="Update Account" onclick="Modify(` + v.ID + `)">create</span>
+                  </button>
+
+                  <button class="custom-button delete" id="openModalBtndeletedept">
+                    <span class="material-icons-outlined" title="Delete" onclick="Delete(` + v.ID + `)">delete</span>
+                  </button>
+                </td>
+              </tr>
+            `);
+          }
+          updatePaginationButtons(result.length);
         });
       }
+
+      function updatePaginationButtons(totalItems) {
+        var totalPages = Math.ceil(totalItems / itemsPerPage);
+
+
+        if (currentPage === 1) {
+          $("#prevButton").prop("disabled", true);
+        } else {
+          $("#prevButton").prop("disabled", false);
+        }
+
+
+        if (currentPage === totalPages) {
+          $("#nextButton").prop("disabled", true);
+        } else {
+          $("#nextButton").prop("disabled", false);
+        }
+      }
+
+
+      function goToPreviousPage() {
+        if (currentPage > 1) {
+          currentPage--;
+          getdata();
+        }
+      }
+
+
+      function goToNextPage() {
+        currentPage++;
+        getdata();
+      }
+
 
     // ADD USER ACCOUNT
     function Submit(){
