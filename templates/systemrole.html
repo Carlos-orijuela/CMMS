@@ -137,8 +137,10 @@
                 <table id="my-table" class="custom-table">
                   <thead>
                     <tr>
-                      <th>Department</th>
-                      <th>Position</th>
+                      <th><input type="checkbox" id="recheck">
+                      <label for="recheck">Select All</label></th>
+                      <th>Name</th>
+                      <th>Description</th>
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -165,7 +167,7 @@
         <div class="modal-content">
           <h2 class="h2h2">Add System Role</h2>
           <div class="centered-container">
-            <h2 class="label">Department</h2>
+            <h2 class="label">Name</h2>
           </div>
           <div class="centered-container">
             <select id="department" name="department" required>
@@ -174,16 +176,12 @@
               <!-- Department APPEND HERE -->
             </select>
           </div>
-          <div class="centered-container"><h2 class="label">Position</h2></div>
+          <div class="centered-container"><h2 class="label">Description</h2></div>
           <div class="centered-container">
-            <input
-              class="input-dept"
-              type="text"
-              placeholder="Position"
-              id="position"
-              required
-            />
+            <textarea rows="4" cols="50" name="comment" form="usrform">
+              </textarea>
           </div>
+          
 
           <div class="centered-container">
             <button class="custom-button" onclick="Submit()">
