@@ -357,10 +357,12 @@ body {
 }
 
 .card-content {
-  padding: 20px;
+  padding: 10px;
   background-color: #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.9);
+  border-radius: 5px;
+  margin-bottom: 40px;
 }
-
 .card-table {
   overflow-x: auto;
 }
@@ -368,14 +370,14 @@ body {
 .custom-table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
+  font-size: 18px;
 }
 
 .custom-table th,
 .custom-table td {
-  padding: 12px 15px;
-  text-align: left;
-  border-bottom: 1px solid black;
+  margin-bottom: 2px;
+  border: 1px solid black;
   text-align: center;
   color: black;
 }
@@ -665,12 +667,14 @@ select option:hover {
 .table-container {
   max-width: 100%;
   overflow-x: auto;
+  padding: 20px;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
+  
 }
 
 th, td {

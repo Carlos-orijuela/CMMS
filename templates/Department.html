@@ -115,23 +115,21 @@
           <h2>DEPARTMENT</h2>
         </div>
 
-        <div class="card-content">
-          <div>
-            <input
-              class="search"
-              type="text"
-              id="search"
-              placeholder="Search..."
-            />
-            <button class="custom-button" id="openModalBtn">
-              <span class="material-icons-outlined" title="Add Department"
-                >plus_one</span
-              >
-            </button>
-          </div>
-
           <div class="card-content">
-            <div class="card-table">
+            <div>
+              <input
+                class="search"
+                type="text"
+                id="search"
+                placeholder="Search..."
+              />
+              <button class="custom-button" id="openModalBtn">
+                <span class="material-icons-outlined" title="Add Department"
+                  >plus_one</span
+                >
+              </button>
+            </div>
+            <div class="table-container">
               <table id="example" class="custom-table">
                 <thead>
                   <tr>
@@ -143,15 +141,15 @@
                   <!-- APPEND TABLE DATA HERE -->
                 </tbody>
               </table>
+              <button class="custom-button" id="prevButton" onclick="goToPreviousPage()" disabled><span class="material-icons-outlined" title="Previous Page"
+                >arrow_back</span
+              ></button>
+              <button class="custom-button" id="nextButton" onclick="goToNextPage()" disabled><span class="material-icons-outlined" title="Next Page"
+                >arrow_forward</span
+              ></button>
             </div>
-            <button class="custom-button" id="prevButton" onclick="goToPreviousPage()" disabled><span class="material-icons-outlined" title="Previous Page"
-              >arrow_back</span
-            ></button>
-            <button class="custom-button" id="nextButton" onclick="goToNextPage()" disabled><span class="material-icons-outlined" title="Next Page"
-              >arrow_forward</span
-            ></button>
+            
           </div>
-        </div>
       </main>
       <!-- End Main -->
 
