@@ -115,8 +115,7 @@
                           <tr>
                             <th>Full Name</th>
                             <th>Username</th>
-                            <!-- <th>Password</th> -->
-                            <th>Account Type</th>
+                            <th>Email</th>
                             <th>Department</th>
                             <th>Position</th>
                             <th>Action</th>
@@ -145,30 +144,21 @@
 
             <div class="centered-container">
                 <div class="name">Full Name:</div>
-                <input class="input-dept" type="text" placeholder="FULLNAME" id="name" required>
+                <input class="input-dept" type="text" placeholder="Full Name" id="name" required>
             </div>
             <div class="centered-container">
               <div class="name">Username:</div>
-              <input class="input-dept" type="text" placeholder="USERNAME" id="username" required>
+              <input class="input-dept" type="text" placeholder="Username" id="username" required>
             </div>
             <div class="centered-container">
               <div class="name">Password:</div>
-                <input class="input-dept" type="password" placeholder="PASSWORD" id="password" required>
+                <input class="input-dept" type="password" placeholder="Password" id="password" required>
             </div>
             <div class="centered-container">
-                <select id="accntType" required>
-                    <option value="">ACCOUNT TYPE</option>
-                    <option value="Administrator">Administrator</option>
-                    <option value="User">User</option>
-                </select>
+              <div class="name">Email:</div>
+                <input class="input-dept" type="email" placeholder="Enter Email" id="password" required>
             </div>
-            <div class="centered-container">
-              <select id="department" name="department" required>
-                    <option value="">DEPARTMENT</option>
-                    <!-- <option value="option1">Option 1</option>
-                    <option value="option2">Option 2</option> -->
-                </select>
-            </div>
+          
             <div class="centered-container">
               <select id="position" name="position" required> 
                     <option value="">POSITION</option>
@@ -176,6 +166,16 @@
                     <option value="Tech Support">Tech Support</option> -->
                 </select>
             </div>
+            <div class="container">
+              <div class="rename">Groups</div>
+               <input class="int1" type="checkbox" id="int2" value="Logistic">
+               <label for="int2">Logistic</label>
+               <input class="int1" type="checkbox" id="int3" value="Logistic">
+               <label for="int2">Manager</label>
+               <input class="int1" type="checkbox" id="int4" value="Logistic">
+               <label for="int2">Purchasing</label>
+
+           </div>
             <div class="centered-container">
                 <button class="custom-button" onclick="Submit()"><span class="material-icons-outlined" title="CREATE" >create</span></button>
                 <button class="custom-button" onclick="Cancel(1)">CANCEL</button>
