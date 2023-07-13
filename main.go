@@ -51,6 +51,7 @@ func Handlers() {
 	http.HandleFunc("/users", views.UserHandler)
 	http.HandleFunc("/department", views.DepartmentHandler)
 	http.HandleFunc("/position", views.PositionHandler)
+	http.HandleFunc("/group", views.GroupHandler)
 
 }
 

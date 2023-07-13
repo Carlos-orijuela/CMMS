@@ -265,6 +265,8 @@
       src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"
     ></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
     <!-- Custom JS -->
     <script>
       $(document).ready(function () {
@@ -279,7 +281,7 @@
       function getdata() {
         $("#details").empty();
 
-        $.get("/api/get_user", function (index) {
+        $.get("/api/get_group", function (index) {
           var result = JSON.parse(index).item;
           var startIndex = (currentPage - 1) * itemsPerPage;
           var endIndex = startIndex + itemsPerPage;

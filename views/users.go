@@ -11,3 +11,10 @@ func UserHandler(w http.ResponseWriter, r *http.Request) {
 	data["Title"] = "Register | POS_SYSTEM"
 	tmpl.Execute(w, data)
 }
+
+func GroupHandler(w http.ResponseWriter, r *http.Request) {
+	tmpl := template.Must(template.ParseFiles("./templates/usergroup.html"))
+	data := map[string]interface{}{}
+	data["Title"] = "Register | POS_SYSTEM"
+	tmpl.Execute(w, data)
+}
