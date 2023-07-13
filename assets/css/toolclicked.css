@@ -1,0 +1,33 @@
+.inputs{
+    display: inline-block;
+    width: 24%;
+    vertical-align: middle;
+}
+.input-name{
+    padding-bottom: 2%;
+}
+.lower p{
+    margin: 2% 0 0 0 ;
+    font-size: 1rem;
+}
+.gen .h6{
+  font-weight: bolder;
+}
+.code-1{
+    width: 15%;
+    display: inline-block;
+}
+.code-1 p{
+   margin: 0;
+}
+.in-cathegory{
+    width: 30%;
+    display: inline-block;
+}
+.in-cathegory p{
+    margin:0;
+}
+
+#Serial-1, #barcodes, #Models,#makes{
+    width: 30%;
+}
