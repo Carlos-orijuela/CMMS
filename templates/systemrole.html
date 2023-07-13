@@ -137,8 +137,8 @@
                 <table id="my-table" class="custom-table">
                   <thead>
                     <tr>
-                      <th><input type="checkbox" id="recheck">
-                      <label for="recheck">Select All</label></th>
+                      <!-- <th><input type="checkbox" id="recheck"> -->
+                      <!-- <label for="recheck">Select All</label></th> -->
                       <th>Name</th>
                       <th>Description</th>
                       <th>Action</th>
@@ -174,9 +174,51 @@
           </div>
           <div class="centered-container"><h2 class="label">Description</h2></div>
           <div class="centered-container">
-            <textarea rows="4" cols="65" name="comment" form="usrform">
-              </textarea>
+            <textarea rows="4" cols="65" name="comment" form="usrform"></textarea>
           </div>
+
+          <div class="panel panel-default">
+            <!-- <div class="panel-body">A Basic Panel</div> -->
+        
+           <div class="centered-container">
+
+              <h2 class="label">Permission</h2></div>
+              <div class="container">
+                  <div class="checkbox">
+                    <input type="checkbox" id="c1" >
+                  <label for="new1"> </label>Enable all of the view and manage permissions for user management.</label>
+                  </div>
+                  <div class="checkbox2">
+                    <input type="checkbox" id="c2" >
+                  <label for="new1">Allow users to view, edit, and create user groups.</label>
+                  </div>
+                  <div class="checkbox2">
+                    <input type="checkbox" id="c3" >
+                  <label for="new1">Allow users to view, edit, create and delete roles.</label>
+                  </div>
+                  <div class="checkbox2">
+                    <input type="checkbox" id="c4" >
+                  <label for="new1">Allows managers to edit the user accounts of their direct reports (i.e. the users who have that manager listed in the Reports To field of their user account). Does not allow any create or delete access.</label>
+                  </div>
+                  <div class="checkbox2">
+                    <input type="checkbox" id="c5" >
+                  <label for="new1">Allow users to view, edit, and create user accounts.</label>
+                  </div>
+                  <div class="checkbox2">
+                    <input type="checkbox" id="c6" ">
+                  <label for="new1">Allow users to view all user group details, including the user group list and permissions. Does not allow any create, edit, or delete access.</label>
+                  </div>
+                  <div class="checkbox2">
+                    <input type="checkbox" id="c7" value="00000010">
+                  <label for="new1">Allow users to view all role details, including the role list and permissions. Does not allow any create, edit, or delete access.</label>
+                  </div>
+                  <div class="checkbox2">
+                    <input type="checkbox" id="c8" value="00000001">
+                  <label for="new1">Allow users to view all user account details, including the user list and user information. Does not allow any create, edit or delete access.</label>
+                  </div>
+              </div>
+              <!-- end of panel -->
+            </div> 
           
 
           <div class="centered-container">
@@ -270,7 +312,7 @@
       //GET DATA
       $(document).ready(function () {
         getdata();
-        get_department();
+       // get_department();
       });
 
       // display Data in the table
@@ -280,15 +322,15 @@
       function getdata() {
         $("#details").empty();
 
-        $.get("/api/get_position", function (index) {
+        $.get("/api/get_systemrole", function (index) {
           var result = JSON.parse(index).item;
           var startIndex = (currentPage - 1) * itemsPerPage;
           var endIndex = startIndex + itemsPerPage;
           $.each(result.slice(startIndex, endIndex), function (_, v) {
             $("#details").append(`
               <tr>
-                <td>${v.Department.Name}</td>
                 <td>${v.Name}</td>
+                <td>${v.Description}</td>
                 <td>
                   <button class="custom-button" id="openModalBtneditdept-${v.ID}">
                     <span class="material-icons-outlined" title="Update Position" onclick="Modify(${v.ID})">create</span>
