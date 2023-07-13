@@ -17,6 +17,20 @@ type User struct {
 	Deleted      gorm.DeletedAt
 }
 
-func (u *User) String() string {
-	return u.Name
+// func (u *User) String() string {
+// 	return u.Name
+// }
+type SystemRole struct {
+	ID          uint `gorm:"primaryKey"`
+	Name        string
+	Description string
+	Permission  string
+	Deleted     gorm.DeletedAt
+}
+
+type Group struct {
+	ID          uint `gorm:"primaryKey"`
+	Name        string
+	Description string
+	Deleted     gorm.DeletedAt
 }
