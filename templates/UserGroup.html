@@ -457,7 +457,7 @@
         var tableBody = document.getElementById("details");
         tableBody.innerHTML = "";
 
-        $.get("/api/get_user", function (index) {
+        $.get("/api/get_group", function (index) {
           var result = JSON.parse(index).item;
           $.each(result, function (_, v) {
             if (v.Name.toLowerCase().includes(search)) {
