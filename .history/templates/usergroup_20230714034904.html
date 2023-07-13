@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>User Group</title>
+
+    <!-- Montserrat Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/dashboard.css" />
+    <link rel="stylesheet" href="/assets/css/users.css">
+    <link rel="stylesheet" href="/assets/css/usergroup.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+    <script defer src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+  </head>
+  <body>
+    <div class="grid-container">
+
+      <!-- Header -->
+      <header class="header">
+        <div class="menu-icon" onclick="openSidebar()">
+          <span class="material-icons-outlined">menu</span>
+        </div>
+        <div class="header-left">
+          
+        </div>
+        <div class="header-right">
+          <span class="material-icons-outlined">notifications</span>
+          <span class="material-icons-outlined">email</span>
+          <span class="material-icons-outlined">account_circle</span>
+        <a href="/loginpage" class="logout">
+                <span class="material-icons-outlined" title="Logout">reply</span>
+        </a>
+        </div>
+      </header>
+      <!-- End Header -->
+
+      <!-- Sidebar -->
+      <aside id="sidebar">
+        <div class="sidebar-title">
+          <div class="sidebar-brand">
+            <span class="material-icons-outlined"></span> SAILORCOM
+          </div>
+          <span class="material-icons-outlined" onclick="closeSidebar()">close</span>
+        </div>
+
+        <ul class="sidebar-list">
+          <li class="sidebar-list-item">
+            <a href="dashboard.html" target="_blank">
+              <span class="material-icons-outlined">dashboard</span> Dashboard
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <span class="material-icons-outlined">inventory_2</span> Asset Hierarchy
+            <ul class="dropdown-menu">
+              <li><a href="#" target="_blank">Location</a></li>
+              <li><a href="#" target="_blank">Facility</a></li>
+              <li><a href="#" target="_blank">Equipment</a></li>
+              <li><a href="#" target="_blank">Spare part</a></li>
+              <li><a href="#" target="_blank">Special tools </a></li>
+              <li><a href="#" target="_blank">Supplies</a></li>
+            </ul>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">category</span> Supplies
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <span class="material-icons-outlined">groups</span> User Management
+          <ul class="dropdown-menu">
+            <li><a href="/users">User</a></li>
+            <li><a href="/department">Department</a></li>
+            <li><a href="/position">System Role</a></li>
+          </ul>
+        </li>
+          <li class="sidebar-list-item">
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">fact_check</span> Maintenance
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">poll</span> Reports
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">settings</span> Settings
+            </a>
+          </li>
+        </ul>
+      </aside>
+      <!-- End Sidebar -->
+
+      <!-- Main -->
+      <main class="main-container">
+        <div class="main-title">
+          <h2>User Groups</h2>
+        </div>
+            
+
+            <div class="card-content">
+              <div>
+                <input class="search" type="text" placeholder="Search..."  id="search">
+                <button class="custom-button" id="openModalBtn"><span class="material-icons-outlined" title="Add User">person_add</span> </button>
+            </div>
+                <div class="table-container">
+                    <table id="example" class="custom-table">
+                        <thead>
+                          <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Action</th>                            
+                          </tr>
+                        </thead>
+                        <tbody id="details">
+                          <!-- APPEND TABLE DATA HERE -->
+                          
+                        </tbody>
+                      </table>
+                      <button class="custom-button" id="prevButton" onclick="goToPreviousPage()" disabled><span class="material-icons-outlined" title="Previous Page"
+                        >arrow_back</span
+                      ></button>
+                      <button class="custom-button" id="nextButton" onclick="goToNextPage()" disabled><span class="material-icons-outlined" title="Next Page"
+                        >arrow_forward</span
+                      ></button>
+                  </div> 
+              </div>
+      </main>
+      <!-- End Main -->
+
+      <!--Modal-->
+      <div id="myModal" class="modal">
+        <div class="modal-content">
+          <h2 class="h2h2">Add User Group</h2>
+          <div class="centered-container">
+            <h2 class="label">Name</h2></div>
+            <div class="centered-container">
+                <input class="input-dept " type="text" placeholder=" Name" id="name" required>
+            </div>
+            
+            <div class="centered-container">
+              <h2 class="label">Description</h2></div>
+          <div class="centered-container">
+            <textarea rows="4" cols="60" name="comment" form="usrform" id="des" required>
+              </textarea>
+          </div>
+          <!-- <div class="centered-container">
+            <h2 class="label">Permission</h2></div>
+            <div class="container">
+              <div class="checkbox2">
+                <input type="checkbox" id="new1">
+              <label for="new1"> Enable all</label>
+              </div>
+              <div class="checkbox2">
+                <input type="checkbox" id="new1">
+              <label for="new1">Manage groups</label>
+              </div>
+              <div class="checkbox2">
+                <input type="checkbox" id="new1">
+              <label for="new1">Manage roles</label>
+              </div>
+              <div class="checkbox2">
+                <input type="checkbox" id="new1">
+              <label for="new1"> Manage direct report</label>
+              </div>
+              <div class="checkbox2">
+                <input type="checkbox" id="new1">
+              <label for="new1">Manage users</label>
+              </div>
+              <div class="checkbox2">
+                <input type="checkbox" id="new1">
+              <label for="new1">View groups</label>
+              </div>
+              <div class="checkbox2">
+                <input type="checkbox" id="new1">
+              <label for="new1">View user</label>
+              </div>
+        </div> -->
+            <div class="centered-container">
+                <button class="custom-button" onclick="Submit()"><span class="material-icons-outlined" title="CREATE" >create</span></button>
+                <button class="custom-button" onclick="Cancel(1)">CANCEL</button>
+            </div>         
+        </div>
+      </div>
+      <!--End Modal-->
+      <!--Edit Modal Start-->
+      <div id="myModaledit" class="modaledit">
+        <div class="modalcontentedit">
+          <h2 class="h2h2">Update Group</h2>
+            <div class="centered-container">
+              <div class="name">Name:</div>
+                <input class="input-dept" type="text" placeholder="Name" id="editname">
+            </div>
+            <div class="centered-container">
+              <div class="name">Description:</div>
+              <textarea rows="4" cols="60" name="name" form="usrform" id="editdes" required>
+                </textarea>
+            </div>
+
+            <!-- <div class="centered-container">
+              <h2 class="label">Permission</h2></div>
+              <div class="container">
+                <div class="checkbox2">
+                  <input type="checkbox" id="new1">
+                <label for="new1"> Enable all</label>
+                </div>
+                <div class="checkbox2">
+                  <input type="checkbox" id="new1">
+                <label for="new1">Manage groups</label>
+                </div>
+                <div class="checkbox2">
+                  <input type="checkbox" id="new1">
+                <label for="new1">Manage roles</label>
+                </div>
+                <div class="checkbox2">
+                  <input type="checkbox" id="new1">
+                <label for="new1"> Manage direct report</label>
+                </div>
+                <div class="checkbox2">
+                  <input type="checkbox" id="new1">
+                <label for="new1">Manage users</label>
+                </div>
+                <div class="checkbox2">
+                  <input type="checkbox" id="new1">
+                <label for="new1">View groups</label>
+                </div>
+                <div class="checkbox2">
+                  <input type="checkbox" id="new1">
+                <label for="new1">View user</label>
+                </div> -->
+              <!--    <div class="centered-container">
+              <div class="name">Password:</div>
+                <input class="input-dept" type="password" placeholder="PASSWORD" id="pw">
+               </div> -->
+            <div class="centered-container">
+                <button class="custom-button" onclick="Edit()">UPDATE</span></button>
+                <button class="custom-button" onclick="Cancel(2)">CANCEL</button>
+            </div>         
+        </div>
+      </div>
+      <!--End edit Modal-->
+
+    </div>
+
+    <!--Start Modal Delete-->
+        <div id="myModaldelete" class="modaldelete">
+        <div class="modalcontentdelete">
+            <h2 class="h2h2">ARE YOU SURE YOU WANT TO DELETE THIS GROUP?</h2>
+            <div class="centered-container">
+              <p class="h2black" id="del_name"></p>
+            </div>
+            <div class="centered-container">
+                <button class="custom-button" onclick="Remove()"><span class="material-icons-outlined" title="Delete" >delete</span></button>
+                <button class="custom-button" onclick="Cancel(3)">CANCEL</button>
+            </div>
+        </div>
+        </div>
+    <!--Delete end modal-->
+
+    <!-- Scripts -->
+    <script src="/assets/js/dashboard.js"></script>
+    <!-- ApexCharts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.5/apexcharts.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.min.js"
+      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      type="text/javascript"
+      src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"
+    ></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+    <!-- Custom JS -->
+    <script>
+      $(document).ready(function () {
+        getdata();
+      });
+
+      // display Data in the table
+      var currentPage = 1; // Current page number
+      var itemsPerPage = 5; // Number of items to display per page
+
+      function getdata() {
+        $("#details").empty();
+
+        $.get("/api/get_group", function (index) {
+          var result = JSON.parse(index).item;
+          var startIndex = (currentPage - 1) * itemsPerPage;
+          var endIndex = startIndex + itemsPerPage;
+          for (var i = startIndex; i < endIndex && i < result.length; i++) {
+            var v = result[i];
+
+            $("#details").append(`
+              <tr>
+                <td>` + v.Name + `</td>
+                <td>` + v.Description + `</td>
+
+                <td>
+                  <button class="custom-button" id="openModalBtneditdept-` + v.ID + `" onclick="Modify(` + v.ID + `)">
+                    <span class="material-icons-outlined" title="Update Account" onclick="Modify(` + v.ID + `)">create</span>
+                  </button>
+
+                  <button class="custom-button delete" id="openModalBtndeletedept">
+                    <span class="material-icons-outlined" title="Delete" onclick="Delete(` + v.ID + `)">delete</span>
+                  </button>
+                </td>
+              </tr>
+            `);
+          }
+          updatePaginationButtons(result.length);
+        });
+      }
+
+      function updatePaginationButtons(totalItems) {
+        var totalPages = Math.ceil(totalItems / itemsPerPage);
+
+
+        if (currentPage === 1) {
+          $("#prevButton").prop("disabled", true);
+        } else {
+          $("#prevButton").prop("disabled", false);
+        }
+
+
+        if (currentPage === totalPages) {
+          $("#nextButton").prop("disabled", true);
+        } else {
+          $("#nextButton").prop("disabled", false);
+        }
+      }
+
+
+      function goToPreviousPage() {
+        if (currentPage > 1) {
+          currentPage--;
+          getdata();
+        }
+      }
+
+
+      function goToNextPage() {
+        currentPage++;
+        getdata();
+      }
+
+
+    // ADD GROUP ACCOUNT
+    function Submit(){
+    var name =  $("#name").val()
+    var description =  $("#des").val()
+    
+
+      if (name == "" || description=="") {
+            Swal.fire({
+              toast: true,
+              position: "center",
+              icon: "warning",
+              title: "Please Complete Required Details",
+              showConfirmButton: false,
+              timer: 3000,
+            });
+          } else {
+            $.ajax({
+              url: "/api/group",
+              data: {
+                name: name,
+                description: description,
+               
+              },
+              success: function () {
+                Swal.fire({
+                  toast: true,
+                  position: "center",
+                  icon: "success",
+                  title: "New Group Added",
+                  showConfirmButton: false,
+                  timer: 3000,
+                }).then(function(){
+                  window.location.reload();
+                });
+              },
+            });
+          }
+    }
+
+    // Cancel Function
+    function Cancel(id) {
+        if (id == 1) {
+          var modal = document.getElementById("myModal");
+          modal.style.display = "none";
+        } else if (id == 2) {
+          var modal = document.getElementById("myModaledit");
+          modal.style.display = "none";
+        } else {
+          var modal = document.getElementById("myModaldelete");
+          modal.style.display = "none";
+        }
+      }
+
+      // Onclick Edit
+      function Modify(id) {
+        var modal = document.getElementById("myModaledit");
+        modal.style.display = "block";
+
+        $.get("/api/get_group", function (index) {
+          var result = JSON.parse(index).item;
+          $.each(result, function (_, v) {
+            if (v.ID == id) {
+              localStorage.setItem("id", id);
+              $("#editname").val(v.Name);
+              $("#editdes").val(v.Description);
+              // ADD PERMISSION HERE
+            }
+          });
+        });
+      }
+
+      function Edit() {
+      var name = $("#editname").val();
+      var description = $("#editdes").val();
+      var id = localStorage.getItem("id");
+
+       // console.log(name, password, username, accntType, department, position,id);
+        if (name == "") {
+          Swal.fire({
+            toast: true,
+            position: "center",
+            icon: "warning",
+            title: "Please Complete Required Details",
+            showConfirmButton: false,
+            timer: 3000,
+          });
+        } else {
+          $.ajax({
+            url: "/api/edit_group",
+            data: {
+              name: name,
+              description: description,
+              id: id,
+              //PERMISSION HERE
+            },
+            success: function () {
+              Swal.fire({
+                toast: true,
+                position: "center",
+                icon: "success",
+                title: "Group Updated",
+                showConfirmButton: false,
+                timer: 3000,
+              }).then(function () {
+                window.location.reload();
+              });
+            },
+          });
+        }
+      }
+
+      // Onclick Delete
+      function Delete(id) {
+        var modal = document.getElementById("myModaldelete");
+        modal.style.display = "block";
+
+        $.get("/api/get_group", function (index) {
+          var result = JSON.parse(index).item;
+          $.each(result, function (_, v) {
+            if (v.ID == id) {
+              localStorage.setItem("delete_id", id);
+              $("#del_name").html(v.Name);
+            }
+          });
+        });
+      }
+
+      // Search
+      $("#search").on("change keyup", function (e) {
+        Search(this.value.toLowerCase());
+      });
+
+      function Search(search) {
+        var tableBody = document.getElementById("details");
+        tableBody.innerHTML = "";
+
+        $.get("/api/get_user", function (index) {
+          var result = JSON.parse(index).item;
+          $.each(result, function (_, v) {
+            if (v.Name.toLowerCase().includes(search)) {
+              tableBody.innerHTML +=
+                `
+              <tr>
+              <td>` +v.Name +`</td>
+              <td>` +v.Description +`</td>
+
+              <td>
+                <button class="custom-button" id="openModalBtneditdept-` +v.ID +`">
+                <span class="material-icons-outlined" title="Update Account" onclick="Modify(` +v.ID +`)" >create</span></button>
+
+                <button class="custom-button delete" id="openModalBtndeletedept">
+                <span class="material-icons-outlined" title="Delete" onclick="Delete(` +v.ID +`)">delete</span></button>
+            </td>
+            </tr>
+              `;
+            }
+          });
+        });
+      }
+
+      // Save Delete
+
+      function Remove() {
+        var id = localStorage.getItem("delete_id");
+        $.ajax({
+          url: "/api/delete_group",
+          data: {
+            id: id,
+          },
+          success: function () {
+            Swal.fire({
+              toast: true,
+              position: "center",
+              icon: "success",
+              title: "Group Deleted",
+              showConfirmButton: false,
+              timer: 3000,
+            }).then(function () {
+              window.location.reload();
+            });
+          },
+        });
+      }
+    </script>
+
+
+
+    <!-- UPDATE USER -->
+    
+    <!--ADD USER JS-->
+    <script>
+        var openModalBtn = document.getElementById("openModalBtn");
+        var closeModalBtn = document.getElementById("closeModalBtn");
+        var modal = document.getElementById("myModal");
+
+        openModalBtn.addEventListener("click", function() {
+        modal.style.display = "block";
+        });
+
+        closeModalBtn.addEventListener("click", function() {
+        modal.style.display = "none";
+        });
+
+        window.addEventListener("click", function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+        });  
+    </script>
+
+    <!--EDIT USER JS-->
+    <script>
+        var openModalBtnedit = document.getElementById("openModalBtnedit");
+        var closeModalBtnedit = document.getElementById("closeModalBtnedit");
+        var modaledit = document.getElementById("myModaledit");
+
+        openModalBtnedit.addEventListener("click", function() {
+        modaledit.style.display = "block";
+        });
+
+        closeModalBtnedit.addEventListener("click", function() {
+        modaledit.style.display = "none";
+        });
+
+        window.addEventListener("click", function(event) {
+        if (event.target == modaledit) {
+            modaledit.style.display = "none";
+        }
+        });  
+    </script>
+    <!--DELETE USER JS-->
+    <script>
+        var openModalBtndelete = document.getElementById("openModalBtndelete");
+        var closeModalBtndelete = document.getElementById("closeModalBtndelete");
+        var modaldelete = document.getElementById("myModaldelete");
+
+        openModalBtndelete.addEventListener("click", function() {
+        modaldelete.style.display = "block";
+        });
+
+        closeModalBtndelete.addEventListener("click", function() {
+        modaldelete.style.display = "none";
+        });
+
+        window.addEventListener("click", function(event) {
+        if (event.target == modaledit) {
+            modaldelete.style.display = "none";
+        }
+        });  
+    </script>
+  </body>
+</html>
