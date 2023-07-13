@@ -1,0 +1,12 @@
+.name{
+    font-size: .8rem;
+    width: 20%;
+    padding-bottom: 5%;
+}
+.name:nth-of-type(3){
+    font-size: .2rem;
+}
+.name h2:nth-of-type(4){
+    margin-right: 2%;
+    width: 10%;
+}
