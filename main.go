@@ -49,7 +49,7 @@ func Handlers() {
 	http.HandleFunc("/clientdashboard", views.ClientDashboardHandler)
 
 	http.HandleFunc("/users", views.UserHandler)
-	http.HandleFunc("/department", views.GroupHandler)
+	http.HandleFunc("/group", views.GroupHandler)
 	http.HandleFunc("/position", views.SystemRoleHandler)
 	http.HandleFunc("/permission", views.PermissionHandler)
 
@@ -87,7 +87,7 @@ func MigrateDB() {
 	permlist := models.Permissionlist{}
 	grouplist := models.Grouplist{}
 	db := GormDB()
-	db.AutoMigrate(&user, &group,&permission,&permlist,&grouplist)
+	db.AutoMigrate(&user, &group, &permission, &permlist, &grouplist)
 }
 
 func CreateGroup() {
@@ -122,7 +122,6 @@ func CreateGroup() {
 
 }
 
-
 func CreatePosition() {
 
 	db := GormDB()
@@ -132,8 +131,8 @@ func CreatePosition() {
 
 	defaultUser := []models.Position{
 		{
-			Name:         "Admin",
-			Description:   "Admin",
+			Name:        "Admin",
+			Description: "Admin",
 		},
 	}
 
@@ -164,21 +163,19 @@ func CreateDefaultUser() {
 
 	defaultUser := []models.User{
 		{
-			Username:     "admin",
-			Email:        "dave@gmail.com",
-			Password:     hashPassword("admin"),
-			Name:         "Dave Falo",
+			Username:   "admin",
+			Email:      "dave@gmail.com",
+			Password:   hashPassword("admin"),
+			Name:       "Dave Falo",
 			PositionID: "1",
-			
 		},
 
 		{
-			Username:     "user",
-			Password:     hashPassword("user"),
-			Email:        "jw@gmail.com",
-			Name:         "John Wick",
+			Username:   "user",
+			Password:   hashPassword("user"),
+			Email:      "jw@gmail.com",
+			Name:       "John Wick",
 			PositionID: "1",
-			
 		},
 	}
 
