@@ -1,6 +1,8 @@
 package api
 
 import (
+	"encoding/json"
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -12,13 +14,29 @@ func CreatePosition(w http.ResponseWriter, r *http.Request) {
 	db := GormDB()
 
 	pos := models.Position{}
-	name := r.FormValue("name")
-	deptID := r.FormValue("departmentID")
+	role := r.FormValue("role")
+	desc := r.FormValue("description")
+	result := r.FormValue("result")
 
-	pos.Name = name
-	pos.DepartmentID = deptID
+	pos.Name = role
+	pos.Description = desc
 
 	db.Save(&pos)
+
+
+	// * Convert the JSON into an array of map
+	var c []map[string]string
+	json.Unmarshal([]byte(result), &c)
+	// * Declare the struct for the passing of values
+	// * Save Each Permission ID
+	for i := range c {
+		permlist := models.Permissionlist{}
+
+		permlist.PositionID = fmt.Sprint(pos.ID)
+		permlist.PermissionID = c[i]["permID"]
+		db.Save(&permlist)
+	}
+
 
 	sqlDB, _ := db.DB()
 	sqlDB.Close()
@@ -29,12 +47,16 @@ func GetPosition(w http.ResponseWriter, r *http.Request) {
 	db := GormDB()
 
 	item := []models.Position{}
-	db.Preload("Department").Find(&item)
+	db.Find(&item)
 	//db.Find(&item)
+
+	permlist := []models.Permissionlist{}
+	db.Preload("Position").Preload("Permission").Find(&permlist)
 
 	data := map[string]interface{}{
 		"status": "ok",
 		"item":   item,
+		"permission" : permlist,
 	}
 	ReturnJSON(w, r, data)
 	sqlDB, _ := db.DB()
@@ -61,8 +83,10 @@ func DeletePositino(w http.ResponseWriter, r *http.Request) {
 	id, _ := strconv.Atoi(r.FormValue("id"))
 	item := models.Position{}
 	db.Where("id", id).Statement.Delete(&item)
+	 list := models.Permissionlist{}
+	db.Where("position_id", id).Statement.Delete(&list)
 
 	sqlDB, _ := db.DB()
 	sqlDB.Close()
 
-}
+} 

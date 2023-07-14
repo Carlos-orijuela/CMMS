@@ -30,9 +30,8 @@ func main() {
 	CreateDB("CMMS")
 	MigrateDB()
 	CreateGroup()
-	CreateSystemRole()
 	CreateDefaultUser()
-
+	CreatePosition()
 	Handlers()
 
 	http.ListenAndServe(Port, nil)
@@ -50,8 +49,9 @@ func Handlers() {
 	http.HandleFunc("/clientdashboard", views.ClientDashboardHandler)
 
 	http.HandleFunc("/users", views.UserHandler)
-	http.HandleFunc("/group", views.GroupHandler)
-	http.HandleFunc("/systemrole", views.SystemRoleHandler)
+	http.HandleFunc("/department", views.GroupHandler)
+	http.HandleFunc("/position", views.SystemRoleHandler)
+	http.HandleFunc("/permission", views.PermissionHandler)
 
 }
 
@@ -82,10 +82,12 @@ func CreateDB(name string) *sql.DB {
 func MigrateDB() {
 	fmt.Println("Database Migrated")
 	user := models.User{}
-	systemrole := models.SystemRole{}
 	group := models.Group{}
+	permission := models.Permission{}
+	permlist := models.Permissionlist{}
+	grouplist := models.Grouplist{}
 	db := GormDB()
-	db.AutoMigrate(&user, &systemrole, &group)
+	db.AutoMigrate(&user, &group,&permission,&permlist,&grouplist)
 }
 
 func CreateGroup() {
@@ -119,37 +121,7 @@ func CreateGroup() {
 	}
 
 }
-func CreateSystemRole() {
 
-	db := GormDB()
-
-	user := []models.SystemRole{}
-	db.Find(&user)
-
-	defaultUser := []models.SystemRole{
-		{
-			Name:        "Admin",
-			Description: "Description here",
-		},
-	}
-
-	isExisting := false
-	for i := range defaultUser {
-		isExisting = false
-
-		for _, users := range user {
-			if defaultUser[i].Name == users.Name {
-				isExisting = true
-				break
-			}
-		}
-		if !isExisting {
-			fmt.Println("Create Default System Role")
-			db.Save(&defaultUser[i])
-		}
-	}
-
-}
 
 func CreatePosition() {
 
@@ -161,7 +133,7 @@ func CreatePosition() {
 	defaultUser := []models.Position{
 		{
 			Name:         "Admin",
-			DepartmentID: "1",
+			Description:   "Admin",
 		},
 	}
 
@@ -196,8 +168,8 @@ func CreateDefaultUser() {
 			Email:        "dave@gmail.com",
 			Password:     hashPassword("admin"),
 			Name:         "Dave Falo",
-			SystemRoleID: "1",
-			GroupID:      "1",
+			PositionID: "1",
+			
 		},
 
 		{
@@ -205,8 +177,8 @@ func CreateDefaultUser() {
 			Password:     hashPassword("user"),
 			Email:        "jw@gmail.com",
 			Name:         "John Wick",
-			SystemRoleID: "1",
-			GroupID:      "1",
+			PositionID: "1",
+			
 		},
 	}
 

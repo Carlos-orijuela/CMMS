@@ -86,9 +86,10 @@
           <li class="sidebar-list-item">
             <span class="material-icons-outlined">groups</span> User Management
             <ul class="dropdown-menu">
-              <li><a href="/users">User</a></li>
-              <li><a href="/department">Department</a></li>
+              <li><a href="permission">Permission</a></li>
               <li><a href="/position">System Role</a></li>
+              <li><a href="/department">Department</a></li>
+              <li><a href="/users">User</a></li>
             </ul>
           </li>
           <li class="sidebar-list-item">
@@ -141,6 +142,7 @@
                       <!-- <label for="recheck">Select All</label></th> -->
                       <th>Name</th>
                       <th>Description</th>
+                      <th>Permission</th>
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -174,7 +176,7 @@
           </div>
           <div class="centered-container"><h2 class="label">Description</h2></div>
           <div class="centered-container">
-            <textarea rows="4" cols="65" name="comment" form="usrform"></textarea>
+            <textarea rows="4" cols="65" id="desc" name="comment" form="usrform"></textarea>
           </div>
 
           <div class="panel panel-default">
@@ -183,45 +185,15 @@
            <div class="centered-container">
 
               <h2 class="label">Permission</h2></div>
-              <div class="container">
-                  <div class="checkbox">
-                    <input type="checkbox" id="c1" >
-                  <label for="new1"> </label>Enable all of the view and manage permissions for user management.</label>
-                  </div>
-                  <div class="checkbox2">
-                    <input type="checkbox" id="c2" >
-                  <label for="new1">Allow users to view, edit, and create user groups.</label>
-                  </div>
-                  <div class="checkbox2">
-                    <input type="checkbox" id="c3" >
-                  <label for="new1">Allow users to view, edit, create and delete roles.</label>
-                  </div>
-                  <div class="checkbox2">
-                    <input type="checkbox" id="c4" >
-                  <label for="new1">Allows managers to edit the user accounts of their direct reports (i.e. the users who have that manager listed in the Reports To field of their user account). Does not allow any create or delete access.</label>
-                  </div>
-                  <div class="checkbox2">
-                    <input type="checkbox" id="c5" >
-                  <label for="new1">Allow users to view, edit, and create user accounts.</label>
-                  </div>
-                  <div class="checkbox2">
-                    <input type="checkbox" id="c6" ">
-                  <label for="new1">Allow users to view all user group details, including the user group list and permissions. Does not allow any create, edit, or delete access.</label>
-                  </div>
-                  <div class="checkbox2">
-                    <input type="checkbox" id="c7" value="00000010">
-                  <label for="new1">Allow users to view all role details, including the role list and permissions. Does not allow any create, edit, or delete access.</label>
-                  </div>
-                  <div class="checkbox2">
-                    <input type="checkbox" id="c8" value="00000001">
-                  <label for="new1">Allow users to view all user account details, including the user list and user information. Does not allow any create, edit or delete access.</label>
-                  </div>
+              <div class="container" id="permissionlist">
+                 <!-- Append data here -->
               </div>
               <!-- end of panel -->
             </div> 
           
 
           <div class="centered-container">
+           
             <button class="custom-button" onclick="Submit()">
               <span class="material-icons-outlined" title="CREATE">create</span>
             </button>
@@ -309,9 +281,12 @@
     <!-- Custom JS -->
 
     <script>
+      var result = []
       //GET DATA
       $(document).ready(function () {
         getdata();
+        permissionlist();
+       
        // get_department();
       });
 
@@ -319,11 +294,41 @@
       var currentPage = 1; // Current page number
       var itemsPerPage = 5; // Number of items to display per page
 
+
+      function permissionlist(){
+        $("#permissionlist").empty();
+
+        $.get("/api/get_permission", function (index) {
+         var result = JSON.parse(index).item;
+         $.each(result, function (_, v) {
+          $("#permissionlist").append(`
+          <div class="checkbox">
+            <input type="checkbox" name="type" class="messageCheckbox" id="`+v.ID+`" value = "`+v.ID+`" onclick="Checked()">
+             <label for="new1"> </label>`+v.Description+`</label>
+          </div>
+          `)
+         })
+        })
+      }
+      function Checked(){
+        result = []
+        $.each($("input[name='type']:checked"), function(){                    
+          result.push({
+           permID : $(this).val()
+        })
+          localStorage.setItem("result", JSON.stringify(result));
+        });
+      }
+
+     
+
+     
       function getdata() {
         $("#details").empty();
 
-        $.get("/api/get_systemrole", function (index) {
+        $.get("/api/get_position", function (index) {
           var result = JSON.parse(index).item;
+          var list = JSON.parse(index).permission;
           var startIndex = (currentPage - 1) * itemsPerPage;
           var endIndex = startIndex + itemsPerPage;
           $.each(result.slice(startIndex, endIndex), function (_, v) {
@@ -331,6 +336,9 @@
               <tr>
                 <td>${v.Name}</td>
                 <td>${v.Description}</td>
+                <td > <ul id="perm-`+v.ID+`">
+              
+            </ul></td>
                 <td>
                   <button class="custom-button" id="openModalBtneditdept-${v.ID}">
                     <span class="material-icons-outlined" title="Update Position" onclick="Modify(${v.ID})">create</span>
@@ -341,7 +349,19 @@
                 </td>
               </tr>
             `);
+            $.each(list, function (_, k) {
+            console.log(k)
+            if(v.ID == k.PositionID){
+              $("#perm-"+v.ID).append(`
+              <li>`+k.Permission.Description+`</li>
+              `)
+
+            }
+           });
+           
           });
+         
+        
           updatePaginationButtons(result.length);
         });
       }
@@ -397,48 +417,14 @@
         });
       }
 
-      //DDL DEPARTMENT
-      function get_department() {
-        $("#department").empty();
-        $("#department").append($("<option />").val(""));
-
-        $("#xdepartment").empty();
-        $("#xdepartment").append($("<option />").val(""));
-        $.get("/api/get_department", function (index) {
-          var result = JSON.parse(index).item;
-          $.each(result, function (_, v) {
-            $("#department").append(
-              `
-              
-              <option value="` +
-                v.ID +
-                `">` +
-                v.Name +
-                `</option>
-          `
-            );
-
-            $("#xdepartment").append(
-              `
-              
-              <option value="` +
-                v.ID +
-                `">` +
-                v.Name +
-                `</option>
-          `
-            );
-          });
-        });
-      }
-
+      
       // CREATE ======================
       function Submit() {
-        var position = $("#position").val();
-        var departID = $("#department").val();
-        console.log(departID);
+        var role = $("#name").val();
+        var desc = $("#desc").val();
+        var result = localStorage.getItem("result")
 
-        if (position == "" || departID == "") {
+        if (role == "" || desc == "") {
           Swal.fire({
             toast: true,
             position: "center",
@@ -451,8 +437,9 @@
           $.ajax({
             url: "/api/position",
             data: {
-              departmentID: departID,
-              name: position,
+              result : result,
+              description: desc,
+              role: role,
             },
             success: function () {
               Swal.fire({
@@ -463,6 +450,7 @@
                 showConfirmButton: false,
                 timer: 3000,
               }).then(function () {
+                localStorage.removeItem("result")
                 window.location.reload();
               });
             },
@@ -558,6 +546,7 @@
 
         $.get("/api/get_position", function (index) {
           var result = JSON.parse(index).item;
+          var list = JSON.parse(index).permission;
           $.each(result, function (_, v) {
             if (v.Name.toLowerCase().includes(search)) {
               tableBody.innerHTML +=
@@ -580,6 +569,16 @@
                   </td>
             </tr>
           `;
+
+          $.each(list, function (_, k) {
+            console.log(k)
+            if(v.ID == k.PositionID){
+              $("#perm-"+v.ID).append(`
+              <li>`+k.Permission.Description+`</li>
+              `)
+
+            }
+           });
             }
           });
         });

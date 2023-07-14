@@ -1,6 +1,8 @@
 package api
 
 import (
+	"encoding/json"
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -17,19 +19,31 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	username := r.FormValue("username")
 	password := r.FormValue("password")
 	email := r.FormValue("email")
+	position := r.FormValue("position")
 	department := r.FormValue("department")
-	positionID := r.FormValue("position")
-
-	//stat := r.FormValue("position")
 
 	product.Name = name
 	product.Username = username
 	product.Email = email
 	product.Password = hashPassword(password)
-	product.SystemRoleID = department
-	product.GroupID = positionID
+	product.PositionID = position
+
 
 	db.Save(&product)
+
+
+	// * Convert the JSON into an array of map
+	var c []map[string]string
+	json.Unmarshal([]byte(department), &c)
+	// * Declare the struct for the passing of values
+	// * Save Each Permission ID
+	for i := range c {
+		permlist := models.Grouplist{}
+
+		permlist.UserID = fmt.Sprint(product.ID)
+		permlist.GroupID = c[i]["groupID"]
+		db.Save(&permlist)
+	}
 
 	sqlDB, _ := db.DB()
 	sqlDB.Close()
@@ -41,40 +55,18 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 	db := GormDB()
 
 	item := []models.User{}
-	db.Preload("Department").Preload("Position").Find(&item)
+	db.Preload("Position").Find(&item)
+	group := []models.Grouplist{}
+	db.Preload("User").Preload("Group").Find(&group)
 
 	data := map[string]interface{}{
 		"status": "ok",
 		"item":   item,
+		"group": group,
 	}
 	ReturnJSON(w, r, data)
 	sqlDB, _ := db.DB()
 	sqlDB.Close()
-}
-
-func ChangePassword(w http.ResponseWriter, r *http.Request) {
-
-	db := GormDB()
-	product := models.User{}
-	username := r.FormValue("username")
-	password := r.FormValue("password")
-
-	db.Where("username", username).Find(&product)
-	product.Password = hashPassword(password)
-	db.Save(&product)
-
-}
-
-func OTP(w http.ResponseWriter, r *http.Request) {
-
-	db := GormDB()
-	product := models.User{}
-	user, _ := r.Cookie("id")
-
-	db.Where("id", user.Value).Find(&product)
-
-	db.Save(&product)
-
 }
 
 func EditUser(w http.ResponseWriter, r *http.Request) {
@@ -83,22 +75,16 @@ func EditUser(w http.ResponseWriter, r *http.Request) {
 	id, _ := strconv.Atoi(r.FormValue("id"))
 	product := models.User{}
 	name := r.FormValue("name")
-	groupID := r.FormValue("group")
 	username := r.FormValue("username")
-	//password := r.FormValue("password")
-	systemrole := r.FormValue("systemrole")
-	//action := r.FormValue("action")
+	email := r.FormValue("email")
+	position := r.FormValue("position")
 
 	db.Where("id", id).Find(&product)
 
 	product.Name = name
 	product.Username = username
-	//product.Password = hashPassword(password)
-	product.Name = name
-	product.GroupID = groupID
-
-	product.SystemRoleID = systemrole
-
+	product.Email = email
+	product.PositionID = position
 	db.Save(&product)
 
 }
@@ -109,6 +95,9 @@ func DeleteUser(w http.ResponseWriter, r *http.Request) {
 	id, _ := strconv.Atoi(r.FormValue("id"))
 	item := models.User{}
 	db.Where("id", id).Statement.Delete(&item)
+
+	group := models.Grouplist{}
+	db.Where("user_id", id).Statement.Delete(&group)
 
 	sqlDB, _ := db.DB()
 	sqlDB.Close()

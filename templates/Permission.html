@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Permission</title>
+
+    <!-- Montserrat Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Material Icons -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+      rel="stylesheet"
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/dashboard.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css"
+    />
+    <script
+      defer
+      src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"
+    ></script>
+  </head>
+  <body>
+    <div class="grid-container">
+      <!-- Header -->
+      <header class="header">
+        <div class="menu-icon" onclick="openSidebar()">
+          <span class="material-icons-outlined">menu</span>
+        </div>
+        <div class="header-left"></div>
+        <div class="header-right">
+          <span class="material-icons-outlined">notifications</span>
+          <span class="material-icons-outlined">email</span>
+          <span class="material-icons-outlined">account_circle</span>
+          <a href="/loginpage" class="logout">
+            <span class="material-icons-outlined" title="Logout">reply</span>
+          </a>
+        </div>
+      </header>
+      <!-- End Header -->
+
+      <!-- Sidebar -->
+      <aside id="sidebar">
+        <div class="sidebar-title">
+          <div class="sidebar-brand">
+            <span class="material-icons-outlined"></span> SAILORCOM
+          </div>
+          <span class="material-icons-outlined" onclick="closeSidebar()"
+            >close</span
+          >
+        </div>
+
+        <ul class="sidebar-list">
+          <li class="sidebar-list-item">
+            <a href="dashboard.html" target="_blank">
+              <span class="material-icons-outlined">dashboard</span> Dashboard
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <span class="material-icons-outlined">inventory_2</span> Asset
+            Hierarchy
+            <ul class="dropdown-menu">
+              <li><a href="#" target="_blank">Location</a></li>
+              <li><a href="#" target="_blank">Facility</a></li>
+              <li><a href="#" target="_blank">Equipment</a></li>
+              <li><a href="#" target="_blank">Spare part</a></li>
+              <li><a href="#" target="_blank">Special tools </a></li>
+              <li><a href="#" target="_blank">Supplies</a></li>
+            </ul>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">category</span> Supplies
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <span class="material-icons-outlined">groups</span> User Management
+            <ul class="dropdown-menu">
+              <li><a href="permission">Permission</a></li>
+              <li><a href="/position">System Role</a></li>
+              <li><a href="/department">Department</a></li>
+              <li><a href="/users">User</a></li>
+            </ul>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">fact_check</span>
+              Maintenance
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">poll</span> Reports
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">settings</span> Settings
+            </a>
+          </li>
+        </ul>
+      </aside>
+      <!-- End Sidebar -->
+
+      <!-- Main -->
+      <main class="main-container">
+        <div class="main-title">
+          <h2>PERMISSION</h2>
+        </div>
+
+        <div class="card-content">
+          <div>
+            <input
+              class="search"
+              type="text"
+              id="search"
+              placeholder="Search..."
+            />
+            <button class="custom-button" id="openModalBtn">
+              <span class="material-icons-outlined" title="Add Department"
+                >plus_one</span
+              >
+            </button>
+          </div>
+          <div class="table-container">
+            <table id="example" class="custom-table">
+              <thead>
+                <tr>
+                  <th>Description</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="details">
+                <!-- APPEND TABLE DATA HERE -->
+              </tbody>
+            </table>
+            <button
+              class="custom-button"
+              id="prevButton"
+              onclick="goToPreviousPage()"
+              disabled
+            >
+              <span class="material-icons-outlined" title="Previous Page"
+                >arrow_back</span
+              >
+            </button>
+            <button
+              class="custom-button"
+              id="nextButton"
+              onclick="goToNextPage()"
+              disabled
+            >
+              <span class="material-icons-outlined" title="Next Page"
+                >arrow_forward</span
+              >
+            </button>
+          </div>
+        </div>
+      </main>
+      <!-- End Main -->
+
+      <!--Modal-->
+      <div id="myModal" class="modal">
+        <div class="modal-content">
+          <h2 class="h2h2">Add Permission</h2>
+          <div class="centered-container">
+            <h2 class="label">Permission</h2>
+          </div>
+          <div class="centered-container">
+            <input
+              class="input-dept"
+              type="text"
+              placeholder="Enter your Department Name"
+              id="department"
+            />
+          </div>
+          <div class="centered-container">
+            <button class="custom-button">
+              <span
+                class="material-icons-outlined"
+                title="Submit"
+                onclick="Submit()"
+                >create</span
+              >
+            </button>
+            <button class="custom-button" onclick="Cancel(1)">Cancel</button>
+          </div>
+        </div>
+      </div>
+      <!--End Modal-->
+      <!--Start edit Modal-->
+      <div id="myModaleditdept" class="modaleditdept">
+        <div class="modalcontenteditdept">
+          <h2 class="h2h2">Update Description</h2>
+          <div class="centered-container">
+            <h2 class="label">Description</h2>
+          </div>
+          <div class="centered-container">
+            <input
+              class="input-dept"
+              type="text"
+              placeholder="Enter your Department Name"
+              id="editdepartment"
+            />
+          </div>
+          <div class="centered-container">
+            <button class="custom-button" onclick="Edit()">
+              <span class="material-icons-outlined" title="Submit">create</span>
+            </button>
+            <button class="custom-button" onclick="Cancel(2)">Cancel</button>
+          </div>
+        </div>
+      </div>
+      <!--End edit Modal-->
+      <!--Start delete Modal-->
+      <div id="myModaldeletedept" class="modaldeletedept">
+        <div class="modalcontentdeletedept">
+          <h2 class="h2h2">
+            Are you sure you want to remove this Description?
+          </h2>
+          <div class="centered-container">
+            <p class="h2black" id="del_name"></p>
+          </div>
+          <div class="centered-container">
+            <button class="custom-button">
+              <span
+                class="material-icons-outlined"
+                title="Submit"
+                onclick="Remove()"
+                >create</span
+              >
+            </button>
+            <button class="custom-button" onclick="Cancel(3)">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <!-- ApexCharts -->
+    <script src="/assets/js/dashboard.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.5/apexcharts.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.min.js"
+      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      type="text/javascript"
+      src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"
+    ></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Custom JS -->
+    <script>
+      $(document).ready(function () {
+        getdata();
+      });
+
+      // display Data in the table
+      var currentPage = 1; // Current page number
+      var itemsPerPage = 5; // Number of items to display per page
+
+      function getdata() {
+        $("#details").empty();
+        $.get("/api/get_permission", function (index) {
+          var result = JSON.parse(index).item;
+          var startIndex = (currentPage - 1) * itemsPerPage;
+          var endIndex = startIndex + itemsPerPage;
+          var itemsToShow = result.slice(startIndex, endIndex);
+
+          $.each(itemsToShow, function (_, v) {
+            $("#details").append(
+              `
+              <tr>
+                <td>${v.Description}</td>
+                <td>
+                  <button class="custom-button" id="openModalBtneditdept-${v.ID}">
+                    <span class="material-icons-outlined" title="Update Department" onclick="Modify(${v.ID})">create</span>
+                  </button>
+                  <button class="custom-button delete" id="openModalBtndeletedept">
+                    <span class="material-icons-outlined" title="Delete" onclick="Delete(${v.ID})">delete</span>
+                  </button>
+                  <button class="custom-button">
+                    <span class="material-icons-outlined" title="Position" onclick="Position(${v.ID})">directions_walk</span>
+                  </button>
+                </td>
+              </tr>
+              `
+            );
+          });
+
+          updatePaginationButtons(result.length);
+        });
+      }
+
+      function updatePaginationButtons(totalItems) {
+        var totalPages = Math.ceil(totalItems / itemsPerPage);
+
+        if (currentPage === 1) {
+          $("#prevButton").prop("disabled", true);
+        } else {
+          $("#prevButton").prop("disabled", false);
+        }
+
+        if (currentPage === totalPages) {
+          $("#nextButton").prop("disabled", true);
+        } else {
+          $("#nextButton").prop("disabled", false);
+        }
+      }
+
+      function goToPreviousPage() {
+        if (currentPage > 1) {
+          currentPage--;
+          getdata();
+        }
+      }
+
+      function goToNextPage() {
+        currentPage++;
+        getdata();
+      }
+
+      // Add Function
+      function Submit() {
+        var department = $("#department").val();
+
+        if (department == "") {
+          Swal.fire({
+            toast: true,
+            position: "center",
+            icon: "warning",
+            title: "Please Complete Required Details",
+            showConfirmButton: false,
+            timer: 3000,
+          });
+        } else {
+          $.ajax({
+            url: "/api/permission",
+            data: {
+              description: department,
+            },
+            success: function () {
+              Swal.fire({
+                toast: true,
+                position: "center",
+                icon: "success",
+                title: "New Permission Added",
+                showConfirmButton: false,
+                timer: 3000,
+              }).then(function () {
+                window.location.reload();
+              });
+            },
+          });
+        }
+      }
+
+      // Onclick Edit
+      function Modify(id) {
+        var modal = document.getElementById("myModaleditdept");
+        modal.style.display = "block";
+
+        $.get("/api/get_permission", function (index) {
+          var result = JSON.parse(index).item;
+          $.each(result, function (_, v) {
+            if (v.ID == id) {
+              localStorage.setItem("permission_id", id);
+              $("#editdepartment").val(v.Description);
+            }
+          });
+        });
+      }
+
+      // Save Edit
+      function Edit() {
+        var department = $("#editdepartment").val();
+        var id = localStorage.getItem("permission_id");
+
+        if (department == "") {
+          Swal.fire({
+            toast: true,
+            position: "center",
+            icon: "warning",
+            title: "Please Complete Required Details",
+            showConfirmButton: false,
+            timer: 3000,
+          });
+        } else {
+          $.ajax({
+            url: "/api/edit_permission",
+            data: {
+              description: department,
+              id: id,
+            },
+            success: function () {
+              Swal.fire({
+                toast: true,
+                position: "center",
+                icon: "success",
+                title: "Permission Name Updated",
+                showConfirmButton: false,
+                timer: 3000,
+              }).then(function () {
+                window.location.reload();
+              });
+            },
+          });
+        }
+      }
+
+      // Onclick Delete
+      function Delete(id) {
+        var modal = document.getElementById("myModaldeletedept");
+        modal.style.display = "block";
+
+        $.get("/api/get_permission", function (index) {
+          var result = JSON.parse(index).item;
+          $.each(result, function (_, v) {
+            if (v.ID == id) {
+              localStorage.setItem("delete_id", id);
+              $("#del_name").html(v.Description);
+            }
+          });
+        });
+      }
+
+      // Search
+      $("#search").on("change keyup", function (e) {
+        Search(this.value.toLowerCase());
+      });
+
+      function Search(search) {
+        var tableBody = document.getElementById("details");
+        tableBody.innerHTML = "";
+
+        $.get("/api/get_permission", function (index) {
+          var result = JSON.parse(index).item;
+          $.each(result, function (_, v) {
+            if (v.Description.toLowerCase().includes(search)) {
+              tableBody.innerHTML +=
+                `
+              <tr>
+                <td>` +
+                v.Description +
+                `</td>
+                <td><button class="custom-button" id="openModalBtneditdept-` +
+                v.ID +
+                `"><span class="material-icons-outlined" title="Update Department" onclick="Modify(` +
+                v.ID +
+                `)" >create</span></button>
+                    <button class="custom-button delete" id="openModalBtndeletedept"><span class="material-icons-outlined" title="Delete" onclick="Delete(` +
+                v.ID +
+                `)">delete</span></button>
+                    <button class="custom-button"><span class="material-icons-outlined" title="Position" onclick="Position(` +
+                v.ID +
+                `)">directions_walk</span></button></td>
+              </tr>
+              `;
+            }
+          });
+        });
+      }
+
+      // Save Delete
+
+      function Remove() {
+        var id = localStorage.getItem("delete_id");
+        $.ajax({
+          url: "/api/delete_permission",
+          data: {
+            id: id,
+          },
+          success: function () {
+            Swal.fire({
+              toast: true,
+              position: "center",
+              icon: "success",
+              title: "Permission Deleted",
+              showConfirmButton: false,
+              timer: 3000,
+            }).then(function () {
+              window.location.reload();
+            });
+          },
+        });
+      }
+
+      // Cancel Function
+      function Cancel(id) {
+        if (id == 1) {
+          var modal = document.getElementById("myModal");
+          modal.style.display = "none";
+        } else if (id == 2) {
+          var modal = document.getElementById("myModaleditdept");
+          modal.style.display = "none";
+        } else {
+          var modal = document.getElementById("myModaldeletedept");
+          modal.style.display = "none";
+        }
+      }
+    </script>
+
+    <script>
+      var openModalBtn = document.getElementById("openModalBtn");
+      var closeModalBtn = document.getElementById("closeModalBtn");
+      var modal = document.getElementById("myModal");
+
+      openModalBtn.addEventListener("click", function () {
+        modal.style.display = "block";
+      });
+
+      // closeModalBtn.addEventListener("click", function () {
+      //   modal.style.display = "none";
+      // });
+
+      window.addEventListener("click", function (event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      });
+    </script>
+
+    <script>
+      var openModalBtneditdept = document.getElementById(
+        "openModalBtneditdept"
+      );
+      var closeModalBtneditdept = document.getElementById(
+        "closeModalBtneditdept"
+      );
+
+      closeModalBtneditdept.addEventListener("click", function () {
+        modaleditdept.style.display = "none";
+      });
+
+      window.addEventListener("click", function (event) {
+        if (event.target == modaleditdept) {
+          modaleditdept.style.display = "none";
+        }
+      });
+    </script>
+
+    <script>
+      var openModalBtndeletedept = document.getElementById(
+        "openModalBtndeletedept"
+      );
+      var closeModalBtndeletedept = document.getElementById(
+        "closeModalBtndeletedept"
+      );
+      var modaldeletedept = document.getElementById("myModaldeletedept");
+
+      openModalBtndeletedept.addEventListener("click", function () {
+        modaldeletedept.style.display = "block";
+      });
+
+      closeModalBtndeletedept.addEventListener("click", function () {
+        modaldeletedept.style.display = "none";
+      });
+
+      window.addEventListener("click", function (event) {
+        if (event.target == modaldeletedept) {
+          modaldeletedept.style.display = "none";
+        }
+      });
+    </script>
+  </body>
+</html>

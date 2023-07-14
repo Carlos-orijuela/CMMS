@@ -73,9 +73,10 @@
           <li class="sidebar-list-item">
             <span class="material-icons-outlined">groups</span> User Management
           <ul class="dropdown-menu">
-            <li><a href="/users">User</a></li>
-            <li><a href="/department">Department</a></li>
+            <li><a href="permission">Permission</a></li>
             <li><a href="/position">System Role</a></li>
+            <li><a href="/department">Department</a></li>
+            <li><a href="/users">User</a></li>
           </ul>
         </li>
           <li class="sidebar-list-item">
@@ -116,8 +117,8 @@
                             <th>Full Name</th>
                             <th>Username</th>
                             <th>Email</th>
-                            <th>Department</th>
-                            <th>Position</th>
+                            <th>Group</th>
+                            <th>System Role</th>
                             <th>Action</th>
                           </tr>
                         </thead>
@@ -156,7 +157,7 @@
             </div>
             <div class="centered-container">
               <div class="name">Email:</div>
-                <input class="input-dept" type="email" placeholder="Enter Email" id="password" required>
+                <input class="input-dept" type="email" placeholder="Enter Email" id="email" required>
             </div>
           
             <div class="centered-container">
@@ -166,10 +167,9 @@
                     <option value="Tech Support">Tech Support</option> -->
                 </select>
             </div>
-            <div class="container">
-              <div class="rename">Groups</div>
-               <input class="int1" type="checkbox" id="int2" value="Logistic">
-               <label for="int2">Logistic</label>
+            <div class="container" id="grouplist">
+            
+             
                <input class="int1" type="checkbox" id="int3" value="Logistic">
                <label for="int2">Manager</label>
                <input class="int1" type="checkbox" id="int4" value="Logistic">
@@ -189,35 +189,23 @@
           <h2 class="h2h2">Update User</h2>
             <div class="centered-container">
               <div class="name">Full Name:</div>
-                <input class="input-dept" type="text" placeholder="FULLNAME" id="fullname">
+                <input class="input-dept" type="text" placeholder="FULLNAME" id="name1">
             </div>
             <div class="centered-container">
               <div class="name">Username:</div>
-                <input class="input-dept" type="text" placeholder="USERNAME" id="user">
-            </div>
-        <!--    <div class="centered-container">
-              <div class="name">Password:</div>
-                <input class="input-dept" type="password" placeholder="PASSWORD" id="pw">
-            </div> -->
-            <div class="centered-container">
-                <select id="xAccntType">
-                    <option value=""></option>
-                    <option value="Administrator">Administrator</option>
-                    <option value="User">User</option>
-                </select>
+                <input class="input-dept" type="text" placeholder="USERNAME" id="username1">
             </div>
             <div class="centered-container">
-              <select id="xdepartment" name="xdepartment" required>
-                    <!-- <option value="option1">DEPARTMENT</option>
-                    <option value="option1">Option 1</option>
-                    <option value="option2">Option 2</option> -->
-                </select>
+              <div class="name">Email:</div>
+                <input class="input-dept" type="email" placeholder="Enter Email" id="email1" required>
             </div>
+          
             <div class="centered-container">
-                <select id="xposition">
-                  
+              <select id="position1" name="position" required> 
+                   
                 </select>
             </div>
+       
             <div class="centered-container">
                 <button class="custom-button" onclick="Edit()">UPDATE</span></button>
                 <button class="custom-button" onclick="Cancel(2)">CANCEL</button>
@@ -261,7 +249,8 @@
     <script>
       $(document).ready(function () {
         getdata();
-        get_department();
+        get_position();
+        grouplist();
       });
 
       // display Data in the table
@@ -273,18 +262,20 @@
 
         $.get("/api/get_user", function (index) {
           var result = JSON.parse(index).item;
+          var group = JSON.parse(index).group;
           var startIndex = (currentPage - 1) * itemsPerPage;
           var endIndex = startIndex + itemsPerPage;
-          for (var i = startIndex; i < endIndex && i < result.length; i++) {
-            var v = result[i];
+          $.each(result.slice(startIndex, endIndex), function (_, v) {
 
             $("#details").append(`
               <tr>
                 <td>` + v.Name + `</td>
                 <td>` + v.Username + `</td>
-                <td>` + v.AccountType + `</td>
-                <td>` + v.Department.Name + `</td>
-                <td>` + v.Position.Name + `</td>
+                <td>` + v.Email + `</td>
+                <td><ul id="perm-`+v.ID+`">
+              
+            </ul></td>
+                <td>`+v.Position.Name+`</td>
 
                 <td>
                   <button class="custom-button" id="openModalBtneditdept-` + v.ID + `">
@@ -297,7 +288,15 @@
                 </td>
               </tr>
             `);
-          }
+            $.each(group, function (_, k) {
+            if(v.ID == k.UserID){
+              $("#perm-"+v.ID).append(`
+              <li>`+k.Group.Name+`</li>
+              `)
+
+            }
+           });
+          })
           updatePaginationButtons(result.length);
         });
       }
@@ -334,17 +333,43 @@
         getdata();
       }
 
+      function grouplist(){
+        $("#grouplist").empty();
+        $("#grouplist").append(`
+        <div class="rename">Groups</div>
+        `)
+        $.get("/api/get_group", function (index) {
+         var result = JSON.parse(index).item;
+         $.each(result, function (_, v) {
+          $("#grouplist").append(`
+          <input class="int1" type="checkbox" name="type"  value="`+v.ID+`" onclick="Checked()">
+               <label for="int2">`+v.Name+`</label>
+          `)
+         })
+        })
+      }
+
+      function Checked(){
+        result = []
+        $.each($("input[name='type']:checked"), function(){                    
+          result.push({
+           groupID : $(this).val()
+        })
+          localStorage.setItem("grouplist", JSON.stringify(result));
+        });
+      }
+
 
     // ADD USER ACCOUNT
     function Submit(){
     var name =  $("#name").val()
     var username =  $("#username").val()
     var password =  $("#password").val()
-    var accntType =  $("#accntType").val()
+    var email =  $("#email").val()
     var position =  $("#position").val()
-    var department =  $("#department").val()
+    var department = localStorage.getItem("grouplist")
 
-      if (name == "" || password == "" || position == "" || department == "" || accntType == "") {
+      if (name == "" || password == "" || position == "" || department == "" || email == "") {
             Swal.fire({
               toast: true,
               position: "center",
@@ -360,7 +385,7 @@
                 name: name,
                 username: username,
                 password: password,
-                accntType: accntType,
+                email: email,
                 position: position,
                 department: department,
               },
@@ -373,6 +398,7 @@
                   showConfirmButton: false,
                   timer: 3000,
                 }).then(function(){
+                  localStorage.removeItem("grouplist")
                   window.location.reload();
                 });
               },
@@ -381,24 +407,24 @@
     }
 
 
-    //DDL DEPARTMENT
-    function get_department() {
-        $("#department").empty();
-        $("#department").append(`<option value="">Select Department</option>`);
+    //DDL System Role
+    function get_position() {
+        $("#position").empty();
+        $("#position").append(`<option value="">Select System Role</option>`);
 
-        $("#xdepartment").empty();
-        $("#xdepartment").append(`<option value="">Select Department</option>`);
-        $.get("/api/get_department", function (index) {
+        $("#position1").empty();
+        $("#position1").append(`<option value="">Select System Role</option>`);
+        $.get("/api/get_position", function (index) {
           var result = JSON.parse(index).item;
           $.each(result, function (_, v) {
-            $("#department").append(
+            $("#position").append(
               `
               
               <option value="`+ v.ID +`">`+ v.Name +`</option>
           `
             );
 
-            $("#xdepartment").append(
+            $("#position1").append(
               `
               
               <option value="`+ v.ID +`">`+ v.Name +`</option>
@@ -407,53 +433,6 @@
           });
         });
       }
-
-      //DDL POSITION FOR ADD
-      $("#department").change(function () {
-        var id = $("#department").val()
-        $("#position").empty();
-        $("#position").append(`
-        <option value="">Select Position</option>
-        `);
-
-        $.get("/api/get_position", function (index) {
-          var result = JSON.parse(index).item;
-          $.each(result, function (_, v) {
-            if (v.DepartmentID == id){
-              $("#position").append(
-              `
-              <option value="`+ v.ID +`">`+ v.Name +`</option>
-          `
-            );
-            }
-            
-          });
-        });
-      });
-
-
-      //DDL POSITION FOR EDIT
-      $("#xdepartment").change(function () {
-        var id = $("#xdepartment").val()
-        $("#xposition").empty();
-        $("#xposition").append(`
-        <option value="">Select Position</option>
-        `);
-
-        $.get("/api/get_position", function (index) {
-          var result = JSON.parse(index).item;
-          $.each(result, function (_, v) {
-            if (v.DepartmentID == id){
-              $("#xposition").append(
-              `
-              <option value="`+ v.ID +`">`+ v.Name +`</option>
-          `
-            );
-            }
-            
-          });
-        });
-      });
 
    
  
@@ -481,31 +460,25 @@
           $.each(result, function (_, v) {
             if (v.ID == id) {
               localStorage.setItem("user_id", id);
-              $("#fullname").val(v.Name);
-              $("#user").val(v.Username);
-              $("#xAccntType").val(v.AccountType);
-              $("#pw").val(v.Password);
-              $("#xposition").val(v.PositionID);
-              $("#xdepartment").val(v.DepartmentID);
-              
-
+              $("#fullname1").val(v.Name);
+              $("#username1").val(v.Username);
+              $("#email1").val(v.AccountType);
+              $("#position1").val(v.PositionID);
             }
           });
         });
       }
 
       function Edit() {
-        var name = $("#fullname").val();
-       var password = $("#pw").val();
-        var username = $("#user").val();
-        var accntType = $("#xAccntType").val();
-        var department = $("#xdepartment").val();
-        var position = $("#xposition").val();
+        var name = $("#fullname1").val();
+        var username = $("#username1").val();
+        var email = $("#email1").val();
+        var position = $("#position1").val();
         var id = localStorage.getItem("user_id");
 
        // console.log(name, password, username, accntType, department, position,id);
 
-        if (name == "") {
+        if (name == "" || username == "" || email == "" || position == "") {
           Swal.fire({
             toast: true,
             position: "center",
@@ -520,10 +493,8 @@
             data: {
               name: name,
               id: id,
-              password: password,
               username: username,
-              accntType : accntType,
-              department : department,
+              email : email,
               position : position,
             },
             success: function () {

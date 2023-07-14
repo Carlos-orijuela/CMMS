@@ -84,9 +84,10 @@
           <li class="sidebar-list-item">
             <span class="material-icons-outlined">groups</span> User Management
             <ul class="dropdown-menu">
-              <li><a href="/users">User</a></li>
-              <li><a href="/department">Department</a></li>
+              <li><a href="permission">Permission</a></li>
               <li><a href="/position">System Role</a></li>
+              <li><a href="/department">Department</a></li>
+              <li><a href="/users">User</a></li>
             </ul>
           </li>
           <li class="sidebar-list-item">
@@ -115,41 +116,54 @@
           <h2>DEPARTMENT</h2>
         </div>
 
-          <div class="card-content">
-            <div>
-              <input
-                class="search"
-                type="text"
-                id="search"
-                placeholder="Search..."
-              />
-              <button class="custom-button" id="openModalBtn">
-                <span class="material-icons-outlined" title="Add Department"
-                  >plus_one</span
-                >
-              </button>
-            </div>
-            <div class="table-container">
-              <table id="example" class="custom-table">
-                <thead>
-                  <tr>
-                    <th>Department</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody id="details">
-                  <!-- APPEND TABLE DATA HERE -->
-                </tbody>
-              </table>
-              <button class="custom-button" id="prevButton" onclick="goToPreviousPage()" disabled><span class="material-icons-outlined" title="Previous Page"
-                >arrow_back</span
-              ></button>
-              <button class="custom-button" id="nextButton" onclick="goToNextPage()" disabled><span class="material-icons-outlined" title="Next Page"
-                >arrow_forward</span
-              ></button>
-            </div>
-            
+        <div class="card-content">
+          <div>
+            <input
+              class="search"
+              type="text"
+              id="search"
+              placeholder="Search..."
+            />
+            <button class="custom-button" id="openModalBtn">
+              <span class="material-icons-outlined" title="Add Department"
+                >plus_one</span
+              >
+            </button>
           </div>
+          <div class="table-container">
+            <table id="example" class="custom-table">
+              <thead>
+                <tr>
+                  <th>Department</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="details">
+                <!-- APPEND TABLE DATA HERE -->
+              </tbody>
+            </table>
+            <button
+              class="custom-button"
+              id="prevButton"
+              onclick="goToPreviousPage()"
+              disabled
+            >
+              <span class="material-icons-outlined" title="Previous Page"
+                >arrow_back</span
+              >
+            </button>
+            <button
+              class="custom-button"
+              id="nextButton"
+              onclick="goToNextPage()"
+              disabled
+            >
+              <span class="material-icons-outlined" title="Next Page"
+                >arrow_forward</span
+              >
+            </button>
+          </div>
+        </div>
       </main>
       <!-- End Main -->
 
@@ -254,13 +268,13 @@
 
       function getdata() {
         $("#details").empty();
-        $.get("/api/get_department", function(index) {
+        $.get("/api/get_department", function (index) {
           var result = JSON.parse(index).item;
           var startIndex = (currentPage - 1) * itemsPerPage;
           var endIndex = startIndex + itemsPerPage;
           var itemsToShow = result.slice(startIndex, endIndex);
 
-          $.each(itemsToShow, function(_, v) {
+          $.each(itemsToShow, function (_, v) {
             $("#details").append(
               `
               <tr>
@@ -312,7 +326,6 @@
         currentPage++;
         getdata();
       }
-
 
       // Add Function
       function Submit() {

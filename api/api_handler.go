@@ -57,27 +57,7 @@ func APIHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	//=====================================================
 
-	if strings.HasPrefix(r.URL.Path, "systemrole") {
-		CreateSystemRole(w, r)
-		return
-	}
-
-	if strings.HasPrefix(r.URL.Path, "get_systemrole") {
-		GetSystemRole(w, r)
-		return
-	}
-
-	if strings.HasPrefix(r.URL.Path, "edit_systemrole") {
-		EditSystemrole(w, r)
-		return
-	}
-
-	if strings.HasPrefix(r.URL.Path, "delete_systemrole") {
-		DeleteSystemRole(w, r)
-		return
-	}
 
 	//=====================================================
 
@@ -102,9 +82,25 @@ func APIHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	//=====================================================
 
-	if strings.HasPrefix(r.URL.Path, "password") {
-		ChangePassword(w, r)
+
+	//=====================================================
+	if strings.HasPrefix(r.URL.Path, "permission") {
+		CreatePermission(w, r)
 		return
 	}
 
+	if strings.HasPrefix(r.URL.Path, "get_permission") {
+		GetPermission(w, r)
+		return
+	}
+
+	if strings.HasPrefix(r.URL.Path, "edit_permission") {
+		EditPermission(w, r)
+		return
+	}
+
+	if strings.HasPrefix(r.URL.Path, "delete_permission") {
+		DeletePermission(w, r)
+		return
+	}
 }
