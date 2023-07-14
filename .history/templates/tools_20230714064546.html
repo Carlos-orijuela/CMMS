@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Asset List</title>
+    <title>Tool List</title>
 
     <!-- Montserrat Font -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -48,7 +48,7 @@
 
         <ul class="sidebar-list">
           <li class="sidebar-list-item">
-            <a href="/dashboard">
+            <a href="dashboard.html" target="_blank">
               <span class="material-icons-outlined">dashboard</span> Dashboard
             </a>
           </li>
@@ -94,7 +94,7 @@
       <!-- Main -->
       <main class="main-container">
         <div class="main-title">
-          <h2>ASSET LISTS</h2>
+          <h2>Tools List</h2>
         </div>
         <div class="card-content">
             <div>
@@ -111,13 +111,12 @@
                         <table id="my-table">
                           <thead>
                             <tr>
-                              <th>NAME</th>
-                              <th>CODE</th>
-                              <th>ASSET STATUS</th>
-                              <th>LAST PRICE</th>
-                              <th>VENDOR</th>
-                              <th>ASSET LOCATION</th>
-                              <th>BARCODE</th>
+                              <th>Name</th>
+                              <th>Code</th>
+                              <th>Tools status</th>
+                              <th>Last Price</th>
+                              <th>Vendor</th>
+                              <th>Tool Location</th>
                               <th>ACTION</th>
                             </tr>
                           </thead>
@@ -149,10 +148,10 @@
       <!--Modal-->
       <div id="myModalasset" class="modal">
         <div class="modal-content">
-          <h2 class="h2h2">Add Asset List</h2>
+          <h2 class="h2h2">Add Tools</h2>
 
             <div class="centered-container">
-              <div class="name">Name</div>
+              <div class="name">Tool Name</div>
                 <input class="input-dept" type="text" placeholder="NAME" id="name" required>
             </div>
             <div class="centered-container">
@@ -176,14 +175,6 @@
               </select>
             </div>
             <div class="centered-container">
-              <div class="name">Location</div>
-                <select id="accntType" required>
-                  <option value="">Locations</option>
-                  <option value="Administrator">cebu</option>
-                  <option value="User">Davao</option>
-              </select>
-            </div>
-            <div class="centered-container">
               <div class="name">Barcode</div>
                 <input class="input-dept" type="text" placeholder="BARCODE" id="password" required>
             </div>
@@ -198,39 +189,31 @@
       <!--Update Modal-->
       <div id="myModalassetupdate" class="modal">
         <div class="modal-content">
-          <h2 class="h2h2">Update Assets</h2>
+          <h2 class="h2h2">Edit Tools</h2>
 
             <div class="centered-container">
-              <div class="name">Name</div>
-                <input class="input-dept" type="text" placeholder="NAME" id="name" required>
+              <div class="name">Tool Name</div>
+                <input class="input-dept" type="text" placeholder="Name" id="name" required>
             </div>
             <div class="centered-container">
               <div class="name">Code</div>
-                <input class="input-dept" type="text" placeholder="CODE" id="username" required>
+                <input class="input-dept" type="text" placeholder="Code" id="username" required>
             </div>
             <div class="centered-container">
               <div class="name">Status</div>
-                <input class="input-dept" type="text" placeholder="ASSET STATUS" id="password" required>
+                <input class="input-dept" type="text" placeholder="Tool Status" id="password" required>
             </div>
             <div class="centered-container">
               <div class="name">Last Price</div>
-                <input class="input-dept" type="text" placeholder="LAST PRICE" id="password" required>
+                <input class="input-dept" type="text" placeholder="Last Price" id="password" required>
             </div>
             <div class="centered-container">
               <div class="name">Vendor</div>
-              <select id="accntType" required>
-                <option value="">Vendor</option>
-                <option value="Administrator">Ph Developers</option>
-                <option value="User">isuzu</option>
-            </select>          
-            </div>
-            <div class="centered-container">
-              <div class="name">Location</div>
-              <select id="accntType" required>
-                <option value="">Locations</option>
-                <option value="Administrator">cebu</option>
-                <option value="User">Davao</option>
-            </select>
+                <select id="accntType" required>
+                  <option value="">Vendor</option>
+                  <option value="Administrator">Ph Developers</option>
+                  <option value="User">Isuzu</option>
+              </select>
             </div>
             <div class="centered-container">
               <div class="name">Barcode</div>
@@ -263,7 +246,7 @@
 
     <!-- Scripts -->
     <!-- ApexCharts -->
-    <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/tools.js"></script>
     <script src="/assets/js/dashboard.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.5/apexcharts.min.js"></script>
     <script

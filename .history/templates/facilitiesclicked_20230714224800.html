@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Tool Info</title>
+    <title>Facilities Info</title>
 
     <!-- Montserrat Font -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -13,7 +13,7 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/assets/css/dashboard.css">
-    <link rel="stylesheet" href="/assets/css/toolclicked.css">
+    <link rel="stylesheet" href="/assets/css/facilitiesclicked.css">
     <link rel="stylesheet" href="/assets/css/assetcathegory.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0-alpha3/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
@@ -33,12 +33,15 @@
           <span class="material-icons-outlined">menu</span>
         </div>
         <div class="header-left">
-          <span class="material-icons-outlined">search</span>
+          
         </div>
         <div class="header-right">
           <span class="material-icons-outlined">notifications</span>
           <span class="material-icons-outlined">email</span>
           <span class="material-icons-outlined">account_circle</span>
+          <a href="/loginpage" class="logout">
+            <span class="material-icons-outlined" title="Logout">reply</span>
+          </a>
         </div>
       </header>
       <!-- End Header -->
@@ -47,21 +50,30 @@
       <aside id="sidebar">
         <div class="sidebar-title">
           <div class="sidebar-brand">
-            <span class="material-icons-outlined">SAILORCOM</span> 
+            <span class="material-icons-outlined"></span> SAILORCOM
           </div>
-          <span class="material-icons-outlined" onclick="closeSidebar()">close</span>
+          <span class="material-icons-outlined" onclick="closeSidebar()"
+            >close</span
+          >
         </div>
 
         <ul class="sidebar-list">
           <li class="sidebar-list-item">
-            <a href="/dashboard">
+            <a href="dashboard.html" target="_blank">
               <span class="material-icons-outlined">dashboard</span> Dashboard
             </a>
           </li>
           <li class="sidebar-list-item">
-            <a href="#" target="_blank">
-              <span class="material-icons-outlined">inventory_2</span> Assets
-            </a>
+            <span class="material-icons-outlined">inventory_2</span> Asset
+            Hierarchy
+            <ul class="dropdown-menu">
+              <li><a href="#" target="_blank">Location</a></li>
+              <li><a href="#" target="_blank">Facility</a></li>
+              <li><a href="#" target="_blank">Equipment</a></li>
+              <li><a href="#" target="_blank">Spare part</a></li>
+              <li><a href="#" target="_blank">Special tools </a></li>
+              <li><a href="#" target="_blank">Supplies</a></li>
+            </ul>
           </li>
           <li class="sidebar-list-item">
             <a href="#" target="_blank">
@@ -69,13 +81,18 @@
             </a>
           </li>
           <li class="sidebar-list-item">
-            <a href="#" target="_blank">
-              <span class="material-icons-outlined">groups</span> Users
-            </a>
+            <span class="material-icons-outlined">groups</span> User Management
+            <ul class="dropdown-menu">
+              <li><a href="permission">Permission</a></li>
+              <li><a href="/position">System Role</a></li>
+              <li><a href="/department">Department</a></li>
+              <li><a href="/users">User</a></li>
+            </ul>
           </li>
           <li class="sidebar-list-item">
             <a href="#" target="_blank">
-              <span class="material-icons-outlined">fact_check</span> Maintenance
+              <span class="material-icons-outlined">fact_check</span>
+              Maintenance
             </a>
           </li>
           <li class="sidebar-list-item">
@@ -106,8 +123,8 @@
             </div>
 
             <div class="assetinfo">
-                <h3 class="title">Tools:
-                    <span class="name">Power Saw</span></h3>
+                <h3 class="title">Facilities:
+                    <span class="name">Power House</span></h3>
                 <div class="img">
                     
                     <img src="/assets/img/logback.jpg">
@@ -138,18 +155,18 @@
                  <div class="in-cathegory">
                   <p>Category</p>
                   <select name="part" id="fac-part">
-                    <option value="powerhouse">Tools</option>
+                    <option value="powerhouse">Location and Facilities</option>
                     <option value="powerhouse">India</option>
                    </select>                             
                   </div>
             </div>
             <div class="assetinfobuttons">
-                <input type="button" value="General">
-                <input type="button" value="Parts">
-                <input type="button" value="Personel">
-                <input type="button" value="Files">
-                <input type="button" value="Warranties">
-                <input type="button" value="Maintenance schedule">
+              <input type="button" value="General" onclick="openTab(event, 'tab1')">
+              <input type="button" value="Parts" onclick="openTab(event, 'tab2')">
+                <input type="button" value="Personel" onclick="openTab(event, 'tab3')">
+                <input type="button" value="Files"  onclick="openTab(event, 'tab4')">
+                <input type="button" value="Warranties" onclick="openTab(event, 'tab5')">
+                <input type="button" value="Maintenance schedule" onclick="openTab(event, 'tab6')">
             </div>
             <div class="data">
       
@@ -158,57 +175,104 @@
                       <div class="loc-up">
                       </div>
                     </div>
-                    <div class="lower"> 
-                        <header><h5>Location</h5></header>
+
+                    <div id="tab1" class="tab-content active">
+                      <div class="lower"> 
+                        
                         <div class="ecard">
                             <div class="check1">
-                                <label for="chk">Account: </label>
+                                <input type="checkbox" id="chk">
+                                <label for="chk">This facility is par of</label>
                                 
                                <select name="part" id="fac-part">
-                                <option value="Accounts-1"></option>
-                                <option value="Accounts-1">Sewage</option>
+                                <option value="powerhouse">Power house</option>
+                                <option value="powerhouse">Sewage</option>
                                </select>
 
-                               <p>Notes</p>
-                               <textarea name="" id="" cols="60" rows="13"></textarea>
-                               
+                               <p>Facilities Location</p>
+                               <textarea name="" id="" cols="50" rows="5"></textarea>
+                               <div class="city">
+                                <p>City</p>
+                                <input type="text" name="city" id="cities" placeholder="City">
+                               </div>
+                               <div class="Province">
+                                <p>Province</p>
+                                <input type="text" name="prov" id="province" placeholder="Province">
+                               </div>
+                               <div class="Province">
+                                <p>Postal Code</p>
+                                <input type="text" name="prov" id="province" placeholder="Province">
+                               </div>
+
+                               <div class="Province">
+                                <p>Country</p>
+                                <select name="part" id="fac-part">
+                                  <option value="powerhouse">Phillipines</option>
+                                  <option value="powerhouse">India</option>
+                                 </select>                             
+                                </div>
                              
                             </div>
                             <div class="dept">
                               <div class="gen">
                                 <div class="h6"><h6>Genaral Information:</h6></div>
                                 <div class="gen2">
-                                  <div class="Province">            
+                                  <div class="Province">
+                                    <p>Account</p>
+                                    <select name="ACc-ount" id="acc-ount">
+                                      <option value="Acc"></option>
+                                      <option value="Acc">India</option>
+                                     </select>                             
                                     </div>
-                                    <div class="barcode--2">
+                                    <div class="Province">
                                       <p>Barcode</p>
                                       <input type="text" name="bar" id="barcodes" placeholder="Barcode">
-                                     </div>
-                                     <div class="barcode--2">
-                                      <p>Serial Number</p>
-                                      <input type="text" name="ser" id="Serial-1" placeholder="Serial ">
-                                     </div>
-                                     <div class="Province">
-                                      <p>Model</p>
-                                      <input type="text" name="Models" id="Models" placeholder="Model">
-                                     </div>
-                                     <div class="makers">
-                                      <p>Make</p>
-                                      <input type="text" name="make" id="makes" placeholder="Make">
                                      </div>
                                     <div class="in-charge">
                                       <p>Charge Department</p>
                                       <select name="part" id="fac-part">
-                                        <option value="powerhouse">It</option>
+                                        <option value="powerhouse">Phillipines</option>
                                         <option value="powerhouse">India</option>
                                        </select>                             
                                       </div>
-                                      
+                                      <div class="Province">
+                                        <p>Notes</p>
+                                        <textarea name="" id="" cols="90" rows="8"></textarea>            
+                                        </div>
                                 </div>
                               </div>
                             </div>
                             
                         </div>
+                    </div>
+                  </div>
+                  
+                  <div id="tab2" class="tab-content">
+                    <h2>Tab 2 Content</h2>
+                    <p>This is the content of Tab 2.</p>
+                  </div>
+                
+                  <div id="tab3" class="tab-content">
+                    <h2>Tab 3 Content</h2>
+                    <p>This is the content of Tab 3.</p>
+                  </div>
+                
+                  <div id="tab4" class="tab-content">
+                    <h2>Tab 4 Content</h2>
+                    <p>This is the content of Tab 4.</p>
+                  </div>
+                
+                  <div id="tab5" class="tab-content">
+                    <h2>Tab 5 Content</h2>
+                    <p>This is the content of Tab 5.</p>
+                  </div>
+                
+                  <div id="tab6" class="tab-content">
+                    <h2>Tab 6 Content</h2>
+                    <p>This is the content of Tab 6.</p>
+                  </div>
+
+                    
                     </div>
 
                 </div>
@@ -221,7 +285,12 @@
       <!-- End Main -->
 
     </div>
-
+    
+    <style>
+      .tab-content{
+        display: none;
+      }
+    </style>
     
     <script
     src="https://code.jquery.com/jquery-3.6.1.min.js"
@@ -229,5 +298,30 @@
     crossorigin="anonymous"
   ></script>
   <script src="/assets/js/assetlist.js"></script>
+
+
+
+  <script>
+    function openTab(event, tabId) {
+      // Hide all tab contents
+      var tabContents = document.getElementsByClassName('tab-content');
+      for (var i = 0; i < tabContents.length; i++) {
+        tabContents[i].style.display = 'none';
+      }
+
+      // Remove active class from all tab buttons
+      var tabButtons = document.getElementsByClassName('tab-button');
+      for (var i = 0; i < tabButtons.length; i++) {
+        tabButtons[i].classList.remove('active');
+      }
+
+      // Show the selected tab content
+      var selectedTab = document.getElementById(tabId);
+      selectedTab.style.display = 'block';
+
+      // Add active class to the clicked tab button
+      event.target.classList.add('active');
+    }
+  </script>
   </body>
 </html>

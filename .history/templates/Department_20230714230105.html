@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <title>Permission</title>
+    <title>Department</title>
 
     <!-- Montserrat Font -->
     <link
@@ -60,7 +60,7 @@
 
         <ul class="sidebar-list">
           <li class="sidebar-list-item">
-            <a href="/dashboard">
+            <a href="/dashboard>
               <span class="material-icons-outlined">dashboard</span> Dashboard
             </a>
           </li>
@@ -112,7 +112,7 @@
       <!-- Main -->
       <main class="main-container">
         <div class="main-title">
-          <h2>PERMISSION</h2>
+          <h2>DEPARTMENT</h2>
         </div>
 
         <div class="card-content">
@@ -133,7 +133,7 @@
             <table id="example" class="custom-table">
               <thead>
                 <tr>
-                  <th>Description</th>
+                  <th>Department</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -169,9 +169,9 @@
       <!--Modal-->
       <div id="myModal" class="modal">
         <div class="modal-content">
-          <h2 class="h2h2">Add Permission</h2>
+          <h2 class="h2h2">Add Department</h2>
           <div class="centered-container">
-            <h2 class="label">Permission</h2>
+            <h2 class="label">Department Name</h2>
           </div>
           <div class="centered-container">
             <input
@@ -198,9 +198,9 @@
       <!--Start edit Modal-->
       <div id="myModaleditdept" class="modaleditdept">
         <div class="modalcontenteditdept">
-          <h2 class="h2h2">Update Description</h2>
+          <h2 class="h2h2">Update Department</h2>
           <div class="centered-container">
-            <h2 class="label">Description</h2>
+            <h2 class="label">Department Name</h2>
           </div>
           <div class="centered-container">
             <input
@@ -222,9 +222,7 @@
       <!--Start delete Modal-->
       <div id="myModaldeletedept" class="modaldeletedept">
         <div class="modalcontentdeletedept">
-          <h2 class="h2h2">
-            Are you sure you want to remove this Description?
-          </h2>
+          <h2 class="h2h2">Are you sure you want to remove this Department?</h2>
           <div class="centered-container">
             <p class="h2black" id="del_name"></p>
           </div>
@@ -269,7 +267,7 @@
 
       function getdata() {
         $("#details").empty();
-        $.get("/api/get_permission", function (index) {
+        $.get("/api/get_department", function (index) {
           var result = JSON.parse(index).item;
           var startIndex = (currentPage - 1) * itemsPerPage;
           var endIndex = startIndex + itemsPerPage;
@@ -279,7 +277,7 @@
             $("#details").append(
               `
               <tr>
-                <td>${v.Description}</td>
+                <td>${v.Name}</td>
                 <td>
                   <button class="custom-button" id="openModalBtneditdept-${v.ID}">
                     <span class="material-icons-outlined" title="Update Department" onclick="Modify(${v.ID})">create</span>
@@ -343,16 +341,16 @@
           });
         } else {
           $.ajax({
-            url: "/api/permission",
+            url: "/api/department",
             data: {
-              description: department,
+              name: department,
             },
             success: function () {
               Swal.fire({
                 toast: true,
                 position: "center",
                 icon: "success",
-                title: "New Permission Added",
+                title: "New Department Added",
                 showConfirmButton: false,
                 timer: 3000,
               }).then(function () {
@@ -368,12 +366,12 @@
         var modal = document.getElementById("myModaleditdept");
         modal.style.display = "block";
 
-        $.get("/api/get_permission", function (index) {
+        $.get("/api/get_department", function (index) {
           var result = JSON.parse(index).item;
           $.each(result, function (_, v) {
             if (v.ID == id) {
-              localStorage.setItem("permission_id", id);
-              $("#editdepartment").val(v.Description);
+              localStorage.setItem("department_id", id);
+              $("#editdepartment").val(v.Name);
             }
           });
         });
@@ -382,7 +380,7 @@
       // Save Edit
       function Edit() {
         var department = $("#editdepartment").val();
-        var id = localStorage.getItem("permission_id");
+        var id = localStorage.getItem("department_id");
 
         if (department == "") {
           Swal.fire({
@@ -395,9 +393,9 @@
           });
         } else {
           $.ajax({
-            url: "/api/edit_permission",
+            url: "/api/edit_department",
             data: {
-              description: department,
+              name: department,
               id: id,
             },
             success: function () {
@@ -405,7 +403,7 @@
                 toast: true,
                 position: "center",
                 icon: "success",
-                title: "Permission Name Updated",
+                title: "Department Name Updated",
                 showConfirmButton: false,
                 timer: 3000,
               }).then(function () {
@@ -421,12 +419,12 @@
         var modal = document.getElementById("myModaldeletedept");
         modal.style.display = "block";
 
-        $.get("/api/get_permission", function (index) {
+        $.get("/api/get_department", function (index) {
           var result = JSON.parse(index).item;
           $.each(result, function (_, v) {
             if (v.ID == id) {
               localStorage.setItem("delete_id", id);
-              $("#del_name").html(v.Description);
+              $("#del_name").html(v.Name);
             }
           });
         });
@@ -441,15 +439,15 @@
         var tableBody = document.getElementById("details");
         tableBody.innerHTML = "";
 
-        $.get("/api/get_permission", function (index) {
+        $.get("/api/get_department", function (index) {
           var result = JSON.parse(index).item;
           $.each(result, function (_, v) {
-            if (v.Description.toLowerCase().includes(search)) {
+            if (v.Name.toLowerCase().includes(search)) {
               tableBody.innerHTML +=
                 `
               <tr>
                 <td>` +
-                v.Description +
+                v.Name +
                 `</td>
                 <td><button class="custom-button" id="openModalBtneditdept-` +
                 v.ID +
@@ -474,7 +472,7 @@
       function Remove() {
         var id = localStorage.getItem("delete_id");
         $.ajax({
-          url: "/api/delete_permission",
+          url: "/api/delete_department",
           data: {
             id: id,
           },
@@ -483,7 +481,7 @@
               toast: true,
               position: "center",
               icon: "success",
-              title: "Permission Deleted",
+              title: "Department Name Deleted",
               showConfirmButton: false,
               timer: 3000,
             }).then(function () {

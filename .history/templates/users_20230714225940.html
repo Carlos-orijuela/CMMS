@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>User Group</title>
+    <title>Users</title>
 
     <!-- Montserrat Font -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -14,7 +14,6 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="/assets/css/dashboard.css" />
     <link rel="stylesheet" href="/assets/css/users.css">
-    <link rel="stylesheet" href="/assets/css/usergroup.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
     <script defer src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
   </head>
@@ -51,7 +50,7 @@
 
         <ul class="sidebar-list">
           <li class="sidebar-list-item">
-            <a href="/dashboard">
+            <a href="dashboard.html" target="_blank">
               <span class="material-icons-outlined">dashboard</span> Dashboard
             </a>
           </li>
@@ -74,9 +73,9 @@
           <li class="sidebar-list-item">
             <span class="material-icons-outlined">groups</span> User Management
           <ul class="dropdown-menu">
-            <li><a href="/users">User</a></li>
-            <li><a href="/position">System Role</a></li>
-            <li><a href="/group">Group</a></li>
+              <li><a href="/users">User</a></li>
+              <li><a href="/position">System Role</a></li>
+              <li><a href="/group">Group</a></li>
           </ul>
         </li>
           <li class="sidebar-list-item">
@@ -101,7 +100,7 @@
       <!-- Main -->
       <main class="main-container">
         <div class="main-title">
-          <h2>User Groups</h2>
+          <h2>ADD USER</h2>
         </div>
             
 
@@ -114,9 +113,12 @@
                     <table id="example" class="custom-table">
                         <thead>
                           <tr>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Action</th>                            
+                            <th>Full Name</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Group</th>
+                            <th>System Role</th>
+                            <th>Action</th>
                           </tr>
                         </thead>
                         <tbody id="details">
@@ -138,19 +140,41 @@
       <!--Modal-->
       <div id="myModal" class="modal">
         <div class="modal-content">
-          <h2 class="h2h2">Add User Group</h2>
-          <div class="centered-container">
-            <h2 class="label">Name</h2></div>
+          <h2 class="h2h2">Add User</h2>
+
             <div class="centered-container">
-                <input class="input-dept " type="text" placeholder=" Name" id="name" required>
+                <div class="name">Full Name:</div>
+                <input class="input-dept" type="text" placeholder="Full Name" id="name" required>
             </div>
-            
             <div class="centered-container">
-              <h2 class="label">Description</h2></div>
-          <div class="centered-container">
-            <textarea rows="4" cols="60" name="comment" form="usrform" id="des" required></textarea>
-          </div>
-        
+              <div class="name">Username:</div>
+              <input class="input-dept" type="text" placeholder="Username" id="username" required>
+            </div>
+            <div class="centered-container">
+              <div class="name">Password:</div>
+                <input class="input-dept" type="password" placeholder="Password" id="password" required>
+            </div>
+            <div class="centered-container">
+              <div class="name">Email:</div>
+                <input class="input-dept" type="email" placeholder="Enter Email" id="email" required>
+            </div>
+          
+            <div class="centered-container">
+              <select id="position" name="position" required> 
+                    <option value="">POSITION</option>
+                    <!-- <option value="Admin">Admin</option>
+                    <option value="Tech Support">Tech Support</option> -->
+                </select>
+            </div>
+            <div class="container" id="grouplist">
+            
+             
+               <input class="int1" type="checkbox" id="int3" value="Logistic">
+               <label for="int2">Manager</label>
+               <input class="int1" type="checkbox" id="int4" value="Logistic">
+               <label for="int2">Purchasing</label>
+
+           </div>
             <div class="centered-container">
                 <button class="custom-button" onclick="Submit()"><span class="material-icons-outlined" title="CREATE" >create</span></button>
                 <button class="custom-button" onclick="Cancel(1)">CANCEL</button>
@@ -161,51 +185,26 @@
       <!--Edit Modal Start-->
       <div id="myModaledit" class="modaledit">
         <div class="modalcontentedit">
-          <h2 class="h2h2">Update Group</h2>
+          <h2 class="h2h2">Update User</h2>
             <div class="centered-container">
-              <div class="name">Name:</div>
-                <input class="input-dept" type="text" placeholder="Name" id="editname">
+              <div class="name">Full Name:</div>
+                <input class="input-dept" type="text" placeholder="FULLNAME" id="name1">
             </div>
             <div class="centered-container">
-              <div class="name">Description:</div>
-              <textarea rows="4" cols="60" name="name" form="usrform" id="editdes" required></textarea>
+              <div class="name">Username:</div>
+                <input class="input-dept" type="text" placeholder="USERNAME" id="username1">
             </div>
-
-            <!-- <div class="centered-container">
-              <h2 class="label">Permission</h2></div>
-              <div class="container">
-                <div class="checkbox2">
-                  <input type="checkbox" id="new1">
-                <label for="new1"> Enable all</label>
-                </div>
-                <div class="checkbox2">
-                  <input type="checkbox" id="new1">
-                <label for="new1">Manage groups</label>
-                </div>
-                <div class="checkbox2">
-                  <input type="checkbox" id="new1">
-                <label for="new1">Manage roles</label>
-                </div>
-                <div class="checkbox2">
-                  <input type="checkbox" id="new1">
-                <label for="new1"> Manage direct report</label>
-                </div>
-                <div class="checkbox2">
-                  <input type="checkbox" id="new1">
-                <label for="new1">Manage users</label>
-                </div>
-                <div class="checkbox2">
-                  <input type="checkbox" id="new1">
-                <label for="new1">View groups</label>
-                </div>
-                <div class="checkbox2">
-                  <input type="checkbox" id="new1">
-                <label for="new1">View user</label>
-                </div> -->
-              <!--    <div class="centered-container">
-              <div class="name">Password:</div>
-                <input class="input-dept" type="password" placeholder="PASSWORD" id="pw">
-               </div> -->
+            <div class="centered-container">
+              <div class="name">Email:</div>
+                <input class="input-dept" type="email" placeholder="Enter Email" id="email1" required>
+            </div>
+          
+            <div class="centered-container">
+              <select id="position1" name="position" required> 
+                   
+                </select>
+            </div>
+       
             <div class="centered-container">
                 <button class="custom-button" onclick="Edit()">UPDATE</span></button>
                 <button class="custom-button" onclick="Cancel(2)">CANCEL</button>
@@ -219,7 +218,7 @@
     <!--Start Modal Delete-->
         <div id="myModaldelete" class="modaldelete">
         <div class="modalcontentdelete">
-            <h2 class="h2h2">ARE YOU SURE YOU WANT TO DELETE THIS GROUP?</h2>
+            <h2 class="h2h2">ARE YOU SURE YOU WANT TO DELETE THIS?</h2>
             <div class="centered-container">
               <p class="h2black" id="del_name"></p>
             </div>
@@ -245,12 +244,12 @@
       src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"
     ></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-
     <!-- Custom JS -->
     <script>
       $(document).ready(function () {
         getdata();
+        get_position();
+        grouplist();
       });
 
       // display Data in the table
@@ -260,30 +259,43 @@
       function getdata() {
         $("#details").empty();
 
-        $.get("/api/get_group", function (index) {
+        $.get("/api/get_user", function (index) {
           var result = JSON.parse(index).item;
+          var group = JSON.parse(index).group;
           var startIndex = (currentPage - 1) * itemsPerPage;
           var endIndex = startIndex + itemsPerPage;
-          for (var i = startIndex; i < endIndex && i < result.length; i++) {
-            var v = result[i];
+          $.each(result.slice(startIndex, endIndex), function (_, v) {
 
             $("#details").append(`
               <tr>
                 <td>` + v.Name + `</td>
-                <td>` + v.Description + `</td>
+                <td>` + v.Username + `</td>
+                <td>` + v.Email + `</td>
+                <td><ul id="perm-`+v.ID+`">
+              
+            </ul></td>
+                <td>`+v.Position.Name+`</td>
 
                 <td>
-                  <button class="custom-button" id="openModalBtneditdept-` + v.ID + `" onclick="Modify(` + v.ID + `)">
+                  <button class="custom-button" id="openModalBtneditdept-` + v.ID + `">
                     <span class="material-icons-outlined" title="Update Account" onclick="Modify(` + v.ID + `)">create</span>
                   </button>
 
-                  <button class="custom-button delete" id="openModalBtndeletedept" onclick="Delete(` + v.ID + `)">
+                  <button class="custom-button delete" id="openModalBtndeletedept">
                     <span class="material-icons-outlined" title="Delete" onclick="Delete(` + v.ID + `)">delete</span>
                   </button>
                 </td>
               </tr>
             `);
-          }
+            $.each(group, function (_, k) {
+            if(v.ID == k.UserID){
+              $("#perm-"+v.ID).append(`
+              <li>`+k.Group.Name+`</li>
+              `)
+
+            }
+           });
+          })
           updatePaginationButtons(result.length);
         });
       }
@@ -320,14 +332,43 @@
         getdata();
       }
 
+      function grouplist(){
+        $("#grouplist").empty();
+        $("#grouplist").append(`
+        <div class="rename">Groups</div>
+        `)
+        $.get("/api/get_group", function (index) {
+         var result = JSON.parse(index).item;
+         $.each(result, function (_, v) {
+          $("#grouplist").append(`
+          <input class="int1" type="checkbox" name="type"  value="`+v.ID+`" onclick="Checked()">
+               <label for="int2">`+v.Name+`</label>
+          `)
+         })
+        })
+      }
 
-    // ADD GROUP ACCOUNT
+      function Checked(){
+        result = []
+        $.each($("input[name='type']:checked"), function(){                    
+          result.push({
+           groupID : $(this).val()
+        })
+          localStorage.setItem("grouplist", JSON.stringify(result));
+        });
+      }
+
+
+    // ADD USER ACCOUNT
     function Submit(){
     var name =  $("#name").val()
-    var description =  $("#des").val()
-    
+    var username =  $("#username").val()
+    var password =  $("#password").val()
+    var email =  $("#email").val()
+    var position =  $("#position").val()
+    var department = localStorage.getItem("grouplist")
 
-      if (name == "" || description=="") {
+      if (name == "" || password == "" || position == "" || department == "" || email == "") {
             Swal.fire({
               toast: true,
               position: "center",
@@ -338,21 +379,25 @@
             });
           } else {
             $.ajax({
-              url: "/api/group",
+              url: "/api/user",
               data: {
                 name: name,
-                description: description,
-               
+                username: username,
+                password: password,
+                email: email,
+                position: position,
+                department: department,
               },
               success: function () {
                 Swal.fire({
                   toast: true,
                   position: "center",
                   icon: "success",
-                  title: "New Group Added",
+                  title: "New User Added",
                   showConfirmButton: false,
                   timer: 3000,
                 }).then(function(){
+                  localStorage.removeItem("grouplist")
                   window.location.reload();
                 });
               },
@@ -360,6 +405,36 @@
           }
     }
 
+
+    //DDL System Role
+    function get_position() {
+        $("#position").empty();
+        $("#position").append(`<option value="">Select System Role</option>`);
+
+        $("#position1").empty();
+        $("#position1").append(`<option value="">Select System Role</option>`);
+        $.get("/api/get_position", function (index) {
+          var result = JSON.parse(index).item;
+          $.each(result, function (_, v) {
+            $("#position").append(
+              `
+              
+              <option value="`+ v.ID +`">`+ v.Name +`</option>
+          `
+            );
+
+            $("#position1").append(
+              `
+              
+              <option value="`+ v.ID +`">`+ v.Name +`</option>
+          `
+            );
+          });
+        });
+      }
+
+   
+ 
     // Cancel Function
     function Cancel(id) {
         if (id == 1) {
@@ -379,26 +454,30 @@
         var modal = document.getElementById("myModaledit");
         modal.style.display = "block";
 
-        $.get("/api/get_group", function (index) {
+        $.get("/api/get_user", function (index) {
           var result = JSON.parse(index).item;
           $.each(result, function (_, v) {
             if (v.ID == id) {
-              localStorage.setItem("id", id);
-              $("#editname").val(v.Name);
-              $("#editdes").val(v.Description);
-              // ADD PERMISSION HERE
+              localStorage.setItem("user_id", id);
+              $("#fullname1").val(v.Name);
+              $("#username1").val(v.Username);
+              $("#email1").val(v.AccountType);
+              $("#position1").val(v.PositionID);
             }
           });
         });
       }
 
       function Edit() {
-      var name = $("#editname").val();
-      var description = $("#editdes").val();
-      var id = localStorage.getItem("id");
+        var name = $("#fullname1").val();
+        var username = $("#username1").val();
+        var email = $("#email1").val();
+        var position = $("#position1").val();
+        var id = localStorage.getItem("user_id");
 
        // console.log(name, password, username, accntType, department, position,id);
-        if (name == "") {
+
+        if (name == "" || username == "" || email == "" || position == "") {
           Swal.fire({
             toast: true,
             position: "center",
@@ -409,19 +488,20 @@
           });
         } else {
           $.ajax({
-            url: "/api/edit_group",
+            url: "/api/edit_user",
             data: {
               name: name,
-              description: description,
               id: id,
-              //PERMISSION HERE
+              username: username,
+              email : email,
+              position : position,
             },
             success: function () {
               Swal.fire({
                 toast: true,
                 position: "center",
                 icon: "success",
-                title: "Group Updated",
+                title: "User Updated",
                 showConfirmButton: false,
                 timer: 3000,
               }).then(function () {
@@ -437,7 +517,7 @@
         var modal = document.getElementById("myModaldelete");
         modal.style.display = "block";
 
-        $.get("/api/get_group", function (index) {
+        $.get("/api/get_user", function (index) {
           var result = JSON.parse(index).item;
           $.each(result, function (_, v) {
             if (v.ID == id) {
@@ -457,7 +537,7 @@
         var tableBody = document.getElementById("details");
         tableBody.innerHTML = "";
 
-        $.get("/api/get_group", function (index) {
+        $.get("/api/get_user", function (index) {
           var result = JSON.parse(index).item;
           $.each(result, function (_, v) {
             if (v.Name.toLowerCase().includes(search)) {
@@ -465,7 +545,10 @@
                 `
               <tr>
               <td>` +v.Name +`</td>
-              <td>` +v.Description +`</td>
+              <td>` +v.Username +`</td>
+              <td>` +v.AccountType +`</td>
+              <td>` +v.Department.Name +`</td>
+              <td>` +v.Position.Name +`</td>
 
               <td>
                 <button class="custom-button" id="openModalBtneditdept-` +v.ID +`">
@@ -486,7 +569,7 @@
       function Remove() {
         var id = localStorage.getItem("delete_id");
         $.ajax({
-          url: "/api/delete_group",
+          url: "/api/delete_user",
           data: {
             id: id,
           },
@@ -495,7 +578,7 @@
               toast: true,
               position: "center",
               icon: "success",
-              title: "Group Deleted",
+              title: "User Deleted",
               showConfirmButton: false,
               timer: 3000,
             }).then(function () {
