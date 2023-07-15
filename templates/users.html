@@ -169,10 +169,10 @@
             <div class="container" id="grouplist">
             
              
-               <input class="int1" type="checkbox" id="int3" value="Logistic">
+               <!-- <input class="int1" type="checkbox" id="int3" value="Logistic">
                <label for="int2">Manager</label>
                <input class="int1" type="checkbox" id="int4" value="Logistic">
-               <label for="int2">Purchasing</label>
+               <label for="int2">Purchasing</label> -->
 
            </div>
             <div class="centered-container">
@@ -200,10 +200,17 @@
             </div>
           
             <div class="centered-container">
-              <select id="position1" name="position" required> 
-                   
-                </select>
+              <div class="name">System Role:</div>
+              <select id="position1" name="position" required></select>
             </div>
+
+             <div class="centered-container">
+                <div class="container" id="editgrouplist">
+                <!-- data of grouplist append here -->
+                </div>
+             </div>
+
+
        
             <div class="centered-container">
                 <button class="custom-button" onclick="Edit()">UPDATE</span></button>
@@ -250,6 +257,7 @@
         getdata();
         get_position();
         grouplist();
+        editgrouplist();
       });
 
       // display Data in the table
@@ -347,6 +355,33 @@
          })
         })
       }
+
+
+      function editgrouplist(id){
+        $("#editgrouplist").empty();
+        $("#editgrouplist").append(`
+        <div class="rename">Groups</div>
+        `)
+        $.get("/api/get_user", function (index) {
+        // var result = JSON.parse(index).item;
+         var group = JSON.parse(index).group;
+
+
+         $.each(group, function (_, v) {
+          if(id == v.Group.UserID){
+          $("#editgrouplist").append(`
+          <input class="int1" type="checkbox" name="type"  value="`+v.Group.ID+`" onclick="Checked()">
+               <label for="int2">`+v.Group.Name+`</label>
+          `)
+         }
+          
+         }) 
+        })
+      }
+
+     
+
+      
 
       function Checked(){
         result = []
@@ -459,17 +494,26 @@
           $.each(result, function (_, v) {
             if (v.ID == id) {
               localStorage.setItem("user_id", id);
-              $("#fullname1").val(v.Name);
+              $("#name1").val(v.Name);
               $("#username1").val(v.Username);
-              $("#email1").val(v.AccountType);
+              $("#email1").val(v.Email);
               $("#position1").val(v.PositionID);
             }
           });
+          //group
+          $.each(group, function (_, k) {
+            if(v.ID == k.UserID){
+              $("#perm-"+v.ID).append(`
+              <li>`+k.Group.Name+`</li>
+              `)
+
+            }
+           });
         });
       }
 
       function Edit() {
-        var name = $("#fullname1").val();
+        var name = $("#name1").val();
         var username = $("#username1").val();
         var email = $("#email1").val();
         var position = $("#position1").val();
