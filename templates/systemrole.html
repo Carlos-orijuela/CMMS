@@ -180,9 +180,7 @@
 
           <div class="panel panel-default">
             <!-- <div class="panel-body">A Basic Panel</div> -->
-        
            <div class="centered-container">
-
               <h2 class="label">Permission</h2></div>
               <div class="container" id="permissionlist">
                  <!-- Append data here -->
@@ -214,8 +212,7 @@
               class="input-dept"
               type="text"
               placeholder="Department"
-              id="dept"
-              disabled 
+              id="dept" 
             />
           </div>
           <div class="centered-container"><h2 class="label">Position</h2></div>
@@ -228,6 +225,18 @@
               required
             />
           </div>
+
+          <div class="panel panel-default">
+            <!-- <div class="panel-body">A Basic Panel</div> -->
+           <div class="centered-container">
+              <h2 class="label">Permission</h2></div>
+              <div class="container" id="editpermissionlist">
+                 <!-- Append data here -->
+              </div>
+              <!-- end of panel -->
+            </div> 
+
+          
 
           <div class="centered-container">
             <button class="custom-button" onclick="Edit()">
@@ -306,6 +315,14 @@
              <label for="new1"> </label>`+v.Description+`</label>
           </div>
           `)
+          //EDIT
+          $("#editpermissionlist").append(`
+          <div class="checkbox">
+            <input type="checkbox" name="type" class="messageCheckbox" id="`+v.ID+`" value = "`+v.ID+`" onclick="Checked()">
+             <label for="new1"> </label>`+v.Description+`</label>
+          </div>
+          `)
+
          })
         })
       }
@@ -352,6 +369,11 @@
             console.log(k)
             if(v.ID == k.PositionID){
               $("#perm-"+v.ID).append(`
+              <li>`+k.Permission.Description+`</li>
+              `)
+
+            
+               $("#perm1-"+v.ID).append(`
               <li>`+k.Permission.Description+`</li>
               `)
 
@@ -410,7 +432,9 @@
             if (v.ID == id) {
               localStorage.setItem("position_id", id);
               $("#pos").val(v.Name);
-              $("#dept").val(v.Department.Name);
+              $("#dept").val(v.Description);
+              
+
             }
           });
         });
