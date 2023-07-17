@@ -7,6 +7,7 @@ type Facility struct {
 	Name           string
 	Description    string
 	Image          string
+	ParentFacility string
 	Code           string // ?AUTO GENERATE
 	Category       string // NOTE: DDL >> Storage, Plants, Building
 	FilesORManuals string
@@ -16,3 +17,9 @@ type Facility struct {
 	GoogleMaps     string
 	Deleted        gorm.DeletedAt
 }
+
+// ?FACILITY RELATIONSHIP
+// *LOCATION TABLE
+// *EQUIPMENT TABLE
+// *STOOLS TABLE
+// *PARTS TABLE

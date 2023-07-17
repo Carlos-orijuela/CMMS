@@ -14,7 +14,6 @@ func APIHandler(w http.ResponseWriter, r *http.Request) {
 		Login(w, r)
 		return
 	}
-
 	//=====================================================
 	if strings.HasPrefix(r.URL.Path, "user") {
 		CreateUser(w, r)
@@ -36,7 +35,6 @@ func APIHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	//=====================================================
-
 	if strings.HasPrefix(r.URL.Path, "group") {
 		CreateGroup(w, r)
 		return
@@ -56,9 +54,6 @@ func APIHandler(w http.ResponseWriter, r *http.Request) {
 		DeleteGroup(w, r)
 		return
 	}
-
-
-
 	//=====================================================
 
 	if strings.HasPrefix(r.URL.Path, "position") {
@@ -82,7 +77,6 @@ func APIHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	//=====================================================
 
-
 	//=====================================================
 	if strings.HasPrefix(r.URL.Path, "permission") {
 		CreatePermission(w, r)
@@ -103,4 +97,25 @@ func APIHandler(w http.ResponseWriter, r *http.Request) {
 		DeletePermission(w, r)
 		return
 	}
+	//=====================================================
+	if strings.HasPrefix(r.URL.Path, "location") {
+		CreateLocation(w, r)
+		return
+	}
+
+	if strings.HasPrefix(r.URL.Path, "get_location") {
+		GetLocation(w, r)
+		return
+	}
+
+	if strings.HasPrefix(r.URL.Path, "edit_location") {
+		EditLocation(w, r)
+		return
+	}
+
+	if strings.HasPrefix(r.URL.Path, "delete_location") {
+		DeleteLocation(w, r)
+		return
+	}
+
 }
