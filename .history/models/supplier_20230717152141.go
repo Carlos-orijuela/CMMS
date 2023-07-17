@@ -2,7 +2,7 @@ package models
 
 import "gorm.io/gorm"
 
-type Equipment struct {
+type Supplier struct {
 	ID               uint `gorm:"primaryKey"`
 	Name             string
 	Image            string
@@ -19,9 +19,7 @@ type Equipment struct {
 	Deleted gorm.DeletedAt
 }
 
-// ?EQUIPMENT RELATIONSHIP
-// *FACILITY TABLE
-// *LOCATION TABLE
+// ?SUPPLIER RELATIONSHIP
+// *EQUIPMENT TABLE
 // *STOOLS TABLE
-// *SUPPLIERS TABLE
 // *PARTS TABLE

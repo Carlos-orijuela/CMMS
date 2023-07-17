@@ -26,8 +26,6 @@ type ChildFacility struct {
 	Name       string
 	Facility   Facility
 	FacilityID string
-	Code       string
-	QRCode     string
 	Deleted    gorm.DeletedAt
 }
 

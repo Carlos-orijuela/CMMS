@@ -15,20 +15,16 @@ type Facility struct {
 	RunningHr      string
 	QRCode         string // ?AUTO GENERATE
 	GoogleMaps     string
-	Address        string
-	City           string
-	Country        string
 	Deleted        gorm.DeletedAt
 }
 
 type ChildFacility struct {
-	ID         uint `gorm:"primaryKey"`
-	Name       string
-	Facility   Facility
-	FacilityID string
-	Code       string
-	QRCode     string
-	Deleted    gorm.DeletedAt
+	ID           uint `gorm:"primaryKey"`
+	Position     Position
+	PositionID   string
+	Permission   Permission
+	PermissionID string
+	Deleted      gorm.DeletedAt
 }
 
 // ?FACILITY RELATIONSHIP

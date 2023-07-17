@@ -2,7 +2,7 @@ package models
 
 import "gorm.io/gorm"
 
-type Equipment struct {
+type Parts struct {
 	ID               uint `gorm:"primaryKey"`
 	Name             string
 	Image            string

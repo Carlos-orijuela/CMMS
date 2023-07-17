@@ -46,6 +46,15 @@ func CreateFacility(w http.ResponseWriter, r *http.Request) {
 
 	}
 
+	fa.Name = name
+	fa.Description = description
+	fa.ParentFacility = parentFacility
+	fa.Code = code
+	fa.Category = category
+	fa.GoogleMaps = googlemaps
+
+	db.Save(&fa)
+
 	sqlDB, _ := db.DB()
 	sqlDB.Close()
 

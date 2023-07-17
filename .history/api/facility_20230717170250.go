@@ -18,33 +18,15 @@ func CreateFacility(w http.ResponseWriter, r *http.Request) {
 	code := r.FormValue("code")
 	category := r.FormValue("cat")
 	googlemaps := r.FormValue("gmaps")
-	process := r.FormValue("process")
 
-	if process == "new" {
-		fa.Name = name
-		fa.Description = description
-		fa.ParentFacility = parentFacility
-		fa.Code = code
-		fa.Category = category
-		fa.GoogleMaps = googlemaps
+	fa.Name = name
+	fa.Description = description
+	fa.ParentFacility = parentFacility
+	fa.Code = code
+	fa.Category = category
+	fa.GoogleMaps = googlemaps
 
-		db.Save(&fa)
-	} else {
-
-		fachild := models.ChildFacility{}
-		name := r.FormValue("name")
-		id := r.FormValue("id")
-		code := r.FormValue("code")
-		qrcode := r.FormValue("qrcode")
-
-		fachild.Name = name
-		fachild.FacilityID = id
-		fachild.Code = qrcode
-		fachild.QRCode = code
-
-		db.Save(&fachild)
-
-	}
+	db.Save(&fa)
 
 	sqlDB, _ := db.DB()
 	sqlDB.Close()

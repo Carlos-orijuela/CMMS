@@ -37,12 +37,3 @@ type Group struct {
 	Description string
 	Deleted     gorm.DeletedAt
 }
-
-type Grouplist struct {
-	ID      uint `gorm:"primaryKey"`
-	User    User
-	UserID  string
-	Group   Group
-	GroupID string
-	Deleted gorm.DeletedAt
-}

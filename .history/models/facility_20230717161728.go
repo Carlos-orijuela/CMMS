@@ -15,9 +15,6 @@ type Facility struct {
 	RunningHr      string
 	QRCode         string // ?AUTO GENERATE
 	GoogleMaps     string
-	Address        string
-	City           string
-	Country        string
 	Deleted        gorm.DeletedAt
 }
 
@@ -26,8 +23,6 @@ type ChildFacility struct {
 	Name       string
 	Facility   Facility
 	FacilityID string
-	Code       string
-	QRCode     string
 	Deleted    gorm.DeletedAt
 }
 

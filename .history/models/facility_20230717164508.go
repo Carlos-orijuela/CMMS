@@ -25,9 +25,9 @@ type ChildFacility struct {
 	ID         uint `gorm:"primaryKey"`
 	Name       string
 	Facility   Facility
-	FacilityID string
 	Code       string
 	QRCode     string
+	FacilityID string
 	Deleted    gorm.DeletedAt
 }
 
