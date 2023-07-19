@@ -14,6 +14,8 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="/assets/css/dashboard.css" />
     <link rel="stylesheet" href="/assets/css/asset.css">
+    <script defer src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+
   </head>
   <body>
     <div class="grid-container">
@@ -115,9 +117,9 @@
                               <th>Name</th>
                               <th>Description</th>
                               <th>Code</th>
-                              <th></th>
+                              <th>Category</th>
+
                               
-                              <th></th>
                             
                               <th>ACTION</th>
                             </tr>
@@ -168,22 +170,22 @@
         
             <div class="centered-container">
               <div class="name">Parent Facility</div>
-                <select id="pfacility" required>
+                <select id="parentFa" required>
                   <option value=""></option>
-                  <option value="">p1</option>
-                  <option value="">p2</option>
-                  <option value="">p3</option>
+                  <option value="p1">p1</option>
+                  <option value="p2">p2</option>
+                  <option value="p3">p3</option>
                 </select>
             </div>
 
           
             <div class="centered-container">
               <div class="name">CATEGORY</div>
-                <select id="pfacility" required>
+                <select id="category" required>
                   <option value=""></option>
-                  <option value="">STORAGE</option>
-                  <option value="">PLANT</option>
-                  <option value="">BUILDING</option>
+                  <option value="STORAGE">STORAGE</option>
+                  <option value="PLANT">PLANT</option>
+                  <option value="BUILDING">BUILDING</option>
                 </select>
             </div>
 
@@ -195,12 +197,12 @@
 
             <div class="centered-container">
               <div class="name">Running Hours</div>
-                <input class="input-dept" type="text" placeholder="" id="runninghr" required>
+                <input class="input-dept" type="text" placeholder="" id="runhr" required>
             </div>
 
             <div class="centered-container">
               <div class="name">Google Map</div>
-                <input class="input-dept" type="text" placeholder="MAP HERE" id="" required>
+                <input class="input-dept" type="text" placeholder="MAP HERE" id="gmaps" required>
             </div>
            
             <div class="centered-container">
@@ -262,12 +264,28 @@
               <p class="h2black"></p>
             </div>
             <div class="centered-container">
-                <button class="custom-button"><span class="material-icons-outlined" title="Delete" >delete</span></button>
+                <button class="custom-button" onclick="Remove()"><span class="material-icons-outlined" title="Delete" >delete</span></button>
                 <button class="custom-button" onclick="Cancel(3)">CANCEL</button>
             </div>
         </div>
         </div>
     <!--Delete end modal-->
+
+
+
+    <script src="/assets/js/dashboard.js"></script>
+    <!-- ApexCharts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.5/apexcharts.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.min.js"
+      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      type="text/javascript"
+      src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"
+    ></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Scripts -->
     <script>
@@ -293,6 +311,9 @@
               <tr>
                 <td>` + v.Name + `</td>
                 <td>` + v.Description + `</td>
+                <td>` + v.Code + `</td>
+                <td>` + v.Category + `</td>
+
 
                 <td>
                   <button class="custom-button" id="openModalBtnedit-` + v.ID + `" onclick="Modify(` + v.ID + `)">
@@ -350,8 +371,8 @@
     var parentFa =  $("#parentFa").val()
     var category=  $("#category").val()
     var filesManuals =  $("#FM").val()
-    var runninghr =  $("#runhr").val()
-    var googlemaps =  $("#gm").val()
+    var runninghr =  $("#runninghr").val()
+    var gmaps =  $("#gmaps").val()
     var code
     
 
@@ -370,10 +391,11 @@
               data: {
                 name: name,
                 description: des,
-                pfa : parentFa,
-                cat: category,
+                parentFa : parentFa,
+                category: category,
                 code : code,
-                gmaps: googlemaps,
+                runninghr : runninghr,
+                gmaps: gmaps,
                 process: "new",
               },
               success: function () {
@@ -492,7 +514,7 @@
         var modal = document.getElementById("myModaldelete");
         modal.style.display = "block";
 
-        $.get("/api/get_group", function (index) {
+        $.get("/api/get_facility", function (index) {
           var result = JSON.parse(index).item;
           $.each(result, function (_, v) {
             if (v.ID == id) {
@@ -506,7 +528,7 @@
       function Remove() {
         var id = localStorage.getItem("delete_id");
         $.ajax({
-          url: "/api/delete_group",
+          url: "/api/delete_facility",
           data: {
             id: id,
           },

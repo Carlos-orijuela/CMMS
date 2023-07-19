@@ -14,11 +14,12 @@ func CreateFacility(w http.ResponseWriter, r *http.Request) {
 	fa := models.Facility{}
 	name := r.FormValue("name")
 	description := r.FormValue("description")
-	parentFacility := r.FormValue("pfa")
+	parentFacility := r.FormValue("parentFa")
 	code := r.FormValue("code")
-	category := r.FormValue("cat")
+	category := r.FormValue("category")
 	googlemaps := r.FormValue("gmaps")
 	process := r.FormValue("process")
+	runninghr := r.FormValue("runninghr")
 
 	fa.Name = name
 	fa.Description = description
@@ -26,6 +27,7 @@ func CreateFacility(w http.ResponseWriter, r *http.Request) {
 	fa.Code = code
 	fa.Category = category
 	fa.GoogleMaps = googlemaps
+	fa.RunningHr = runninghr
 
 	db.Save(&fa)
 
