@@ -13,12 +13,21 @@ func CreateFacility(w http.ResponseWriter, r *http.Request) {
 
 	fa := models.Facility{}
 	name := r.FormValue("name")
-	description := r.FormValue("dscrptn")
+	description := r.FormValue("description")
 	parentFacility := r.FormValue("pfa")
 	code := r.FormValue("code")
 	category := r.FormValue("cat")
 	googlemaps := r.FormValue("gmaps")
 	process := r.FormValue("process")
+
+	fa.Name = name
+	fa.Description = description
+	fa.ParentFacility = parentFacility
+	fa.Code = code
+	fa.Category = category
+	fa.GoogleMaps = googlemaps
+
+	db.Save(&fa)
 
 	if process == "new" {
 		fa.Name = name
@@ -76,7 +85,7 @@ func EditFacility(w http.ResponseWriter, r *http.Request) {
 	description := r.FormValue("dscrptn")
 	parentFacility := r.FormValue("pfa")
 	code := r.FormValue("code")
-	category := r.FormValue("cat")
+	category := r.FormValue("category")
 	googlemaps := r.FormValue("gmaps")
 
 	id, _ := strconv.Atoi(r.FormValue("id"))

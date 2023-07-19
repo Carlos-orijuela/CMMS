@@ -103,41 +103,31 @@
             <div>
                 <input class="search" type="text" placeholder="Search Facilities"  id="search">
                 <button class="custom-button" id="openModalBtnasset"><span class="material-icons-outlined" title="Add Assets">plus_one</span> </button>
-                <button class="custom-button" ><span class="material-icons-outlined" title="Print">computer</span> </button>
-                <button class="custom-button" ><span class="material-icons-outlined" title="Print Asset tags">add_to_queue</span> </button>
-                <button class="custom-button" ><span class="material-icons-outlined" title="More">build</span> </button>
+               
             </div>
 
             <div class="card-content">
                 <div class="card-table">
                     <div class="table-container">
-                        <table id="my-table">
+                        <table id="">
                           <thead>
                             <tr>
                               <th>Name</th>
-                              <th>Locations</th>
-                              <th>Last Price</th>
-                              <th>Person Incharge</th>
+                              <th>Description</th>
+                              <th>Code</th>
+                              <th></th>
                               
-                              <th>Contact Number</th>
+                              <th></th>
                             
                               <th>ACTION</th>
                             </tr>
                           </thead>
-                          <tbody>
-                            <tr>
-                                <td>JOHN WICK 4</td>
-                                <td>#8484848</td>
-                                <td>SINGLE</td>
-                                <td>$200</td>
-                                <td>MR. WICK</td>
-                                <td>BATANGGAS</td>
-                                <td>CAMOTE</td>
-                                <td>
-                                </td>
-                            </tr>
+                          <tbody id="details">
+                            <!-- APPEND TABLE DATA HERE -->
+                            
                           </tbody>
                         </table>
+
                       
                         <div id="pagination-container">
                           <ul id="pagination"></ul>
@@ -214,7 +204,7 @@
             </div>
            
             <div class="centered-container">
-                <button class="custom-button"><span class="material-icons-outlined" title="CREATE" >create</span></button>
+                <button class="custom-button" onclick="Submit()"><span class="material-icons-outlined" title="CREATE">create</span></button>
                 <button class="custom-button" onclick="Cancel(1)">CANCEL</button>
             </div>         
         </div>
@@ -292,7 +282,7 @@
       function getdata() {
         $("#details").empty();
 
-        $.get("/api/get_group", function (index) {
+        $.get("/api/get_facility", function (index) {
           var result = JSON.parse(index).item;
           var startIndex = (currentPage - 1) * itemsPerPage;
           var endIndex = startIndex + itemsPerPage;
@@ -305,11 +295,11 @@
                 <td>` + v.Description + `</td>
 
                 <td>
-                  <button class="custom-button" id="openModalBtneditdept-` + v.ID + `" onclick="Modify(` + v.ID + `)">
+                  <button class="custom-button" id="openModalBtnedit-` + v.ID + `" onclick="Modify(` + v.ID + `)">
                     <span class="material-icons-outlined" title="Update Account" onclick="Modify(` + v.ID + `)">create</span>
                   </button>
 
-                  <button class="custom-button delete" id="openModalBtndeletedept" onclick="Delete(` + v.ID + `)">
+                  <button class="custom-button delete" id="openModalBtndelete" onclick="Delete(` + v.ID + `)">
                     <span class="material-icons-outlined" title="Delete" onclick="Delete(` + v.ID + `)">delete</span>
                   </button>
                 </td>
@@ -356,10 +346,16 @@
     // ADD GROUP ACCOUNT
     function Submit(){
     var name =  $("#name").val()
-    var description =  $("#des").val()
+    var des =  $("#des").val()
+    var parentFa =  $("#parentFa").val()
+    var category=  $("#category").val()
+    var filesManuals =  $("#FM").val()
+    var runninghr =  $("#runhr").val()
+    var googlemaps =  $("#gm").val()
+    var code
     
 
-      if (name == "" || description=="") {
+      if (name == "") {
             Swal.fire({
               toast: true,
               position: "center",
@@ -370,18 +366,22 @@
             });
           } else {
             $.ajax({
-              url: "/api/group",
+              url: "/api/facility",
               data: {
                 name: name,
-                description: description,
-               
+                description: des,
+                pfa : parentFa,
+                cat: category,
+                code : code,
+                gmaps: googlemaps,
+                process: "new",
               },
               success: function () {
                 Swal.fire({
                   toast: true,
                   position: "center",
                   icon: "success",
-                  title: "New Group Added",
+                  title: "New Facility Added",
                   showConfirmButton: false,
                   timer: 3000,
                 }).then(function(){
@@ -392,19 +392,7 @@
           }
     }
 
-    // Cancel Function
-    function Cancel(id) {
-        if (id == 1) {
-          var modal = document.getElementById("myModal");
-          modal.style.display = "none";
-        } else if (id == 2) {
-          var modal = document.getElementById("myModaledit");
-          modal.style.display = "none";
-        } else {
-          var modal = document.getElementById("myModaldelete");
-          modal.style.display = "none";
-        }
-      }
+    
 
       // Onclick Edit
       function Modify(id) {
@@ -464,21 +452,7 @@
         }
       }
 
-      // Onclick Delete
-      function Delete(id) {
-        var modal = document.getElementById("myModaldelete");
-        modal.style.display = "block";
-
-        $.get("/api/get_group", function (index) {
-          var result = JSON.parse(index).item;
-          $.each(result, function (_, v) {
-            if (v.ID == id) {
-              localStorage.setItem("delete_id", id);
-              $("#del_name").html(v.Name);
-            }
-          });
-        });
-      }
+      
 
       // Search
       $("#search").on("change keyup", function (e) {
@@ -500,10 +474,10 @@
               <td>` +v.Description +`</td>
 
               <td>
-                <button class="custom-button" id="openModalBtneditdept-` +v.ID +`">
+                <button class="custom-button" id="openModalBtnedit-` +v.ID +`">
                 <span class="material-icons-outlined" title="Update Account" onclick="Modify(` +v.ID +`)" >create</span></button>
 
-                <button class="custom-button delete" id="openModalBtndeletedept">
+                <button class="custom-button delete" id="openModalBtndelete">
                 <span class="material-icons-outlined" title="Delete" onclick="Delete(` +v.ID +`)">delete</span></button>
             </td>
             </tr>
@@ -513,6 +487,21 @@
         });
       }
 
+      // Onclick Delete
+      function Delete(id) {
+        var modal = document.getElementById("myModaldelete");
+        modal.style.display = "block";
+
+        $.get("/api/get_group", function (index) {
+          var result = JSON.parse(index).item;
+          $.each(result, function (_, v) {
+            if (v.ID == id) {
+              localStorage.setItem("delete_id", id);
+              $("#del_name").html(v.Name);
+            }
+          });
+        });
+      }
       // SAVE DELETE 
       function Remove() {
         var id = localStorage.getItem("delete_id");
@@ -535,12 +524,26 @@
           },
         });
       }
+
+      // Cancel Function
+    function Cancel(id) {
+        if (id == 1) {
+          var modal = document.getElementById("myModal");
+          modal.style.display = "none";
+        } else if (id == 2) {
+          var modal = document.getElementById("myModaledit");
+          modal.style.display = "none";
+        } else {
+          var modal = document.getElementById("myModaldelete");
+          modal.style.display = "none";
+        }
+      }
     </script>
 
 
 
     <!-- ApexCharts -->
-    <script src="/assets/js/listoffacilities.js"></script>
+    <!-- <script src="/assets/js/listoffacilities.js"></script> -->
     <script src="/assets/js/dashboard.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.5/apexcharts.min.js"></script>
     <script
@@ -566,9 +569,9 @@
         modalasset.style.display = "block";
         });
 
-        closeModalBtnasset.addEventListener("click", function() {
-        modalasset.style.display = "none";
-        });
+        // closeModalBtnasset.addEventListener("click", function() {
+        // modalasset.style.display = "none";
+        // });
 
         window.addEventListener("click", function(event) {
         if (event.target == modalasset) {
@@ -579,17 +582,17 @@
 
     <!--EDIT USER JS-->
     <script>
-       var openModalBtnassetupdate = document.getElementById("openModalBtnassetupdate");
-        var closeModalBtnassetupdate = document.getElementById("closeModalBtnassetupdate");
+       var openModalBtnassetupdate = document.getElementById("openModalBtnedit");
+        var closeModalBtnassetupdate = document.getElementById("closeModalBtupdate");
         var modalassetupdate = document.getElementById("myModaledit");
 
         openModalBtnassetupdate.addEventListener("click", function() {
         modalassetupdate.style.display = "block";
         });
 
-        closeModalBtnassetupdate.addEventListener("click", function() {
-        modalassetupdate.style.display = "none";
-        });
+        // closeModalBtnassetupdate.addEventListener("click", function() {
+        // modalassetupdate.style.display = "none";
+        // });
 
         window.addEventListener("click", function(event) {
         if (event.target == modalassetupdate) {
@@ -607,9 +610,9 @@
         modaldelete.style.display = "block";
         });
 
-        closeModalBtndelete.addEventListener("click", function() {
-        modaldelete.style.display = "none";
-        });
+        // closeModalBtndelete.addEventListener("click", function() {
+        // modaldelete.style.display = "none";
+        // });
 
         window.addEventListener("click", function(event) {
         if (event.target == modaledit) {
