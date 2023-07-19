@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Facilities Info</title>
+
+    <!-- Montserrat Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/assets/css/dashboard.css">
+    <link rel="stylesheet" href="/assets/css/facilitiesclicked.css">
+    <link rel="stylesheet" href="/assets/css/assetcathegory.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0-alpha3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.5/apexcharts.min.js"></script>
+    <!-- Custom JS -->
+    <script defer src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script defer src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script defer src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+  </head>
+  <body>
+    <div class="grid-container">
+
+      <!-- Header -->
+      <header class="header">
+        <div class="menu-icon" onclick="openSidebar()">
+          <span class="material-icons-outlined">menu</span>
+        </div>
+        <div class="header-left">
+          
+        </div>
+        <div class="header-right">
+          <span class="material-icons-outlined">notifications</span>
+          <span class="material-icons-outlined">email</span>
+          <span class="material-icons-outlined">account_circle</span>
+          <a href="/loginpage" class="logout">
+            <span class="material-icons-outlined" title="Logout">reply</span>
+          </a>
+        </div>
+      </header>
+      <!-- End Header -->
+
+      <!-- Sidebar -->
+      <aside id="sidebar">
+        <div class="sidebar-title">
+          <div class="sidebar-brand">
+            <span class="material-icons-outlined"></span> SAILORCOM
+          </div>
+          <span class="material-icons-outlined" onclick="closeSidebar()"
+            >close</span
+          >
+        </div>
+
+        <ul class="sidebar-list">
+          <li class="sidebar-list-item">
+            <a href="/dashboard">
+              <span class="material-icons-outlined">dashboard</span> Dashboard
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <span class="material-icons-outlined">inventory_2</span> Asset
+            Hierarchy
+            <ul class="dropdown-menu">
+              <li><a href="/location" >Location</a></li>
+              <li><a href="/facility" >Facility</a></li>
+              <li><a href="/equipment" >Equipment</a></li>
+              <li><a href="/sparepart" >Spare part</a></li>
+              <li><a href="/specialtools" >Special tools </a></li>
+              <li><a href="/supplies" >Supplies</a></li>
+            </ul>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">category</span> Supplies
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <span class="material-icons-outlined">groups</span> User Management
+            <ul class="dropdown-menu">
+              <li><a href="/users">User</a></li>
+              <li><a href="/position">System Role</a></li>
+              <li><a href="/group">Group</a></li>
+            </ul>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">fact_check</span>
+              Maintenance
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">poll</span> Reports
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">settings</span> Settings
+            </a>
+          </li>
+        </ul>
+      </aside>
+      <!-- End Sidebar -->
+
+      <!-- Main -->
+      <main class="main-container">
+        <div class="main-frame">
+            <div class="print-div">
+                <div class="back">
+                <input type="button" value="← Back">
+                <input type="button" value="Settings">
+                </div>
+                <div class="print">
+                <input type="button" value="Print">
+                </div>
+            </div>
+
+            <div class="assetinfo">
+                <h3 style="color: black;">Facilities:
+                    <span style="color: black;">Power House</span></h3>
+                <div class="img">
+                    
+                    <img src="/assets/img/logback.jpg">
+                </div>
+                <div class="inputs">
+                  <div class="input-name">
+                    <input type="text" placeholder="Name">
+                  </div>
+                  <div class="input-comment">
+                    <textarea name="comment" id="com1" cols="50" rows="5"></textarea>
+                  </div>
+                </div>
+                <div class="qrcode">
+                    
+                    <img src="/assets/img/barcode.png" >
+                </div>
+                <div class="info">
+                    <p class="ptext">Portable Inverter Generator, Inverter, Gasoline, Generator Rated Watts 5500, Surge Watts 7000, 120/240VAC, Generator Amps 58.3/29.1, Generator Engine Brand Honda, Generator Starter Type Electric/Recoil, Generator Outlets 5-20R 120VAC Duplex GFCI (2), L5-30R 120VAC Twist-Lock (1), L14-30R 120/240VAC Twist-Lock (1), CARB Compliant Yes, Circuit Breaker Yes, Engine Displacement 389cc, 
+                        Sound Level dB 60, Parallel Configuration Capable 
+                        Yes</p> 
+                    <span class="ptext">CODE:</span><br>
+                    <span class="ptext">Category:</span><br>
+                </div>
+                <div class="code-1">
+                  <p class="ptext">Code</p>
+                  <input type="text" name="bar" id="barcodes" placeholder="Barcode">
+                 </div>
+                 <div class="in-cathegory">
+                  <p class="ptext">Category</p>
+                  <select name="part" id="fac-part">
+                    <option  value="powerhouse">Location and Facilities</option>
+                    <option value="powerhouse">India</option>
+                   </select>                             
+                  </div>
+            </div>
+            <div class="assetinfobuttons">
+              <input type="button" value="General" onclick="openTab(event, 'tab1')">
+              <input type="button" value="Parts" onclick="openTab(event, 'tab2')">
+                <input type="button" value="Personel" onclick="openTab(event, 'tab3')">
+                <input type="button" value="Files"  onclick="openTab(event, 'tab4')">
+                <input type="button" value="Warranties" onclick="openTab(event, 'tab5')">
+                <input type="button" value="Maintenance schedule" onclick="openTab(event, 'tab6')">
+            </div>
+            <div class="data">
+      
+                <div class="info1">
+                    <div class="upper">
+                      <div class="loc-up">
+                      </div>
+                    </div>
+
+                    <div id="tab1" class="tab-content active">
+                      <div class="lower"> 
+                        
+                        <div class="ecard">
+                            <div class="check1">
+                                <input type="checkbox" id="chk">
+                                <label for="chk" class="ptext">This facility is par of</label>
+                                
+                               <select name="part" id="fac-part">
+                                <option value="powerhouse" class="ptext">Power house</option>
+                                <option value="powerhouse" class="ptext">Sewage</option>
+                               </select>
+
+                               <p class="ptext">Facilities Location</p>
+                               <textarea name="" id="" cols="50" rows="5"></textarea>
+                               <div class="city">
+                                <p class="ptext">City</p>
+                                <input type="text" name="city" id="cities" placeholder="City">
+                               </div>
+                               <div class="Province">
+                                <p class="ptext">Province</p>
+                                <input type="text" name="prov" id="province" placeholder="Province">
+                               </div>
+                               <div class="Province">
+                                <p class="ptext">Postal Code</p>
+                                <input type="text" name="prov" id="province" placeholder="Postal Code">
+                               </div>
+
+                               <div class="Province">
+                                <p class="ptext"> Country</p>
+                                <select name="part" id="fac-part">
+                                  <option value="powerhouse" class="ptext">Phillipines</option>
+                                  <option value="powerhouse" class="ptext">India</option>
+                                 </select>                             
+                                </div>
+                             
+                            </div>
+                            <div class="dept">
+                              <div class="gen">
+                                <div class="h6"><h6>Genaral Information:</h6></div>
+                                <div class="gen2">
+                                  <div class="Province">
+                                    <p class="ptext">Account</p>
+                                    <select name="ACc-ount" id="acc-ount">
+                                      <option value="Acc"></option>
+                                      <option value="Acc" >India</option>
+                                     </select>                             
+                                    </div>
+                                    <div class="Province">
+                                      <p class="ptext">Barcode</p>
+                                      <input type="text" name="bar" id="barcodes" placeholder="Barcode">
+                                     </div>
+                                    <div class="in-charge">
+                                      <p class="ptext">Charge Department</p>
+                                      <select name="part" id="fac-part">
+                                        <option value="powerhouse">Phillipines</option>
+                                        <option value="powerhouse">India</option>
+                                       </select>                             
+                                      </div>
+                                      <div class="Province">
+                                        <p class="ptext">Notes</p>
+                                        <textarea name="" id="" cols="90" rows="8"></textarea>            
+                                        </div>
+                                </div>
+                              </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                  </div>
+                  
+                  <div id="tab2" class="tab-content tabcontent--1">
+                    <div class="upppart-1">
+                      <h2 class="ptext">Tab 2 Content</h2>
+                    <p class="ptext"> This is the content of Tab 2.</p>
+                    </div>
+                    
+                    <div class="addbuttons">
+                      <input type="button" class="but--1" value="Add Parts"></input>
+                    </div>
+                  </div>
+                
+                  <div id="tab3" class="tab-content">
+                    <h2 class="ptext">Tab 3 Content</h2>
+                    <p class="ptext">This is the content of Tab 3.</p>
+                  </div>
+                
+                  <div id="tab4" class="tab-content">
+                    <h2 class="ptext">Tab 4 Content</h2>
+                    <p class="ptext"> This is the content of Tab 4.</p>
+                  </div>
+                
+                  <div id="tab5" class="tab-content">
+                    <h2 class="ptext">Tab 5 Content</h2>
+                    <p class="ptext">This is the content of Tab 5.</p>
+                  </div>
+                
+                  <div id="tab6" class="tab-content">
+                    <h2 class="ptext">Tab 6 Content</h2>
+                    <p class="ptext">This is the content of Tab 6.</p>
+                  </div>
+
+                    
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        
+      </main>
+      
+      <!-- End Main -->
+
+    </div>
+    
+    <style>
+      .tab-content{
+        display: none;
+      }
+      .ptext{
+        color: black;
+        text-align: left;
+      }
+    </style>
+    
+    <script
+    src="https://code.jquery.com/jquery-3.6.1.min.js"
+    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+    crossorigin="anonymous"
+  ></script>
+  <script src="/assets/js/assetlist.js"></script>
+
+
+
+  <script>
+    function openTab(event, tabId) {
+      // Hide all tab contents
+      var tabContents = document.getElementsByClassName('tab-content');
+      for (var i = 0; i < tabContents.length; i++) {
+        tabContents[i].style.display = 'none';
+      }
+
+      // Remove active class from all tab buttons
+      var tabButtons = document.getElementsByClassName('tab-button');
+      for (var i = 0; i < tabButtons.length; i++) {
+        tabButtons[i].classList.remove('active');
+      }
+
+      // Show the selected tab content
+      var selectedTab = document.getElementById(tabId);
+      selectedTab.style.display = 'block';
+
+      // Add active class to the clicked tab button
+      event.target.classList.add('active');
+    }
+  </script>
+  </body>
+</html>

@@ -53,6 +53,8 @@ func Handlers() {
 	http.HandleFunc("/position", views.SystemRoleHandler)
 	http.HandleFunc("/permission", views.PermissionHandler)
 
+	http.HandleFunc("/facility", views.FacilityHandler)
+
 }
 
 func CreateDB(name string) *sql.DB {

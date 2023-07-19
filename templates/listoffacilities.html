@@ -48,14 +48,17 @@
 
         <ul class="sidebar-list">
           <li class="sidebar-list-item">
-            <a href="dashboard.html" target="_blank">
+            <a href="/dashboard">
               <span class="material-icons-outlined">dashboard</span> Dashboard
             </a>
           </li>
           <li class="sidebar-list-item">
-            <a href="#" target="_blank">
-              <span class="material-icons-outlined">inventory_2</span> Assets
-            </a>
+            <span class="material-icons-outlined">inventory_2</span> Asset
+            <ul class="dropdown-menu">
+              <li><a href="/facility" >Facility</a></li>
+              <li><a href="/equipment" >Equipment</a></li>
+              <li><a href="/tools" >Tools</a></li>
+            </ul>
           </li>
           <li class="sidebar-list-item">
             <a href="#" target="_blank">
@@ -147,7 +150,7 @@
       <!-- End Main -->
 
       <!--Modal-->
-      <div id="myModalasset" class="modal">
+      <div id="myModal" class="modal">
         <div class="modal-content">
           <h2 class="h2h2">Add Facilities</h2>
 
@@ -181,14 +184,14 @@
            
             <div class="centered-container">
                 <button class="custom-button"><span class="material-icons-outlined" title="CREATE" >create</span></button>
-                <button class="custom-button">CANCEL</button>
+                <button class="custom-button" onclick="Cancel(1)">CANCEL</button>
             </div>         
         </div>
       </div>
       <!--End Modal-->
 
       <!--Update Modal-->
-      <div id="myModalassetupdate" class="modal">
+      <div id="myModalupdate" class="modal">
         <div class="modal-content">
           <h2 class="h2h2">Edit Facilities</h2>
 
@@ -222,7 +225,7 @@
            
             <div class="centered-container">
                 <button class="custom-button"><span class="material-icons-outlined" title="CREATE" >create</span></button>
-                <button class="custom-button">CANCEL</button>
+                <button class="custom-button" onclick="Cancel(2)">CANCEL</button>
             </div>    
         </div>
       </div>
@@ -239,7 +242,7 @@
             </div>
             <div class="centered-container">
                 <button class="custom-button"><span class="material-icons-outlined" title="Delete" >delete</span></button>
-                <button class="custom-button">CANCEL</button>
+                <button class="custom-button" onclick="Cancel(3)">CANCEL</button>
             </div>
         </div>
         </div>
@@ -364,7 +367,7 @@
           var modal = document.getElementById("myModal");
           modal.style.display = "none";
         } else if (id == 2) {
-          var modal = document.getElementById("myModaledit");
+          var modal = document.getElementById("myModalupdate");
           modal.style.display = "none";
         } else {
           var modal = document.getElementById("myModaldelete");
@@ -526,7 +529,7 @@
         <script>
             var openModalBtnasset = document.getElementById("openModalBtnasset");
         var closeModalBtnasset = document.getElementById("closeModalBtnasset");
-        var modalasset = document.getElementById("myModalasset");
+        var modalasset = document.getElementById("myModal");
 
         openModalBtnasset.addEventListener("click", function() {
         modalasset.style.display = "block";
@@ -547,7 +550,7 @@
     <script>
        var openModalBtnassetupdate = document.getElementById("openModalBtnassetupdate");
         var closeModalBtnassetupdate = document.getElementById("closeModalBtnassetupdate");
-        var modalassetupdate = document.getElementById("myModalassetupdate");
+        var modalassetupdate = document.getElementById("myModalupdate");
 
         openModalBtnassetupdate.addEventListener("click", function() {
         modalassetupdate.style.display = "block";
