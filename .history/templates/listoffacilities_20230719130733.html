@@ -153,65 +153,34 @@
       <div id="myModal" class="modal">
         <div class="modal-content">
           <h2 class="h2h2">Add Facility</h2>
-         
-          <div class="">
-              <img src="/assets/img/barcode.png" alt="Facilities Image" width="80" height="80">
-              <div class="name">QR CODE</div>
-              <!-- <input class="input-dept" type="text" placeholder="QR CODE" id="qrcode" required> -->
-          </div>
-
-          <div class="">
-            <div class="name">CODE: 0000</div>
-            
-              <!-- <input class="input-dept" type="text" placeholder="0000" id="code" required> -->
-          </div>
 
             <div class="centered-container">
               <div class="name">Name</div>
-                <input class="input-dept" type="text" placeholder="" id="name" required>
+                <input class="input-dept" type="text" placeholder="Name" id="name" required>
             </div>
-
             <div class="centered-container">
-              <div class="name">Description</div>
-                <textarea rows="4" cols="66" name="comment" form="usrform" id="des" required></textarea>
+              <div class="name">Location</div>
+                <input class="input-dept" type="text" placeholder="Location" id="username" required>
+            </div>
+            <div class="centered-container">
+              <div class="name">Last Price</div>
+                <input class="input-dept" type="text" placeholder="Last Price" id="password" required>
             </div>
         
             <div class="centered-container">
-              <div class="name">Parent Facility</div>
-                <select id="pfacility" required>
-                  <option value=""></option>
-                  <option value="">p1</option>
-                  <option value="">p2</option>
-                  <option value="">p3</option>
-                </select>
+              <div class="name"> Person Incharge</div>
+              <input class="input-dept" type="text" placeholder="Person incharge" id="password" required>
             </div>
-
-          
             <div class="centered-container">
-              <div class="name">CATEGORY</div>
-                <select id="pfacility" required>
-                  <option value=""></option>
-                  <option value="">STORAGE</option>
-                  <option value="">PLANT</option>
-                  <option value="">BUILDING</option>
-                </select>
+              <div class="name">Contact Number</div>
+              <input class="input-dept" type="text" placeholder="Contact Number" id="password" required>
             </div>
-
-            <div class="centered-container">
-              <div class="name">Files OR Manuals</div>
-                <input type="file" id="myFile" name="filename">
-                <!-- <input class="input-dept" type="text" placeholder="" id="fom" required> -->
-            </div>
-
-            <div class="centered-container">
-              <div class="name">Running Hours</div>
-                <input class="input-dept" type="text" placeholder="" id="runninghr" required>
-            </div>
-
-            <div class="centered-container">
-              <div class="name">Google Map</div>
-                <input class="input-dept" type="text" placeholder="MAP HERE" id="" required>
-            </div>
+            <div class="name">Parent Facility</div>
+            <select id="pfacility" required>
+              <option value="Vendor"></option>
+              <option value="Administrator"></option>
+              <option value="User"></option>
+          </select>
            
             <div class="centered-container">
                 <button class="custom-button"><span class="material-icons-outlined" title="CREATE" >create</span></button>
