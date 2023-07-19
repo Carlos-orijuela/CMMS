@@ -246,265 +246,30 @@
     <!--Delete end modal-->
 
     <!-- Scripts -->
-    <script>
-      $(document).ready(function () {
-        getdata();
-      });
-
-      // display Data in the table
-      var currentPage = 1; // Current page number
-      var itemsPerPage = 5; // Number of items to display per page
-
-      function getdata() {
-        $("#details").empty();
-
-        $.get("/api/get_group", function (index) {
-          var result = JSON.parse(index).item;
-          var startIndex = (currentPage - 1) * itemsPerPage;
-          var endIndex = startIndex + itemsPerPage;
-          for (var i = startIndex; i < endIndex && i < result.length; i++) {
-            var v = result[i];
-
-            $("#details").append(`
-              <tr>
-                <td>` + v.Name + `</td>
-                <td>` + v.Description + `</td>
-
-                <td>
-                  <button class="custom-button" id="openModalBtneditdept-` + v.ID + `" onclick="Modify(` + v.ID + `)">
-                    <span class="material-icons-outlined" title="Update Account" onclick="Modify(` + v.ID + `)">create</span>
-                  </button>
-
-                  <button class="custom-button delete" id="openModalBtndeletedept" onclick="Delete(` + v.ID + `)">
-                    <span class="material-icons-outlined" title="Delete" onclick="Delete(` + v.ID + `)">delete</span>
-                  </button>
-                </td>
-              </tr>
-            `);
-          }
-          updatePaginationButtons(result.length);
-        });
-      }
-
-      function updatePaginationButtons(totalItems) {
-        var totalPages = Math.ceil(totalItems / itemsPerPage);
 
 
-        if (currentPage === 1) {
-          $("#prevButton").prop("disabled", true);
-        } else {
-          $("#prevButton").prop("disabled", false);
-        }
 
 
-        if (currentPage === totalPages) {
-          $("#nextButton").prop("disabled", true);
-        } else {
-          $("#nextButton").prop("disabled", false);
-        }
-      }
 
 
-      function goToPreviousPage() {
-        if (currentPage > 1) {
-          currentPage--;
-          getdata();
-        }
-      }
 
 
-      function goToNextPage() {
-        currentPage++;
-        getdata();
-      }
 
 
-    // ADD GROUP ACCOUNT
-    function Submit(){
-    var name =  $("#name").val()
-    var description =  $("#des").val()
+
+
+
+
+
+
+
+
+
+
+
+
+
     
-
-      if (name == "" || description=="") {
-            Swal.fire({
-              toast: true,
-              position: "center",
-              icon: "warning",
-              title: "Please Complete Required Details",
-              showConfirmButton: false,
-              timer: 3000,
-            });
-          } else {
-            $.ajax({
-              url: "/api/group",
-              data: {
-                name: name,
-                description: description,
-               
-              },
-              success: function () {
-                Swal.fire({
-                  toast: true,
-                  position: "center",
-                  icon: "success",
-                  title: "New Group Added",
-                  showConfirmButton: false,
-                  timer: 3000,
-                }).then(function(){
-                  window.location.reload();
-                });
-              },
-            });
-          }
-    }
-
-    // Cancel Function
-    function Cancel(id) {
-        if (id == 1) {
-          var modal = document.getElementById("myModal");
-          modal.style.display = "none";
-        } else if (id == 2) {
-          var modal = document.getElementById("myModaledit");
-          modal.style.display = "none";
-        } else {
-          var modal = document.getElementById("myModaldelete");
-          modal.style.display = "none";
-        }
-      }
-
-      // Onclick Edit
-      function Modify(id) {
-        var modal = document.getElementById("myModaledit");
-        modal.style.display = "block";
-
-        $.get("/api/get_group", function (index) {
-          var result = JSON.parse(index).item;
-          $.each(result, function (_, v) {
-            if (v.ID == id) {
-              localStorage.setItem("id", id);
-              $("#editname").val(v.Name);
-              $("#editdes").val(v.Description);
-              // ADD PERMISSION HERE
-            }
-          });
-        });
-      }
-
-      function Edit() {
-      var name = $("#editname").val();
-      var description = $("#editdes").val();
-      var id = localStorage.getItem("id");
-
-       // console.log(name, password, username, accntType, department, position,id);
-        if (name == "") {
-          Swal.fire({
-            toast: true,
-            position: "center",
-            icon: "warning",
-            title: "Please Complete Required Details",
-            showConfirmButton: false,
-            timer: 3000,
-          });
-        } else {
-          $.ajax({
-            url: "/api/edit_group",
-            data: {
-              name: name,
-              description: description,
-              id: id,
-              //PERMISSION HERE
-            },
-            success: function () {
-              Swal.fire({
-                toast: true,
-                position: "center",
-                icon: "success",
-                title: "Group Updated",
-                showConfirmButton: false,
-                timer: 3000,
-              }).then(function () {
-                window.location.reload();
-              });
-            },
-          });
-        }
-      }
-
-      // Onclick Delete
-      function Delete(id) {
-        var modal = document.getElementById("myModaldelete");
-        modal.style.display = "block";
-
-        $.get("/api/get_group", function (index) {
-          var result = JSON.parse(index).item;
-          $.each(result, function (_, v) {
-            if (v.ID == id) {
-              localStorage.setItem("delete_id", id);
-              $("#del_name").html(v.Name);
-            }
-          });
-        });
-      }
-
-      // Search
-      $("#search").on("change keyup", function (e) {
-        Search(this.value.toLowerCase());
-      });
-
-      function Search(search) {
-        var tableBody = document.getElementById("details");
-        tableBody.innerHTML = "";
-
-        $.get("/api/get_group", function (index) {
-          var result = JSON.parse(index).item;
-          $.each(result, function (_, v) {
-            if (v.Name.toLowerCase().includes(search)) {
-              tableBody.innerHTML +=
-                `
-              <tr>
-              <td>` +v.Name +`</td>
-              <td>` +v.Description +`</td>
-
-              <td>
-                <button class="custom-button" id="openModalBtneditdept-` +v.ID +`">
-                <span class="material-icons-outlined" title="Update Account" onclick="Modify(` +v.ID +`)" >create</span></button>
-
-                <button class="custom-button delete" id="openModalBtndeletedept">
-                <span class="material-icons-outlined" title="Delete" onclick="Delete(` +v.ID +`)">delete</span></button>
-            </td>
-            </tr>
-              `;
-            }
-          });
-        });
-      }
-
-      // SAVE DELETE 
-      function Remove() {
-        var id = localStorage.getItem("delete_id");
-        $.ajax({
-          url: "/api/delete_group",
-          data: {
-            id: id,
-          },
-          success: function () {
-            Swal.fire({
-              toast: true,
-              position: "center",
-              icon: "success",
-              title: "Group Deleted",
-              showConfirmButton: false,
-              timer: 3000,
-            }).then(function () {
-              window.location.reload();
-            });
-          },
-        });
-      }
-    </script>
-
-
-
     <!-- ApexCharts -->
     <script src="/assets/js/listoffacilities.js"></script>
     <script src="/assets/js/dashboard.js"></script>
