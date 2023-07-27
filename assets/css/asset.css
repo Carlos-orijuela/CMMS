@@ -1,5 +1,30 @@
-.name{
-    width: 25%;
-    text-align:left;
-    padding-bottom: 5%;
+.name {
+  width: 25%;
+  text-align: left;
+  padding-bottom: 5%;
+}
+
+.radio {
+  padding: 1rem;
+}
+
+.radio_content {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.radio_data {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+}
+
+.radio_select {
+  width: 100%;
+}
+
+.radio_select select {
+  width: 100%;
 }

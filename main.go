@@ -54,7 +54,7 @@ func Handlers() {
 	http.HandleFunc("/permission", views.PermissionHandler)
 
 	http.HandleFunc("/facility", views.FacilityHandler)
-
+	http.HandleFunc("/location", views.LocationHandler)
 }
 
 func CreateDB(name string) *sql.DB {
@@ -89,8 +89,10 @@ func MigrateDB() {
 	permlist := models.Permissionlist{}
 	grouplist := models.Grouplist{}
 	facility := models.Facility{}
+	location := models.Location{}
+	loclist := models.LocationList{}
 	db := GormDB()
-	db.AutoMigrate(&user, &group, &permission, &permlist, &grouplist, &facility)
+	db.AutoMigrate(&user, &group, &permission, &permlist, &grouplist, &facility,&location,&loclist)
 }
 
 func CreateGroup() {

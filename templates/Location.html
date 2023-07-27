@@ -1,23 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>Locations</title>
 
     <!-- Montserrat Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Material Icons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+      rel="stylesheet"
+    />
 
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="/assets/css/dashboard.css" />
-    <link rel="stylesheet" href="/assets/css/asset.css">
+    <link rel="stylesheet" href="/assets/css/asset.css" />
+    <link rel="stylesheet" href="/assets/css/AllAsset.css" />
   </head>
   <body>
     <div class="grid-container">
-
       <!-- Header -->
       <header class="header">
         <div class="menu-icon" onclick="openSidebar()">
@@ -30,9 +36,9 @@
           <span class="material-icons-outlined">notifications</span>
           <span class="material-icons-outlined">email</span>
           <span class="material-icons-outlined">account_circle</span>
-        <a href="/loginpage" class="logout">
-                <span class="material-icons-outlined" title="Logout">reply</span>
-        </a>
+          <a href="/loginpage" class="logout">
+            <span class="material-icons-outlined" title="Logout">reply</span>
+          </a>
         </div>
       </header>
       <!-- End Header -->
@@ -43,7 +49,9 @@
           <div class="sidebar-brand">
             <span class="material-icons-outlined"></span> SAILORCOM
           </div>
-          <span class="material-icons-outlined" onclick="closeSidebar()">close</span>
+          <span class="material-icons-outlined" onclick="closeSidebar()"
+            >close</span
+          >
         </div>
 
         <ul class="sidebar-list">
@@ -69,7 +77,8 @@
           </li>
           <li class="sidebar-list-item">
             <a href="#" target="_blank">
-              <span class="material-icons-outlined">fact_check</span> Maintenance
+              <span class="material-icons-outlined">fact_check</span>
+              Maintenance
             </a>
           </li>
           <li class="sidebar-list-item">
@@ -97,157 +106,234 @@
           <h2>Location</h2>
         </div>
         <div class="card-content">
-            <div>
-                <input class="search" type="text" placeholder="Search Locations"  id="search">
-                <button class="custom-button" id="openModalBtnasset"><span class="material-icons-outlined" title="Add Assets">plus_one</span> </button>
-                <button class="custom-button" ><span class="material-icons-outlined" title="Print">computer</span> </button>
-                <button class="custom-button" ><span class="material-icons-outlined" title="Print Asset tags">add_to_queue</span> </button>
-                <button class="custom-button" ><span class="material-icons-outlined" title="More">build</span> </button>
-            </div>
+          <div>
+            <input
+              class="search"
+              type="text"
+              placeholder="Search Locations"
+              id="search"
+            />
+            <button class="custom-button" id="openModalBtnasset">
+              <span class="material-icons-outlined" title="Add Assets"
+                >plus_one</span
+              >
+            </button>
+            <button class="custom-button">
+              <span class="material-icons-outlined" title="Print"
+                >computer</span
+              >
+            </button>
+            <button class="custom-button">
+              <span class="material-icons-outlined" title="Print Asset tags"
+                >add_to_queue</span
+              >
+            </button>
+            <button class="custom-button">
+              <span class="material-icons-outlined" title="More">build</span>
+            </button>
+          </div>
 
-            <div class="card-content">
-                <div class="card-table">
-                    <div class="table-container">
-                        <table id="my-table">
-                          <thead>
-                            <tr>
-                              <th>City</th>
-                              <th>Province</th>
-                              <th>Street</th>
-                              <th>Building Name</th>
-                              <th>Address</th>
-                             
-                              <th>ACTION</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                                <td>JOHN WICK 4</td>
-                                <td>#8484848</td>
-                                <td>SINGLE</td>
-                                <td>$200</td>    
-                                <td>
-                                </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      
-                        <div id="pagination-container">
-                          <ul id="pagination"></ul>
-                        </div>
-                      </div>
-                  </div> 
+          <div class="card-content">
+            <div class="card-table">
+              <div class="table-container">
+                <table id="my-table">
+                  <thead>
+                    <tr>
+                      <th><span class="visually-hidden">Toggle</span></th>
+                      <th>Name</th>
+                      <th>Description</th>
+                      <th>Category</th>
+                      <th>Address</th>
+                      <th>City</th>
+
+                      <th>ACTION</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+
+                <div id="pagination-container">
+                  <ul id="pagination"></ul>
+                </div>
               </div>
             </div>
+          </div>
+        </div>
       </main>
       <!-- End Main -->
 
       <!--Modal-->
+
       <div id="myModalasset" class="modal">
         <div class="modal-content">
-          <h2 class="h2h2">Add Location</h2>
+          <h2 class="h2h2" id="modaltitle"></h2>
+
+          <div class="radio">
+            <div class="radio_content">
+              <div class="radio_data">
+                <input
+                  type="radio"
+                  id="html"
+                  name="fav_language"
+                  value="HTML"
+                  onclick="Part()"
+                />
+                <label for="html">Part Of</label><br />
+              </div>
+
+              <div class="radio_select" id="selectrad">
+                <select name="exloc" id="exloc">
+                  <!-- Append Data here -->
+                </select>
+              </div>
+            </div>
+            <div class="radio_data">
+              <input
+                type="radio"
+                id="css"
+                name="fav_language"
+                value="CSS"
+                onclick="New()"
+              />
+              <label for="css" id="css1">New</label><br />
+            </div>
+          </div>
+          <div id="maindata">
+            <div>
+              <div class="name">CODE: 0000</div>
+              <input class="input-dept" type="hidden" placeholder="" id="pid" />
+              <input
+                class="input-dept"
+                type="hidden"
+                placeholder=""
+                id="process"
+              />
+              <!-- <input class="input-dept" type="text" placeholder="0000" id="code" required> -->
+            </div>
 
             <div class="centered-container">
-              <div class="name">City</div>
-                <input class="input-dept" type="text" placeholder="City" id="name" required>
+              <div class="name">Name</div>
+              <input
+                class="input-dept"
+                type="text"
+                placeholder=""
+                id="name"
+                required
+              />
+            </div>
+
+            <div class="centered-container">
+              <div class="name">Description</div>
+              <textarea
+                rows="4"
+                cols="66"
+                name="comment"
+                form="usrform"
+                id="des"
+                required
+              ></textarea>
+            </div>
+          </div>
+          <br />
+
+          <div id="subdata">
+            <div class="centered-container">
+              <div class="name">Category</div>
+              <select name="category" id="category">
+                <option value="">Select Category</option>
+                <option value="Store Room">Store Room</option>
+                <option value="Plants">Plants</option>
+                <option value="Buildings">Buildings</option>
+              </select>
             </div>
             <div class="centered-container">
-              <div class="name">province</div>
-                <input class="input-dept" type="text" placeholder="Province" id="username" required>
-            </div>
-            <div class="centered-container">
-              <div class="name">Street</div>
-                <input class="input-dept" type="text" placeholder="Street" id="password" required>
-            </div>
-            <div class="centered-container">
-              <div class="name">Building Name </div>
-                <input class="input-dept" type="text" placeholder="Building Name" id="password" required>
+              <div class="name">Google Map</div>
+              <input
+                class="input-dept"
+                type="text"
+                placeholder="MAP HERE"
+                id="gmaps"
+                required
+              />
             </div>
             <div class="centered-container">
               <div class="name">Address</div>
-              <input class="input-dept" type="text" placeholder="Adress" id="password" required>
+              <input
+                class="input-dept"
+                type="text"
+                placeholder="Address"
+                id="address"
+                required
+              />
             </div>
-            <div class="name">Vendor</div>
-            <select id="accntType" required>
-              <option value="Vendor"></option>
-              <option value="Administrator"></option>
-              <option value="User"></option>
-          </select>
-           
+
             <div class="centered-container">
-                <button class="custom-button"><span class="material-icons-outlined" title="CREATE" >create</span></button>
-                <button class="custom-button">CANCEL</button>
-            </div>         
+              <div class="name">City</div>
+              <input
+                class="input-dept"
+                type="text"
+                placeholder="City"
+                id="city"
+                required
+              />
+            </div>
+
+            <div class="centered-container">
+              <div class="name">Country</div>
+              <input
+                class="input-dept"
+                type="text"
+                placeholder="country"
+                id="country"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="centered-container">
+            <button class="custom-button" id="add" onclick="Submit()">
+              <span class="material-icons-outlined" title="CREATE">create</span>
+            </button>
+            <button class="custom-button" id="update" onclick="Update()">
+              <span class="material-icons-outlined" title="CREATE">create</span>
+            </button>
+            <button class="custom-button" onclick="Cancel()">CANCEL</button>
+          </div>
         </div>
       </div>
+
       <!--End Modal-->
-
-      <!--Update Modal-->
-      <div id="myModalassetupdate" class="modal">
-        <div class="modal-content">
-          <h2 class="h2h2">Edit Location</h2>
-
-            <div class="centered-container">
-              <div class="name">City</div>
-                <input class="input-dept" type="text" placeholder="City" id="name" required>
-            </div>
-            <div class="centered-container">
-              <div class="name">province</div>
-                <input class="input-dept" type="text" placeholder="Province" id="username" required>
-            </div>
-            <div class="centered-container">
-              <div class="name">Street</div>
-                <input class="input-dept" type="text" placeholder="Street" id="password" required>
-            </div>
-            <div class="centered-container">
-              <div class="name">Building Name </div>
-                <input class="input-dept" type="text" placeholder="Building Name" id="password" required>
-            </div>
-            <div class="centered-container">
-              <div class="name">Address</div>
-              <input class="input-dept" type="text" placeholder="Adress" id="password" required>
-            </div>
-            <div class="name">Vendor</div>
-            <select id="accntType" required>
-              <option value="Vendor"></option>
-              <option value="Administrator"></option>
-              <option value="User"></option>
-          </select>
-            <div class="centered-container">
-                <button class="custom-button"><span class="material-icons-outlined" title="CREATE" >create</span></button>
-                <button class="custom-button">CANCEL</button>
-            </div>        
-        </div>
-      </div>
-      <!--End edit Modal-->
-
     </div>
 
     <!--Start Modal Delete-->
-        <div id="myModaldelete" class="modal">
-        <div class="modal-content">
-            <h2 class="h2h2">ARE YOU SURE YOU WANT TO DELETE THIS?</h2>
-            <div class="centered-container">
-              <p class="h2black"></p>
-            </div>
-            <div class="name">Vendor</div>
-            <select id="accntType" required>
-              <option value="Vendor"></option>
-              <option value="Administrator"></option>
-              <option value="User"></option>
-          </select>
-            <div class="centered-container">
-                <button class="custom-button"><span class="material-icons-outlined" title="Delete" >delete</span></button>
-                <button class="custom-button">CANCEL</button>
-            </div>
+    <div id="myModaldelete" class="modal">
+      <div class="modal-content">
+        <h2 class="h2h2">ARE YOU SURE YOU WANT TO DELETE THIS?</h2>
+        <div class="centered-container">
+          <p class="h2black" id="delid" hidden></p>
+          <p class="h2black" id="delprocess" hidden></p>
+          <p class="h2black" id="delname"></p>
         </div>
+        <div class="centered-container">
+          <button class="custom-button">
+            <span
+              class="material-icons-outlined"
+              title="Delete"
+              onclick="Remove()"
+              >delete</span
+            >
+          </button>
+          <button class="custom-button" onclick="Cancel()">CANCEL</button>
         </div>
+      </div>
+    </div>
     <!--Delete end modal-->
 
     <!-- Scripts -->
     <!-- ApexCharts -->
-    <script src="/assets/js/Locations.js"></script>
+    <!-- <script src="/assets/js/Locations.js"></script> -->
     <script src="/assets/js/dashboard.js"></script>
+    <script src="/assets/js/AllAsset.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.5/apexcharts.min.js"></script>
     <script
       src="https://code.jquery.com/jquery-3.6.1.min.js"
@@ -260,68 +346,541 @@
     ></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Custom JS -->
- 
-    
+
     <!--ADD asset JS-->
-        <script>
-            var openModalBtnasset = document.getElementById("openModalBtnasset");
-        var closeModalBtnasset = document.getElementById("closeModalBtnasset");
-        var modalasset = document.getElementById("myModalasset");
 
-        openModalBtnasset.addEventListener("click", function() {
-        modalasset.style.display = "block";
-        });
-
-        closeModalBtnasset.addEventListener("click", function() {
-        modalasset.style.display = "none";
-        });
-
-        window.addEventListener("click", function(event) {
-        if (event.target == modalasset) {
-            modalasset.style.display = "none";
-        }
-        });
-        </script>
-
-    <!--EDIT USER JS-->
     <script>
-       var openModalBtnassetupdate = document.getElementById("openModalBtnassetupdate");
-        var closeModalBtnassetupdate = document.getElementById("closeModalBtnassetupdate");
-        var modalassetupdate = document.getElementById("myModalassetupdate");
+      $(document).ready(function () {
+        $("#maindata").hide();
+        $("#subdata").hide();
+        $("#selectrad").hide();
+        LocationTable();
+      });
 
-        openModalBtnassetupdate.addEventListener("click", function() {
-        modalassetupdate.style.display = "block";
+      // Dropdown Data in Add button
+      function getlocation() {
+        $("#exloc").empty();
+        $.get("/api/get_location", function (index) {
+          var result = JSON.parse(index).item;
+          $.each(result, function (_, v) {
+            $("#exloc").append(
+              `
+            <option value="` +
+                v.ID +
+                `">` +
+                v.Name +
+                `</option>
+            `
+            );
+          });
         });
+      }
 
-        closeModalBtnassetupdate.addEventListener("click", function() {
-        modalassetupdate.style.display = "none";
+      function LocationTable() {
+        $("tbody").empty();
+        $.get("/api/get_location", function (index) {
+          var result = JSON.parse(index).item;
+          $.each(result, function (_, v) {
+            $("tbody").append(
+              `
+              <tr>
+                      <td id="btn-` +
+                v.ID +
+                `">
+
+                      </td>
+                      <td id="lblMSb-` +
+                v.ID +
+                `">` +
+                v.Name +
+                `</td>
+                      <td>` +
+                v.Description +
+                `</td>
+                      <td>` +
+                v.Category +
+                `</td>
+                      <td>` +
+                v.Address +
+                `</td>
+                      <td>` +
+                v.City +
+                `</td>
+                <td>
+                  <button class="custom-button">
+                    <span class="material-icons-outlined" title="Update Department" onclick="Modify(${v.ID})">create</span>
+                  </button>
+                  <button class="custom-button delete" >
+                    <span class="material-icons-outlined" title="Delete" onclick="Delete(${v.ID})">delete</span>
+                  </button>
+                </td>
+                      </tr>
+            `
+            );
+
+            var data = JSON.parse(index).location;
+            datacount = 0;
+            $.each(data, function (_, k) {
+              if (v.ID == k.LocationID) {
+                datacount += 1;
+                if (datacount == 1) {
+                  $("#btn-" + v.ID).append(
+                    `
+                 <button
+                          type="button"
+                          id="btnMSb-` +
+                      v.ID +
+                      `"
+                          aria-expanded="false"
+                          onclick="toggle(this.id,'#MS01b-` +
+                      v.ID +
+                      `');"
+                          aria-controls="MS01b-` +
+                      v.ID +
+                      `"
+                          aria-label="3 more from"
+                          aria-labelledby="btnMSb-` +
+                      v.ID +
+                      ` lblMSb-` +
+                      v.ID +
+                      `"
+                        >
+                          <svg
+                            xmlns='\http://www.w3.org/2000/svg"'
+                            viewBox="0 0 80 80"
+                            focusable="false"
+                          >
+                            <path d="M70.3 13.8L40 66.3 9.7 13.8z"></path>
+                          </svg>
+                        </button>
+                `
+                  );
+                }
+
+                $("tbody").append(
+                  `
+                <tr id="MS01b-` +
+                    v.ID +
+                    `" class="hidden">
+                  <td></td>
+                  <td>` +
+                    k.Name +
+                    `</td>
+                  <td>` +
+                    k.Description +
+                    `</td>
+                    <td>` +
+                    v.Category +
+                    `</td>
+                      <td>` +
+                    v.Address +
+                    `</td>
+                      <td>` +
+                    v.City +
+                    `</td>
+                  <td>
+                  <button class="custom-button">
+                    <span class="material-icons-outlined" title="Update Department" onclick="Modify1(${k.ID})">create</span>
+                  </button>
+                  <button class="custom-button delete" >
+                    <span class="material-icons-outlined" title="Delete" onclick="Delete1(${k.ID})">delete</span>
+                  </button>
+                </td>
+
+                </tr>
+              `
+                );
+              }
+            });
+          });
         });
+      }
 
-        window.addEventListener("click", function(event) {
-        if (event.target == modalassetupdate) {
-            modalassetupdate.style.display = "none";
+      // Select radion Button Part
+      function Part() {
+        $("#maindata").show();
+        $("#subdata").hide();
+        $("#selectrad").show();
+        getlocation();
+      }
+
+      // Select radion Button New
+      function New() {
+        $("#maindata").show();
+        $("#subdata").show();
+        $("#selectrad").hide();
+        $("#selectrad").val("");
+      }
+
+      // Button Submit
+      function Submit() {
+        var rad1 = $('input[name="fav_language"]:checked').val();
+
+        if (rad1 == null) {
+          // No Selection of Radio Button
+          Swal.fire({
+            toast: true,
+            position: "center",
+            icon: "warning",
+            title: "Please Select Selection!",
+            showConfirmButton: false,
+            timer: 3000,
+          });
+        } else if (rad1 == "HTML") {
+          // Part of Radio Button Selected
+          var exloc = $("#exloc").val();
+          var name = $("#name").val();
+          var desc = $("#des").val();
+
+          if (exloc == "" || name == "" || desc == "") {
+            Swal.fire({
+              toast: true,
+              position: "center",
+              icon: "warning",
+              title: "Please Complete Required Details!",
+              showConfirmButton: false,
+              timer: 3000,
+            });
+          } else {
+            $.ajax({
+              url: "/api/location",
+              data: {
+                name: name,
+                description: desc,
+                id: exloc,
+                process: "exist",
+              },
+              success: function () {
+                Swal.fire({
+                  toast: true,
+                  position: "center",
+                  icon: "success",
+                  title: "New Location Added",
+                  showConfirmButton: false,
+                  timer: 3000,
+                }).then(function () {
+                  window.location.reload();
+                });
+              },
+            });
+          }
+        } else if (rad1 == "CSS") {
+          // New Location
+          var name = $("#name").val();
+          var desc = $("#des").val();
+          var category = $("#category").val();
+          var gmaps = $("#gmaps").val();
+          var address = $("#address").val();
+          var city = $("#city").val();
+          var country = $("#country").val();
+
+          if (
+            name == "" ||
+            desc == "" ||
+            category == "" ||
+            gmaps == "" ||
+            address == "" ||
+            city == "" ||
+            country == ""
+          ) {
+            Swal.fire({
+              toast: true,
+              position: "center",
+              icon: "warning",
+              title: "Please Complete Required Details!",
+              showConfirmButton: false,
+              timer: 3000,
+            });
+          } else {
+            $.ajax({
+              url: "/api/location",
+              data: {
+                name: name,
+                description: desc,
+                category: category,
+                gmaps: gmaps,
+                address: address,
+                city: city,
+                country: country,
+                process: "new",
+              },
+              success: function () {
+                Swal.fire({
+                  toast: true,
+                  position: "center",
+                  icon: "success",
+                  title: "New Location Added",
+                  showConfirmButton: false,
+                  timer: 3000,
+                }).then(function () {
+                  window.location.reload();
+                });
+              },
+            });
+          }
         }
+      }
+
+      // Edit Button in Main Location
+      function Modify(id) {
+        var modalasset = document.getElementById("myModalasset");
+        modalasset.style.display = "block";
+        $("#modaltitle").html("Update Location");
+        $("#add").hide();
+        $("#update").show();
+        $(".radio").hide();
+        $("#maindata").show();
+        $("#subdata").show();
+
+        $.get("/api/get_location", function (index) {
+          var result = JSON.parse(index).item;
+          $.each(result, function (_, v) {
+            if (v.ID == id) {
+              $("#pid").val(v.ID);
+              $("#name").val(v.Name);
+              $("#des").val(v.Description);
+              $("#category").val(v.Category);
+              $("#gmaps").val(v.GoogleMaps);
+              $("#address").val(v.Address);
+              $("#city").val(v.City);
+              $("#country").val(v.Country);
+              $("#process").val("new");
+            }
+          });
         });
+      }
+
+      // Edit Button in Main SubLocation
+      function Modify1(id) {
+        var modalasset = document.getElementById("myModalasset");
+        modalasset.style.display = "block";
+        $("#modaltitle").html("Update Location");
+        $("#add").hide();
+        $("#update").show();
+        $(".radio").show();
+        $("#css").hide();
+        $("#css1").hide();
+        $("#selectrad").show();
+        $("#maindata").show();
+        $("#subdata").hide();
+        getlocation();
+
+        $.get("/api/get_location", function (index) {
+          var result = JSON.parse(index).location;
+          $.each(result, function (_, v) {
+            if (v.ID == id) {
+              $("#pid").val(v.ID);
+              $("#name").val(v.Name);
+              $("#des").val(v.Description);
+              $("#process").val("exist");
+              $("#exloc").val(v.LocationID);
+            }
+          });
+        });
+      }
+
+      // Update Function
+      function Update() {
+        var pid = $("#pid").val();
+        var process = $("#process").val();
+        var name = $("#name").val();
+        var desc = $("#des").val();
+        var category = $("#category").val();
+        var gmaps = $("#gmaps").val();
+        var address = $("#address").val();
+        var city = $("#city").val();
+        var country = $("#country").val();
+        var exloc = $("#exloc").val();
+
+        if (process == "exist") {
+          if (exloc == "" || name == "" || desc == "") {
+            Swal.fire({
+              toast: true,
+              position: "center",
+              icon: "warning",
+              title: "Please Complete Required Details!",
+              showConfirmButton: false,
+              timer: 3000,
+            });
+          } else {
+            $.ajax({
+              url: "/api/edit_location",
+              data: {
+                name: name,
+                description: desc,
+                id: exloc,
+                process: process,
+                pid: pid,
+              },
+              success: function () {
+                Swal.fire({
+                  toast: true,
+                  position: "center",
+                  icon: "success",
+                  title: "Location Details Updated",
+                  showConfirmButton: false,
+                  timer: 3000,
+                }).then(function () {
+                  window.location.reload();
+                });
+              },
+            });
+          }
+        } else {
+          if (
+            name == "" ||
+            desc == "" ||
+            category == "" ||
+            gmaps == "" ||
+            address == "" ||
+            city == "" ||
+            country == ""
+          ) {
+            Swal.fire({
+              toast: true,
+              position: "center",
+              icon: "warning",
+              title: "Please Complete Required Details!",
+              showConfirmButton: false,
+              timer: 3000,
+            });
+          } else {
+            $.ajax({
+              url: "/api/edit_location",
+              data: {
+                pid: pid,
+                name: name,
+                description: desc,
+                category: category,
+                gmaps: gmaps,
+                address: address,
+                city: city,
+                country: country,
+                process: process,
+              },
+              success: function () {
+                Swal.fire({
+                  toast: true,
+                  position: "center",
+                  icon: "success",
+                  title: "Location Details Updated",
+                  showConfirmButton: false,
+                  timer: 3000,
+                }).then(function () {
+                  window.location.reload();
+                });
+              },
+            });
+          }
+        }
+      }
+      // Delete to Main Location
+      function Delete(id) {
+        var modaldelete = document.getElementById("myModaldelete");
+        modaldelete.style.display = "block";
+        $.get("/api/get_location", function (index) {
+          var result = JSON.parse(index).item;
+          $.each(result, function (_, v) {
+            if (v.ID == id) {
+              $("#delid").html(v.ID);
+              $("#delname").html(v.Name);
+              $("#delprocess").html("new");
+            }
+          });
+        });
+      }
+
+      // Delete to SubLocation
+      function Delete1(id) {
+        var modaldelete = document.getElementById("myModaldelete");
+        modaldelete.style.display = "block";
+        $.get("/api/get_location", function (index) {
+          var result = JSON.parse(index).location;
+          $.each(result, function (_, v) {
+            if (v.ID == id) {
+              $("#delid").html(v.ID);
+              $("#delname").html(v.Name);
+              $("#delprocess").html("exist");
+            }
+          });
+        });
+      }
+
+      // Delete Function
+
+      function Remove() {
+        var id = $("#delid").html();
+        var process = $("#delprocess").html();
+        $.ajax({
+          url: "/api/delete_location",
+          data: {
+            id: id,
+            process: process,
+          },
+          success: function () {
+            Swal.fire({
+              toast: true,
+              position: "center",
+              icon: "success",
+              title: "Delete Location Successful",
+              showConfirmButton: false,
+              timer: 3000,
+            }).then(function () {
+              window.location.reload();
+            });
+          },
+        });
+      }
+
+      function Cancel() {
+        var modalasset = document.getElementById("myModalasset");
+        modalasset.style.display = "none";
+        var modaldelete = document.getElementById("myModaldelete");
+        modaldelete.style.display = "none";
+      }
     </script>
+    <script>
+      var openModalBtnasset = document.getElementById("openModalBtnasset");
+      var closeModalBtnasset = document.getElementById("closeModalBtnasset");
+      var modalasset = document.getElementById("myModalasset");
+
+      openModalBtnasset.addEventListener("click", function () {
+        modalasset.style.display = "block";
+        $("#modaltitle").html("Add Location");
+        $("#add").show();
+        $("#update").hide();
+      });
+
+      closeModalBtnasset.addEventListener("click", function () {
+        modalasset.style.display = "none";
+      });
+
+      window.addEventListener("click", function (event) {
+        if (event.target == modalasset) {
+          modalasset.style.display = "none";
+        }
+      });
+    </script>
+
     <!--DELETE USER JS-->
     <script>
-        var openModalBtndelete = document.getElementById("openModalBtndelete");
-        var closeModalBtndelete = document.getElementById("closeModalBtndelete");
-        var modaldelete = document.getElementById("myModaldelete");
+      var openModalBtndelete = document.getElementById("openModalBtndelete");
+      var closeModalBtndelete = document.getElementById("closeModalBtndelete");
+      var modaldelete = document.getElementById("myModaldelete");
 
-        openModalBtndelete.addEventListener("click", function() {
+      openModalBtndelete.addEventListener("click", function () {
         modaldelete.style.display = "block";
-        });
+      });
 
-        closeModalBtndelete.addEventListener("click", function() {
+      closeModalBtndelete.addEventListener("click", function () {
         modaldelete.style.display = "none";
-        });
+      });
 
-        window.addEventListener("click", function(event) {
+      window.addEventListener("click", function (event) {
         if (event.target == modaledit) {
-            modaldelete.style.display = "none";
+          modaldelete.style.display = "none";
         }
-        });  
+      });
     </script>
   </body>
 </html>
