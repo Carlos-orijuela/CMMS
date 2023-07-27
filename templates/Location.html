@@ -360,6 +360,11 @@
       // Dropdown Data in Add button
       function getlocation() {
         $("#exloc").empty();
+        $("#exloc").append(
+          `
+            <option value="">Select Location</option>
+            `
+        );
         $.get("/api/get_location", function (index) {
           var result = JSON.parse(index).item;
           $.each(result, function (_, v) {
@@ -849,6 +854,8 @@
         $("#modaltitle").html("Add Location");
         $("#add").show();
         $("#update").hide();
+        $("#css").show();
+        $("#css1").show();
       });
 
       closeModalBtnasset.addEventListener("click", function () {

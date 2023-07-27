@@ -89,10 +89,11 @@ func MigrateDB() {
 	permlist := models.Permissionlist{}
 	grouplist := models.Grouplist{}
 	facility := models.Facility{}
+	facilitylist := models.ChildFacility{}
 	location := models.Location{}
 	loclist := models.LocationList{}
 	db := GormDB()
-	db.AutoMigrate(&user, &group, &permission, &permlist, &grouplist, &facility,&location,&loclist)
+	db.AutoMigrate(&user, &group, &permission, &permlist, &grouplist, &facility,&facilitylist,&location,&loclist)
 }
 
 func CreateGroup() {

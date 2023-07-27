@@ -12,47 +12,32 @@ func CreateFacility(w http.ResponseWriter, r *http.Request) {
 	db := GormDB()
 
 	fa := models.Facility{}
+	fachild := models.ChildFacility{}
+	process := r.FormValue("process")
 	name := r.FormValue("name")
 	description := r.FormValue("description")
-	parentFacility := r.FormValue("parentFa")
-	code := r.FormValue("code")
+	id := r.FormValue("id")
+	code := r.FormValue("123")
 	category := r.FormValue("category")
+	location := r.FormValue("location")
 	googlemaps := r.FormValue("gmaps")
-	process := r.FormValue("process")
-	runninghr := r.FormValue("runninghr")
-
-	fa.Name = name
-	fa.Description = description
-	fa.ParentFacility = parentFacility
-	fa.Code = code
-	fa.Category = category
-	fa.GoogleMaps = googlemaps
-	fa.RunningHr = runninghr
-
-	db.Save(&fa)
+	runninghr := r.FormValue("running")
 
 	if process == "new" {
 		fa.Name = name
 		fa.Description = description
-		fa.ParentFacility = parentFacility
 		fa.Code = code
 		fa.Category = category
 		fa.GoogleMaps = googlemaps
+		fa.RunningHr = runninghr
+		fa.LocationListID = location
 
 		db.Save(&fa)
 	} else {
-
-		fachild := models.ChildFacility{}
-		name := r.FormValue("name")
-		id := r.FormValue("id")
-		code := r.FormValue("code")
-		qrcode := r.FormValue("qrcode")
-
 		fachild.Name = name
+		fachild.Description = description
 		fachild.FacilityID = id
-		fachild.Code = qrcode
-		fachild.QRCode = code
-
+		fachild.Code = code
 		db.Save(&fachild)
 
 	}
@@ -66,11 +51,15 @@ func GetFacility(w http.ResponseWriter, r *http.Request) {
 
 	db := GormDB()
 	item := []models.Facility{}
-	db.Find(&item)
+	db.Preload("LocationList").Find(&item)
+
+	itemlist := []models.ChildFacility{}
+	db.Preload("Facility").Find(&itemlist)
 
 	data := map[string]interface{}{
 		"status": "ok",
 		"item":   item,
+		"facility" : itemlist,
 	}
 	ReturnJSON(w, r, data)
 	sqlDB, _ := db.DB()
@@ -82,25 +71,41 @@ func EditFacility(w http.ResponseWriter, r *http.Request) {
 	db := GormDB()
 
 	fa := models.Facility{}
-
+	fachild := models.ChildFacility{}
+	process := r.FormValue("process")
 	name := r.FormValue("name")
-	description := r.FormValue("dscrptn")
-	parentFacility := r.FormValue("pfa")
-	code := r.FormValue("code")
+	description := r.FormValue("description")
+	id := r.FormValue("id")
+	code := r.FormValue("123")
 	category := r.FormValue("category")
+	location := r.FormValue("location")
 	googlemaps := r.FormValue("gmaps")
+	runninghr := r.FormValue("running")
+	pid, _ := strconv.Atoi(r.FormValue("pid"))
 
-	id, _ := strconv.Atoi(r.FormValue("id"))
-	db.Where("id", id).Find(&fa)
+	if process == "new" {
+		db.Where("id", pid).Find(&fa)
+		fa.Name = name
+		fa.Description = description
+		fa.Code = code
+		fa.Category = category
+		fa.GoogleMaps = googlemaps
+		fa.RunningHr = runninghr
+		fa.LocationListID = location
 
-	fa.Name = name
-	fa.Description = description
-	fa.ParentFacility = parentFacility
-	fa.Code = code
-	fa.Category = category
-	fa.GoogleMaps = googlemaps
+		db.Save(&fa)
+	} else {
+		db.Where("id", pid).Find(&fachild)
+		fachild.Name = name
+		fachild.Description = description
+		fachild.FacilityID = id
+		fachild.Code = code
+		db.Save(&fachild)
 
-	db.Save(&fa)
+	}
+
+	sqlDB, _ := db.DB()
+	sqlDB.Close()
 
 }
 
@@ -108,8 +113,18 @@ func DeleteFacility(w http.ResponseWriter, r *http.Request) {
 
 	db := GormDB()
 	id, _ := strconv.Atoi(r.FormValue("id"))
-	item := models.Facility{}
-	db.Where("id", id).Statement.Delete(&item)
+	process := r.FormValue("process")
+
+	if (process == "new"){
+		item := models.Facility{}
+		db.Where("id", id).Statement.Delete(&item)
+		itemlist := models.ChildFacility{}
+		db.Where("facility_id", id).Statement.Delete(&itemlist)
+	}else{
+		itemlist := models.ChildFacility{}
+		db.Where("id", id).Statement.Delete(&itemlist)
+	}
+	
 
 	sqlDB, _ := db.DB()
 	sqlDB.Close()
