@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Facilities</title>
+
+    <!-- Montserrat Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Material Icons -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+      rel="stylesheet"
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/dashboard.css" />
+    <link rel="stylesheet" href="/assets/css/asset.css" />
+    <link rel="stylesheet" href="/assets/css/AllAsset.css" />
+    <script
+      defer
+      src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"
+    ></script>
+  </head>
+  <body>
+    <div class="grid-container">
+      <!-- Header -->
+      <header class="header">
+        <div class="menu-icon" onclick="openSidebar()">
+          <span class="material-icons-outlined">menu</span>
+        </div>
+        <div class="header-left">
+          <span class="material-icons-outlined">search</span>
+        </div>
+        <div class="header-right">
+          <span class="material-icons-outlined">notifications</span>
+          <span class="material-icons-outlined">email</span>
+          <span class="material-icons-outlined">account_circle</span>
+          <a href="/loginpage" class="logout">
+            <span class="material-icons-outlined" title="Logout">reply</span>
+          </a>
+        </div>
+      </header>
+      <!-- End Header -->
+
+      <!-- Sidebar -->
+      <aside id="sidebar">
+        <div class="sidebar-title">
+          <div class="sidebar-brand">
+            <span class="material-icons-outlined"></span> SAILORCOM
+          </div>
+          <span class="material-icons-outlined" onclick="closeSidebar()"
+            >close</span
+          >
+        </div>
+
+        <ul class="sidebar-list">
+          <li class="sidebar-list-item">
+            <a href="/dashboard">
+              <span class="material-icons-outlined">dashboard</span> Dashboard
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <span class="material-icons-outlined">inventory_2</span> Asset
+            <ul class="dropdown-menu">
+              <li><a href="/facility">Facility</a></li>
+              <li><a href="/equipment">Equipment</a></li>
+              <li><a href="/tools">Tools</a></li>
+            </ul>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">category</span> Supplies
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="/users">
+              <span class="material-icons-outlined">groups</span> Users
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">fact_check</span>
+              Maintenance
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">poll</span> Reports
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="/department">
+              <span class="material-icons-outlined">sort</span> Department
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">settings</span> Settings
+            </a>
+          </li>
+        </ul>
+      </aside>
+      <!-- End Sidebar -->
+
+      <!-- Main -->
+      <main class="main-container">
+        <div class="main-title">
+          <h2>Facilities</h2>
+        </div>
+        <div class="card-content">
+          <div>
+            <input
+              class="search"
+              type="text"
+              placeholder="Search Facilities"
+              id="search"
+            />
+            <button class="custom-button" id="openModalBtnasset">
+              <span class="material-icons-outlined" title="Add Assets"
+                >plus_one</span
+              >
+            </button>
+          </div>
+
+          <div class="card-content">
+            <div class="card-table">
+              <div class="table-container">
+                <table id="">
+                  <thead>
+                    <tr>
+                      <th><span class="visually-hidden">Toggle</span></th>
+                      <th>Name</th>
+                      <th>Description</th>
+                      <th>Location</th>
+                      <th>Category</th>
+                      <th>ACTION</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- APPEND TABLE DATA HERE -->
+                  </tbody>
+                </table>
+
+                <div id="pagination-container">
+                  <ul id="pagination"></ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+      <!-- End Main -->
+
+      <!--Modal-->
+      <div id="myModal" class="modal">
+        <div class="modal-content">
+          <h2 class="h2h2" id="modaltitle"></h2>
+
+          <div class="radio">
+            <div class="radio_content">
+              <div class="radio_data">
+                <input
+                  type="radio"
+                  id="html"
+                  name="fav_language"
+                  value="HTML"
+                  onclick="Part()"
+                />
+                <label for="html">Part Of</label><br />
+              </div>
+
+              <div class="radio_select" id="selectrad">
+                <select name="exloc" id="exloc">
+                  <!-- Append Data here -->
+                </select>
+              </div>
+            </div>
+            <div class="radio_data">
+              <input
+                type="radio"
+                id="css"
+                name="fav_language"
+                value="CSS"
+                onclick="New()"
+              />
+              <label for="css" id="css1">New</label><br />
+            </div>
+          </div>
+          <div id="maindata">
+            <div>
+              <div class="name">CODE: 0000</div>
+              <input class="input-dept" type="hidden" placeholder="" id="pid" />
+              <input
+                class="input-dept"
+                type="hidden"
+                placeholder=""
+                id="process"
+              />
+              <!-- <input class="input-dept" type="text" placeholder="0000" id="code" required> -->
+            </div>
+
+            <div class="centered-container">
+              <div class="name">Name</div>
+              <input
+                class="input-dept"
+                type="text"
+                placeholder=""
+                id="name"
+                required
+              />
+            </div>
+
+            <div class="centered-container">
+              <div class="name">Description</div>
+              <textarea
+                rows="4"
+                cols="66"
+                name="comment"
+                form="usrform"
+                id="des"
+                required
+              ></textarea>
+            </div>
+          </div>
+          <br />
+
+          <div id="subdata">
+            <div class="centered-container">
+              <div class="name">Location</div>
+              <select name="category" id="location"></select>
+            </div>
+            <div class="centered-container">
+              <div class="name">Category</div>
+              <select name="category" id="category">
+                <option value="">Select Category</option>
+                <option value="Store Room">Store Room</option>
+                <option value="Plants">Plants</option>
+                <option value="Buildings">Buildings</option>
+              </select>
+            </div>
+            <div class="centered-container">
+              <div class="name">Google Map</div>
+              <input
+                class="input-dept"
+                type="text"
+                placeholder="MAP HERE"
+                id="gmaps"
+                required
+              />
+            </div>
+            <div class="centered-container">
+              <div class="name">Running Hour</div>
+              <input
+                class="input-dept"
+                type="text"
+                placeholder="Running Hour"
+                id="hour"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="centered-container">
+            <button class="custom-button" id="add" onclick="Submit()">
+              <span class="material-icons-outlined" title="CREATE">create</span>
+            </button>
+            <button class="custom-button" id="update" onclick="Update()">
+              <span class="material-icons-outlined" title="CREATE">create</span>
+            </button>
+            <button class="custom-button" onclick="Cancel(1)">CANCEL</button>
+          </div>
+        </div>
+      </div>
+      <!--End Modal-->
+    </div>
+
+    <!--Start Modal Delete-->
+    <div id="myModaldelete" class="modal">
+      <div class="modal-content">
+        <h2 class="h2h2">ARE YOU SURE YOU WANT TO DELETE THIS?</h2>
+        <div class="centered-container">
+          <p class="h2black" id="delid" hidden></p>
+          <p class="h2black" id="delprocess" hidden></p>
+          <p class="h2black" id="delname"></p>
+        </div>
+        <div class="centered-container">
+          <button class="custom-button">
+            <span
+              class="material-icons-outlined"
+              title="Delete"
+              onclick="Remove()"
+              >delete</span
+            >
+          </button>
+          <button class="custom-button" onclick="Cancel()">CANCEL</button>
+        </div>
+      </div>
+    </div>
+    <!--Delete end modal-->
+
+    <script src="/assets/js/dashboard.js"></script>
+    <script src="/assets/js/AllAsset.js"></script>
+    <!-- ApexCharts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.5/apexcharts.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.min.js"
+      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      type="text/javascript"
+      src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"
+    ></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- ApexCharts -->
+    <!-- <script src="/assets/js/listoffacilities.js"></script> -->
+    <script src="/assets/js/dashboard.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.5/apexcharts.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.min.js"
+      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      $(document).ready(function () {
+        $("#maindata").hide();
+        $("#subdata").hide();
+        $("#selectrad").hide();
+        LocationTable();
+        getlocation();
+      });
+
+      // Select radion Button Part
+      function Part() {
+        $("#maindata").show();
+        $("#subdata").hide();
+        $("#selectrad").show();
+        getfacility();
+      }
+
+      // Select radion Button New
+      function New() {
+        $("#maindata").show();
+        $("#subdata").show();
+        $("#selectrad").hide();
+        $("#selectrad").val("");
+        getlocation();
+      }
+
+      // Dropdown Data in for location
+      function getlocation() {
+        $("#location").empty();
+        $("#location").append(
+          `
+            <option value="">Select Location</option>
+            `
+        );
+        $.get("/api/get_location", function (index) {
+          var result = JSON.parse(index).location;
+          $.each(result, function (_, v) {
+            $("#location").append(
+              `
+            <option value="` +
+                v.ID +
+                `">` +
+                v.Name +
+                `</option>
+            `
+            );
+          });
+        });
+      }
+
+      // DDL for facility
+      function getfacility() {
+        $("#exloc").empty();
+        $("#exloc").append(
+          `
+            <option value="">Select Facility</option>
+            `
+        );
+        $.get("/api/get_facility", function (index) {
+          var result = JSON.parse(index).item;
+          $.each(result, function (_, v) {
+            $("#exloc").append(
+              `
+            <option value="` +
+                v.ID +
+                `">` +
+                v.Name +
+                `</option>
+            `
+            );
+          });
+        });
+      }
+
+      // Table Data
+      function LocationTable() {
+        $("tbody").empty();
+        $.get("/api/get_facility", function (index) {
+          var result = JSON.parse(index).item;
+          $.each(result, function (_, v) {
+            $("tbody").append(
+              `
+              <tr>
+                      <td id="btn-` +
+                v.ID +
+                `">
+
+                      </td>
+                      <td id="lblMSb-` +
+                v.ID +
+                `">` +
+                v.Name +
+                `</td>
+                      <td>` +
+                v.Description +
+                `</td>
+                      <td>` +
+                v.LocationList.Name +
+                `</td>
+                      <td>` +
+                v.Category +
+                `</td>
+                <td>
+                  <button class="custom-button">
+                    <span class="material-icons-outlined" title="Update Department" onclick="Modify(${v.ID})">create</span>
+                  </button>
+                  <button class="custom-button delete" >
+                    <span class="material-icons-outlined" title="Delete" onclick="Delete(${v.ID})">delete</span>
+                  </button>
+                </td>
+                      </tr>
+            `
+            );
+
+            var data = JSON.parse(index).facility;
+            datacount = 0;
+            $.each(data, function (_, k) {
+              if (v.ID == k.FacilityID) {
+                datacount += 1;
+                if (datacount == 1) {
+                  $("#btn-" + v.ID).append(
+                    `
+                 <button
+                          type="button"
+                          id="btnMSb-` +
+                      v.ID +
+                      `"
+                          aria-expanded="false"
+                          onclick="toggle(this.id,'#MS01b-` +
+                      v.ID +
+                      `');"
+                          aria-controls="MS01b-` +
+                      v.ID +
+                      `"
+                          aria-label="3 more from"
+                          aria-labelledby="btnMSb-` +
+                      v.ID +
+                      ` lblMSb-` +
+                      v.ID +
+                      `"
+                        >
+                          <svg
+                            xmlns='\http://www.w3.org/2000/svg"'
+                            viewBox="0 0 80 80"
+                            focusable="false"
+                          >
+                            <path d="M70.3 13.8L40 66.3 9.7 13.8z"></path>
+                          </svg>
+                        </button>
+                `
+                  );
+                }
+
+                $("tbody").append(
+                  `
+                <tr id="MS01b-` +
+                    v.ID +
+                    `" class="hidden">
+                  <td></td>
+                  <td>` +
+                    k.Name +
+                    `</td>
+                  <td>` +
+                    k.Description +
+                    `</td>
+                    <td>` +
+                    v.LocationList.Name +
+                    `</td>
+                    <td>` +
+                    v.Category +
+                    `</td>
+                      
+                  <td>
+                  <button class="custom-button">
+                    <span class="material-icons-outlined" title="Update Department" onclick="Modify1(${k.ID})">create</span>
+                  </button>
+                  <button class="custom-button delete" >
+                    <span class="material-icons-outlined" title="Delete" onclick="Delete1(${k.ID})">delete</span>
+                  </button>
+                </td>
+
+                </tr>
+              `
+                );
+              }
+            });
+          });
+        });
+      }
+
+      // Button Submit
+      function Submit() {
+        var rad1 = $('input[name="fav_language"]:checked').val();
+
+        if (rad1 == null) {
+          // No Selection of Radio Button
+          Swal.fire({
+            toast: true,
+            position: "center",
+            icon: "warning",
+            title: "Please Select Selection!",
+            showConfirmButton: false,
+            timer: 3000,
+          });
+        } else if (rad1 == "HTML") {
+          // Part of Radio Button Selected
+          var exloc = $("#exloc").val();
+          var name = $("#name").val();
+          var desc = $("#des").val();
+
+          if (exloc == "" || name == "" || desc == "") {
+            Swal.fire({
+              toast: true,
+              position: "center",
+              icon: "warning",
+              title: "Please Complete Required Details!",
+              showConfirmButton: false,
+              timer: 3000,
+            });
+          } else {
+            $.ajax({
+              url: "/api/facility",
+              data: {
+                name: name,
+                description: desc,
+                id: exloc,
+                process: "exist",
+              },
+              success: function () {
+                Swal.fire({
+                  toast: true,
+                  position: "center",
+                  icon: "success",
+                  title: "New Facility Added",
+                  showConfirmButton: false,
+                  timer: 3000,
+                }).then(function () {
+                  window.location.reload();
+                });
+              },
+            });
+          }
+        } else if (rad1 == "CSS") {
+          // New Location
+          var name = $("#name").val();
+          var desc = $("#des").val();
+          var category = $("#category").val();
+          var gmaps = $("#gmaps").val();
+          var location = $("#location").val();
+          var running = $("#hour").val();
+
+          if (
+            name == "" ||
+            desc == "" ||
+            category == "" ||
+            gmaps == "" ||
+            location == "" ||
+            running == ""
+          ) {
+            Swal.fire({
+              toast: true,
+              position: "center",
+              icon: "warning",
+              title: "Please Complete Required Details!",
+              showConfirmButton: false,
+              timer: 3000,
+            });
+          } else {
+            $.ajax({
+              url: "/api/facility",
+              data: {
+                name: name,
+                description: desc,
+                category: category,
+                gmaps: gmaps,
+                location: location,
+                running: running,
+                process: "new",
+              },
+              success: function () {
+                Swal.fire({
+                  toast: true,
+                  position: "center",
+                  icon: "success",
+                  title: "New Facility Added",
+                  showConfirmButton: false,
+                  timer: 3000,
+                }).then(function () {
+                  window.location.reload();
+                });
+              },
+            });
+          }
+        }
+      }
+
+      // Edit Button in Main Location
+      function Modify(id) {
+        var modalasset = document.getElementById("myModal");
+        modalasset.style.display = "block";
+        $("#modaltitle").html("Update Facility");
+        $("#add").hide();
+        $("#update").show();
+        $(".radio").hide();
+        $("#maindata").show();
+        $("#subdata").show();
+
+        $.get("/api/get_facility", function (index) {
+          var result = JSON.parse(index).item;
+          $.each(result, function (_, v) {
+            if (v.ID == id) {
+              $("#pid").val(v.ID);
+              $("#name").val(v.Name);
+              $("#des").val(v.Description);
+              $("#category").val(v.Category);
+              $("#gmaps").val(v.GoogleMaps);
+              $("#location").val(v.LocationListID);
+              $("#hour").val(v.RunningHr);
+              $("#process").val("new");
+            }
+          });
+        });
+      }
+
+      // Edit Button in Main SubLocation
+      function Modify1(id) {
+        var modalasset = document.getElementById("myModal");
+        modalasset.style.display = "block";
+        $("#modaltitle").html("Update Facility");
+        $("#add").hide();
+        $("#update").show();
+        $(".radio").show();
+        $("#css").hide();
+        $("#css1").hide();
+        $("#selectrad").show();
+        $("#maindata").show();
+        $("#subdata").hide();
+        getfacility();
+
+        $.get("/api/get_facility", function (index) {
+          var result = JSON.parse(index).facility;
+          $.each(result, function (_, v) {
+            if (v.ID == id) {
+              $("#pid").val(v.ID);
+              $("#name").val(v.Name);
+              $("#des").val(v.Description);
+              $("#process").val("exist");
+              $("#exloc").val(v.FacilityID);
+            }
+          });
+        });
+      }
+
+      function Update() {
+        var pid = $("#pid").val();
+        var process = $("#process").val();
+        var name = $("#name").val();
+        var desc = $("#des").val();
+        var category = $("#category").val();
+        var gmaps = $("#gmaps").val();
+        var location = $("#location").val();
+        var running = $("#hour").val();
+        var exloc = $("#exloc").val();
+
+        if (process == "exist") {
+          if (exloc == "" || name == "" || desc == "") {
+            Swal.fire({
+              toast: true,
+              position: "center",
+              icon: "warning",
+              title: "Please Complete Required Details!",
+              showConfirmButton: false,
+              timer: 3000,
+            });
+          } else {
+            $.ajax({
+              url: "/api/edit_facility",
+              data: {
+                name: name,
+                description: desc,
+                id: exloc,
+                process: process,
+                pid: pid,
+              },
+              success: function () {
+                Swal.fire({
+                  toast: true,
+                  position: "center",
+                  icon: "success",
+                  title: "Facility Details Updated",
+                  showConfirmButton: false,
+                  timer: 3000,
+                }).then(function () {
+                  window.location.reload();
+                });
+              },
+            });
+          }
+        } else {
+          if (
+            name == "" ||
+            desc == "" ||
+            category == "" ||
+            gmaps == "" ||
+            location == "" ||
+            running == ""
+          ) {
+            Swal.fire({
+              toast: true,
+              position: "center",
+              icon: "warning",
+              title: "Please Complete Required Details!",
+              showConfirmButton: false,
+              timer: 3000,
+            });
+          } else {
+            $.ajax({
+              url: "/api/edit_facility",
+              data: {
+                pid: pid,
+                name: name,
+                description: desc,
+                category: category,
+                gmaps: gmaps,
+                location: location,
+                running: running,
+                process: process,
+              },
+              success: function () {
+                Swal.fire({
+                  toast: true,
+                  position: "center",
+                  icon: "success",
+                  title: "Facility Details Updated",
+                  showConfirmButton: false,
+                  timer: 3000,
+                }).then(function () {
+                  window.location.reload();
+                });
+              },
+            });
+          }
+        }
+      }
+
+      // Delete to Main Location
+      function Delete(id) {
+        var modaldelete = document.getElementById("myModaldelete");
+        modaldelete.style.display = "block";
+        $.get("/api/get_facility", function (index) {
+          var result = JSON.parse(index).item;
+          $.each(result, function (_, v) {
+            if (v.ID == id) {
+              $("#delid").html(v.ID);
+              $("#delname").html(v.Name);
+              $("#delprocess").html("new");
+            }
+          });
+        });
+      }
+
+      // Delete to SubLocation
+      function Delete1(id) {
+        var modaldelete = document.getElementById("myModaldelete");
+        modaldelete.style.display = "block";
+        $.get("/api/get_facility", function (index) {
+          var result = JSON.parse(index).facility;
+          $.each(result, function (_, v) {
+            if (v.ID == id) {
+              $("#delid").html(v.ID);
+              $("#delname").html(v.Name);
+              $("#delprocess").html("exist");
+            }
+          });
+        });
+      }
+
+      // Delete Function
+
+      function Remove() {
+        var id = $("#delid").html();
+        var process = $("#delprocess").html();
+        $.ajax({
+          url: "/api/delete_facility",
+          data: {
+            id: id,
+            process: process,
+          },
+          success: function () {
+            Swal.fire({
+              toast: true,
+              position: "center",
+              icon: "success",
+              title: "Delete Facility Successful",
+              showConfirmButton: false,
+              timer: 3000,
+            }).then(function () {
+              window.location.reload();
+            });
+          },
+        });
+      }
+
+      function Cancel() {
+        var modalasset = document.getElementById("myModal");
+        modalasset.style.display = "none";
+        var modaldelete = document.getElementById("myModaldelete");
+        modaldelete.style.display = "none";
+      }
+    </script>
+    <script
+      type="text/javascript"
+      src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"
+    ></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Custom JS -->
+
+    <!--ADD asset JS-->
+    <script>
+      var openModalBtnasset = document.getElementById("openModalBtnasset");
+      var closeModalBtnasset = document.getElementById("closeModalBtnasset");
+      var modalasset = document.getElementById("myModal");
+
+      openModalBtnasset.addEventListener("click", function () {
+        modalasset.style.display = "block";
+        $("#modaltitle").html("Add Facility");
+        $("#add").show();
+        $("#update").hide();
+      });
+
+      // closeModalBtnasset.addEventListener("click", function() {
+      // modalasset.style.display = "none";
+      // });
+
+      window.addEventListener("click", function (event) {
+        if (event.target == modalasset) {
+          modalasset.style.display = "none";
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Asset List</title>
+
+    <!-- Montserrat Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/dashboard.css" />
+    <link rel="stylesheet" href="/assets/css/asset.css">
+  </head>
+  <body>
+    <div class="grid-container">
+
+      <!-- Header -->
+      <header class="header">
+        <div class="menu-icon" onclick="openSidebar()">
+          <span class="material-icons-outlined">menu</span>
+        </div>
+        <div class="header-left">
+          <span class="material-icons-outlined">search</span>
+        </div>
+        <div class="header-right">
+          <span class="material-icons-outlined">notifications</span>
+          <span class="material-icons-outlined">email</span>
+          <span class="material-icons-outlined">account_circle</span>
+        <a href="/loginpage" class="logout">
+                <span class="material-icons-outlined" title="Logout">reply</span>
+        </a>
+        </div>
+      </header>
+      <!-- End Header -->
+
+      <!-- Sidebar -->
+      <aside id="sidebar">
+        <div class="sidebar-title">
+          <div class="sidebar-brand">
+            <span class="material-icons-outlined"></span> SAILORCOM
+          </div>
+          <span class="material-icons-outlined" onclick="closeSidebar()">close</span>
+        </div>
+
+        <ul class="sidebar-list">
+          <li class="sidebar-list-item">
+            <a href="/dashboard">
+              <span class="material-icons-outlined">dashboard</span> Dashboard
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <span class="material-icons-outlined">inventory_2</span> Asset
+            Hierarchy
+            <ul class="dropdown-menu">
+              <li><a href="/facility" >Facility</a></li>
+              <li><a href="/equipment" >Equipment</a></li>
+              <li><a href="/tools" >Tools</a></li>
+            </ul>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="#" >
+              <span class="material-icons-outlined">category</span> Supplies
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <span class="material-icons-outlined">groups</span> User Management
+            <ul class="dropdown-menu">
+              <!-- <li><a href="permission">Permission</a></li> -->
+              <li><a href="/users">User</a></li>
+              <li><a href="/position">System Role</a></li>
+              <li><a href="/group">Group</a></li>
+            </ul>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">fact_check</span>
+              Maintenance
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">poll</span> Reports
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">settings</span> Settings
+            </a>
+          </li>
+        </ul>
+      </aside>
+      <!-- End Sidebar -->
+
+      <!-- Main -->
+      <main class="main-container">
+        <div class="main-title">
+          <h2>ASSET LISTS</h2>
+        </div>
+        <div class="card-content">
+            <div>
+                <input class="search" type="text" placeholder="Search..."  id="search">
+                <button class="custom-button" id="openModalBtnasset"><span class="material-icons-outlined" title="Add Assets">plus_one</span> </button>
+                <button class="custom-button" ><span class="material-icons-outlined" title="Print">computer</span> </button>
+                <button class="custom-button" ><span class="material-icons-outlined" title="Print Asset tags">add_to_queue</span> </button>
+                <button class="custom-button" ><span class="material-icons-outlined" title="More">build</span> </button>
+            </div>
+
+            <div class="card-content">
+                <div class="card-table">
+                    <div class="table-container">
+                        <table id="my-table">
+                          <thead>
+                            <tr>
+                              <th>NAME</th>
+                              <th>CODE</th>
+                              <th>ASSET STATUS</th>
+                              <th>LAST PRICE</th>
+                              <th>VENDOR</th>
+                              <th>ASSET LOCATION</th>
+                              <th>BARCODE</th>
+                              <th>ACTION</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                                <td>JOHN WICK 4</td>
+                                <td>#8484848</td>
+                                <td>SINGLE</td>
+                                <td>$200</td>
+                                <td>MR. WICK</td>
+                                <td>BATANGGAS</td>
+                                <td>CAMOTE</td>
+                                <td>
+                                </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      
+                        <div id="pagination-container">
+                          <ul id="pagination"></ul>
+                        </div>
+                      </div>
+                  </div> 
+              </div>
+            </div>
+      </main>
+      <!-- End Main -->
+
+      <!--Modal-->
+      <div id="myModalasset" class="modal">
+        <div class="modal-content">
+          <h2 class="h2h2">Add Equipment</h2>
+
+            <div class="centered-container">
+              <div class="name">Name</div>
+                <input class="input-dept" type="text" placeholder="" id="name" required>
+            </div>
+            <div class="centered-container">
+              <div class="name">Code</div>
+                <input class="input-dept" type="text" placeholder="" id="code" required>
+            </div>
+            <div class="centered-container">
+              <div class="name">Manufacturer</div>
+                <input class="input-dept" type="text" placeholder="" id="manufacturer" required>
+            </div>
+            <div class="centered-container">
+              <div class="name">Model</div>
+                <input class="input-dept" type="text" placeholder="" id="model" required>
+            </div>
+            <div class="centered-container">
+              <div class="name">Serial Number</div>
+                <input class="input-dept" type="text" placeholder="" id="serialnumber" required>
+            </div>
+            <div class="centered-container">
+              <div class="name">Running Hour</div>
+                <input class="input-dept" type="text" placeholder="" id="runninghr" required>
+            </div>
+            <div class="centered-container">
+              <div class="name">Critical</div>
+                <select id="critical" required>
+                  <option value=""></option>
+                  <option value="Y">YES</option>
+                  <option value="N">NO</option>
+              </select>
+            </div>
+            <div class="centered-container">
+              <div class="name">Description</div>
+                <input class="input-dept" type="text" placeholder="" id="decription" required>
+            </div>
+            <div class="centered-container">
+              <div class="name">Commissioned Date</div>
+                <input class="input-dept" type="text" placeholder="" id="comdate" required>
+            </div>
+            <div class="centered-container">
+              <div class="name">Decommissioned Date</div>
+                <input class="input-dept" type="text" placeholder="" id="decomdate" required>
+            </div>
+            <div class="centered-container">
+              <div class="name">Parent Facility</div>
+                <select id="accntType" required>
+                  <option value=""></option>
+                  <option value="Administrator"></option>
+                  <option value="User"></option>
+              </select>
+            </div>
+            <div class="centered-container">
+              <div class="name">Location</div>
+                <input type="radio" id="partof" value="">
+                <label for="">Part of:</label>
+                <input type="radio" id="new" value="">
+                <label for="">New Location</label><br>  
+            </div>
+           
+            <div class="centered-container">
+                <button class="custom-button"><span class="material-icons-outlined" title="CREATE" >create</span></button>
+                <button class="custom-button" onclick="Cancel(1)">CANCEL</button>
+            </div>         
+        </div>
+      </div>
+      <!--End Modal-->
+
+      <!--Update Modal-->
+      <div id="myModalassetupdate" class="modal">
+        <div class="modal-content">
+          <h2 class="h2h2">Update Assets</h2>
+
+            <div class="centered-container">
+              <div class="name">Name</div>
+                <input class="input-dept" type="text" placeholder="NAME" id="name" required>
+            </div>
+            <div class="centered-container">
+              <div class="name">Code</div>
+                <input class="input-dept" type="text" placeholder="CODE" id="username" required>
+            </div>
+            <div class="centered-container">
+              <div class="name">Status</div>
+                <input class="input-dept" type="text" placeholder="ASSET STATUS" id="password" required>
+            </div>
+            <div class="centered-container">
+              <div class="name">Last Price</div>
+                <input class="input-dept" type="text" placeholder="LAST PRICE" id="password" required>
+            </div>
+            <div class="centered-container">
+              <div class="name">Vendor</div>
+              <select id="accntType" required>
+                <option value="">Vendor</option>
+                <option value="Administrator">Ph Developers</option>
+                <option value="User">isuzu</option>
+            </select>          
+            </div>
+            <div class="centered-container">
+              <div class="name">Location</div>
+              <select id="accntType" required>
+                <option value="">Locations</option>
+                <option value="Administrator">cebu</option>
+                <option value="User">Davao</option>
+            </select>
+            </div>
+            <div class="centered-container">
+              <div class="name">Barcode</div>
+                <input class="input-dept" type="text" placeholder="BARCODE" id="password" required>
+            </div>
+            <div class="centered-container">
+                <button class="custom-button"><span class="material-icons-outlined" title="CREATE" >create</span></button>
+                <button class="custom-button">CANCEL</button>
+            </div>         
+        </div>
+      </div>
+      <!--End edit Modal-->
+
+    </div>
+
+    <!--Start Modal Delete-->
+        <div id="myModaldelete" class="modal">
+        <div class="modal-content">
+            <h2 class="h2h2">ARE YOU SURE YOU WANT TO DELETE THIS?</h2>
+            <div class="centered-container">
+              <p class="h2black"></p>
+            </div>
+            <div class="centered-container">
+                <button class="custom-button"><span class="material-icons-outlined" title="Delete" >delete</span></button>
+                <button class="custom-button">CANCEL</button>
+            </div>
+        </div>
+        </div>
+    <!--Delete end modal-->
+
+    <!-- Scripts -->
+    <!-- ApexCharts -->
+    <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/dashboard.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.5/apexcharts.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.min.js"
+      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      type="text/javascript"
+      src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"
+    ></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Custom JS -->
+ 
+    <script>
+      function Cancel() {
+        var modalasset = document.getElementById("myModal");
+        modalasset.style.display = "none";
+        var modaldelete = document.getElementById("myModaldelete");
+        modaldelete.style.display = "none";
+      }
+
+    </script>
+    <!--ADD asset JS-->
+        <script>
+            var openModalBtnasset = document.getElementById("openModalBtnasset");
+        var closeModalBtnasset = document.getElementById("closeModalBtnasset");
+        var modalasset = document.getElementById("myModalasset");
+
+        openModalBtnasset.addEventListener("click", function() {
+        modalasset.style.display = "block";
+        });
+
+        closeModalBtnasset.addEventListener("click", function() {
+        modalasset.style.display = "none";
+        });
+
+        window.addEventListener("click", function(event) {
+        if (event.target == modalasset) {
+            modalasset.style.display = "none";
+        }
+        });
+        </script>
+
+    <!--EDIT USER JS-->
+    <script>
+       var openModalBtnassetupdate = document.getElementById("openModalBtnassetupdate");
+        var closeModalBtnassetupdate = document.getElementById("closeModalBtnassetupdate");
+        var modalassetupdate = document.getElementById("myModalassetupdate");
+
+        openModalBtnassetupdate.addEventListener("click", function() {
+        modalassetupdate.style.display = "block";
+        });
+
+        closeModalBtnassetupdate.addEventListener("click", function() {
+        modalassetupdate.style.display = "none";
+        });
+
+        window.addEventListener("click", function(event) {
+        if (event.target == modalassetupdate) {
+            modalassetupdate.style.display = "none";
+        }
+        });
+    </script>
+    <!--DELETE USER JS-->
+    <script>
+        var openModalBtndelete = document.getElementById("openModalBtndelete");
+        var closeModalBtndelete = document.getElementById("closeModalBtndelete");
+        var modaldelete = document.getElementById("myModaldelete");
+
+        openModalBtndelete.addEventListener("click", function() {
+        modaldelete.style.display = "block";
+        });
+
+        closeModalBtndelete.addEventListener("click", function() {
+        modaldelete.style.display = "none";
+        });
+
+        window.addEventListener("click", function(event) {
+        if (event.target == modaledit) {
+            modaldelete.style.display = "none";
+        }
+        });  
+    </script>
+  </body>
+</html>
