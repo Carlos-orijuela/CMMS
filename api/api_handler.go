@@ -137,5 +137,26 @@ func APIHandler(w http.ResponseWriter, r *http.Request) {
 		DeleteFacility(w, r)
 		return
 	}
+	//=====================================================
+	if strings.HasPrefix(r.URL.Path, "equipment") {
+		CreateEquipment(w, r)
+		return
+	}
+
+	if strings.HasPrefix(r.URL.Path, "get_equipment") {
+		GetEquipment(w, r)
+		return
+	}
+
+	if strings.HasPrefix(r.URL.Path, "edit_equipment") {
+		EditEquipment(w, r)
+		return
+	}
+
+	if strings.HasPrefix(r.URL.Path, "delete_equipment") {
+		DeleteEquipment(w, r)
+		return
+	}
+
 
 }

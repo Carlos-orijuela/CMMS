@@ -4,8 +4,8 @@ import "gorm.io/gorm"
 
 type Facility struct {
 	ID             uint `gorm:"primaryKey"`
-	LocationList	LocationList
-	LocationListID	string
+	Location	Location
+	LocationID	string
 	Name           string
 	Description    string
 	Code           string // ?AUTO GENERATE

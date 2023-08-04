@@ -30,8 +30,11 @@ func main() {
 	CreateDB("CMMS")
 	MigrateDB()
 	CreateGroup()
-	CreateDefaultUser()
+	CreateLocation()
 	CreatePosition()
+	CreateDefaultUser()
+	CreateFacility()
+	CreateSubFacility()
 	Handlers()
 
 	http.ListenAndServe(Port, nil)
@@ -95,8 +98,10 @@ func MigrateDB() {
 	facilitylist := models.ChildFacility{}
 	location := models.Location{}
 	loclist := models.LocationList{}
+	equipment := models.Equipment{}
+	equipmentlist := models.EquipmentList{}
 	db := GormDB()
-	db.AutoMigrate(&user, &group, &permission, &permlist, &grouplist, &facility, &facilitylist, &location, &loclist)
+	db.AutoMigrate(&user, &group, &permission, &permlist, &grouplist, &facility, &facilitylist, &location, &loclist,&equipment,&equipmentlist)
 }
 
 func CreateGroup() {
@@ -157,6 +162,105 @@ func CreatePosition() {
 		}
 		if !isExisting {
 			fmt.Println("Create Default Position")
+			db.Save(&defaultUser[i])
+		}
+	}
+
+}
+
+func CreateLocation() {
+
+	db := GormDB()
+
+	user := []models.Location{}
+	db.Find(&user)
+
+	defaultUser := []models.Location{
+		{
+			Name:        "Admin",
+			Description: "Admin",
+			
+		},
+	}
+
+	isExisting := false
+	for i := range defaultUser {
+		isExisting = false
+
+		for _, users := range user {
+			if defaultUser[i].Name == users.Name {
+				isExisting = true
+				break
+			}
+		}
+		if !isExisting {
+			fmt.Println("Create Default Location")
+			db.Save(&defaultUser[i])
+		}
+	}
+}
+
+
+func CreateFacility() {
+
+	db := GormDB()
+
+	user := []models.Facility{}
+	db.Find(&user)
+
+	defaultUser := []models.Facility{
+		{
+			Name:        "Admin",
+			Description: "Admin",
+			LocationID: "1",
+			
+		},
+	}
+
+	isExisting := false
+	for i := range defaultUser {
+		isExisting = false
+
+		for _, users := range user {
+			if defaultUser[i].Name == users.Name {
+				isExisting = true
+				break
+			}
+		}
+		if !isExisting {
+			fmt.Println("Create Default Facility")
+			db.Save(&defaultUser[i])
+		}
+	}
+}
+
+func CreateSubFacility() {
+
+	db := GormDB()
+
+	user := []models.ChildFacility{}
+	db.Find(&user)
+
+	defaultUser := []models.ChildFacility{
+		{
+			Name:        "Admin",
+			Description: "Admin",
+			FacilityID: "1",
+		},
+	}
+
+	isExisting := false
+	for i := range defaultUser {
+		isExisting = false
+
+		for _, users := range user {
+			if defaultUser[i].Name == users.Name {
+				isExisting = true
+				break
+			}
+		}
+		if !isExisting {
+			fmt.Println("Create Default SubFacility")
 			db.Save(&defaultUser[i])
 		}
 	}

@@ -363,7 +363,7 @@
             `
         );
         $.get("/api/get_location", function (index) {
-          var result = JSON.parse(index).location;
+          var result = JSON.parse(index).item;
           $.each(result, function (_, v) {
             $("#location").append(
               `
@@ -425,7 +425,7 @@
                 v.Description +
                 `</td>
                       <td>` +
-                v.LocationList.Name +
+                v.Location.Name +
                 `</td>
                       <td>` +
                 v.Category +
@@ -494,7 +494,7 @@
                     k.Description +
                     `</td>
                     <td>` +
-                    v.LocationList.Name +
+                    v.Location.Name +
                     `</td>
                     <td>` +
                     v.Category +

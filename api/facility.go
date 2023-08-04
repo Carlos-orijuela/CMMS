@@ -30,7 +30,7 @@ func CreateFacility(w http.ResponseWriter, r *http.Request) {
 		fa.Category = category
 		fa.GoogleMaps = googlemaps
 		fa.RunningHr = runninghr
-		fa.LocationListID = location
+		fa.LocationID = location
 
 		db.Save(&fa)
 	} else {
@@ -51,10 +51,10 @@ func GetFacility(w http.ResponseWriter, r *http.Request) {
 
 	db := GormDB()
 	item := []models.Facility{}
-	db.Preload("LocationList").Find(&item)
+	db.Preload("Location").Where("id > 1").Find(&item)
 
 	itemlist := []models.ChildFacility{}
-	db.Preload("Facility").Find(&itemlist)
+	db.Preload("Facility").Where("id > 1").Find(&itemlist)
 
 	data := map[string]interface{}{
 		"status": "ok",
@@ -91,7 +91,7 @@ func EditFacility(w http.ResponseWriter, r *http.Request) {
 		fa.Category = category
 		fa.GoogleMaps = googlemaps
 		fa.RunningHr = runninghr
-		fa.LocationListID = location
+		fa.LocationID = location
 
 		db.Save(&fa)
 	} else {

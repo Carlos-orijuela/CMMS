@@ -4,20 +4,42 @@ import "gorm.io/gorm"
 
 type Equipment struct {
 	ID               uint `gorm:"primaryKey"`
-	Name             string
-	Image            string
+	Facility		 Facility
+	FacilityID		 string
+	ChildFacility	 ChildFacility
+	ChildFacilityID	 string
+ 	Name             string
+	Description      string
 	Commisioneddate  string
 	DCommisioneddate string
-	ParentFacility   string
-	QRCode           string
+	Code           	 string
 	Manufacturer     string
 	Model            string
 	SerialNumber     string
 	RunningHr        string
-	CriticalY_N      bool // YES OR NO ??? bool or string???
-
-	Deleted gorm.DeletedAt
+	Critical	     string 
+	Deleted 		 gorm.DeletedAt
 }
+
+type EquipmentList struct {
+	ID               uint `gorm:"primaryKey"`
+	Name             string
+	Equipment		 Equipment
+	EquipmentID		 string
+	Description      string
+	Commisioneddate  string
+	DCommisioneddate string
+	Code          	 string
+	Manufacturer     string
+	Model            string
+	SerialNumber     string
+	RunningHr        string
+	Critical	     string 
+	Deleted 		gorm.DeletedAt
+}
+
+
+
 
 // ?EQUIPMENT RELATIONSHIP
 // *FACILITY TABLE

@@ -61,7 +61,7 @@ func GetLocation(w http.ResponseWriter, r *http.Request) {
 
 	db := GormDB()
 	item := []models.Location{}
-	db.Find(&item)
+	db.Where("id > 1").Find(&item)
 
 	itemlist := []models.LocationList{}
 	db.Preload("Location").Find(&itemlist)
