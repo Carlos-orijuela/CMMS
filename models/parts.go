@@ -2,24 +2,31 @@ package models
 
 import "gorm.io/gorm"
 
-type Parts struct {
+type Tools struct {
 	ID            uint `gorm:"primaryKey"`
+	Equipment	  Equipment
+	EquipmentID	  string
 	Name          string
 	Description   string
-	PartUniNumber string
+	Model		  string
 	SerialNumber  string
 	DatePurchase  string
 	DateUsed      string
-	QtyInhand     string
-	QtyMin        string
-	Manufacturer  string
-	FilesManuals  string
-	Image         string
-	QRCode        string
-	RunningHr     string
-	CriticalY_N   bool // YES OR NO ??? bool or string???
+	Deleted       gorm.DeletedAt
+}
 
-	Deleted gorm.DeletedAt
+
+type ToolsList struct {
+	ID            uint `gorm:"primaryKey"`
+	EquipmentList	  EquipmentList
+	EquipmentListID	  string
+	Name          	  string
+	Description       string
+	Model		      string
+	SerialNumber      string
+	DatePurchase      string
+	DateUsed          string
+	Deleted           gorm.DeletedAt
 }
 
 // ?EQUIPMENT RELATIONSHIP

@@ -1,23 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>Tools List</title>
 
     <!-- Montserrat Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Material Icons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+      rel="stylesheet"
+    />
 
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="/assets/css/dashboard.css" />
-    <link rel="stylesheet" href="/assets/css/asset.css">
+    <link rel="stylesheet" href="/assets/css/asset.css" />
   </head>
   <body>
     <div class="grid-container">
-
       <!-- Header -->
       <header class="header">
         <div class="menu-icon" onclick="openSidebar()">
@@ -30,9 +35,9 @@
           <span class="material-icons-outlined">notifications</span>
           <span class="material-icons-outlined">email</span>
           <span class="material-icons-outlined">account_circle</span>
-        <a href="/loginpage" class="logout">
-                <span class="material-icons-outlined" title="Logout">reply</span>
-        </a>
+          <a href="/loginpage" class="logout">
+            <span class="material-icons-outlined" title="Logout">reply</span>
+          </a>
         </div>
       </header>
       <!-- End Header -->
@@ -43,7 +48,9 @@
           <div class="sidebar-brand">
             <span class="material-icons-outlined"></span> SAILORCOM
           </div>
-          <span class="material-icons-outlined" onclick="closeSidebar()">close</span>
+          <span class="material-icons-outlined" onclick="closeSidebar()"
+            >close</span
+          >
         </div>
 
         <ul class="sidebar-list">
@@ -56,13 +63,13 @@
             <span class="material-icons-outlined">inventory_2</span> Asset
             Hierarchy
             <ul class="dropdown-menu">
-              <li><a href="/facility" >Facility</a></li>
-              <li><a href="/equipment" >Equipment</a></li>
-              <li><a href="/tools" >Tools</a></li>
+              <li><a href="/facility">Facility</a></li>
+              <li><a href="/equipment">Equipment</a></li>
+              <li><a href="/tools">Tools</a></li>
             </ul>
           </li>
           <li class="sidebar-list-item">
-            <a href="#" >
+            <a href="#">
               <span class="material-icons-outlined">category</span> Supplies
             </a>
           </li>
@@ -101,169 +108,219 @@
           <h2>Tools List</h2>
         </div>
         <div class="card-content">
-            <div>
-                <input class="search" type="text" placeholder="Search..."  id="search">
-                <button class="custom-button" id="openModalBtnasset"><span class="material-icons-outlined" title="Add Assets">plus_one</span> </button>
-                <button class="custom-button" ><span class="material-icons-outlined" title="Print">computer</span> </button>
-                <button class="custom-button" ><span class="material-icons-outlined" title="Print Asset tags">add_to_queue</span> </button>
-                <button class="custom-button" ><span class="material-icons-outlined" title="More">build</span> </button>
-            </div>
+          <div>
+            <input
+              class="search"
+              type="text"
+              placeholder="Search..."
+              id="search"
+            />
+            <button class="custom-button" id="openModalBtnasset">
+              <span class="material-icons-outlined" title="Add Assets"
+                >plus_one</span
+              >
+            </button>
+            <button class="custom-button">
+              <span class="material-icons-outlined" title="Print"
+                >computer</span
+              >
+            </button>
+            <button class="custom-button">
+              <span class="material-icons-outlined" title="Print Asset tags"
+                >add_to_queue</span
+              >
+            </button>
+            <button class="custom-button">
+              <span class="material-icons-outlined" title="More">build</span>
+            </button>
+          </div>
 
-            <div class="card-content">
-                <div class="card-table">
-                    <div class="table-container">
-                        <table id="my-table">
-                          <thead>
-                            <tr>
-                              <th>Name</th>
-                              <th>Code</th>
-                              <th>Tools status</th>
-                              <th>Last Price</th>
-                              <th>Vendor</th>
-                              <th>Tool Location</th>
-                              <th>ACTION</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                                <td>JOHN WICK 4</td>
-                                <td>#8484848</td>
-                                <td>SINGLE</td>
-                                <td>$200</td>
-                                <td>MR. WICK</td>
-                                <td>BATANGGAS</td>
-                                <td>CAMOTE</td>
-                                <td>
-                                </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      
-                        <div id="pagination-container">
-                          <ul id="pagination"></ul>
-                        </div>
-                      </div>
-                  </div> 
+          <div class="card-content">
+            <div class="card-table">
+              <div class="table-container">
+                <table id="my-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                      <th>Equipment</th>
+                      <th>Model</th>
+                      <th>Serial Number</th>
+                      <th>Date Purchase</th>
+                      <th>Date Use</th>
+                      <th>ACTION</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+
+                <div id="pagination-container">
+                  <ul id="pagination"></ul>
+                </div>
               </div>
             </div>
+          </div>
+        </div>
       </main>
       <!-- End Main -->
 
       <!--Modal-->
       <div id="myModal" class="modal">
         <div class="modal-content">
-          <h2 class="h2h2">Add Tools</h2>
+          <h2 class="h2h2" id="modaltitle"></h2>
+          <div class="radio">
+            <div class="radio_content">
+              <div class="radio_data">
+                <input
+                  type="radio"
+                  id="html"
+                  name="fav_language"
+                  value="HTML"
+                  onclick="Part()"
+                />
+                <label for="html">Equipment</label><br />
+              </div>
 
-            <div class="centered-container">
-              <div class="name">Tool Name</div>
-                <input class="input-dept" type="text" placeholder="" id="name" required>
+              <div class="radio_select" id="selectrad">
+                <select name="exloc" id="exloc">
+                  <!-- Append Data here -->
+                </select>
+              </div>
             </div>
-            <div class="centered-container">
-              <div class="name">QR Code</div>
-                <input class="input-dept" type="text" placeholder="" id="qrcode" required>
+            <div class="radio_data">
+              <input
+                type="radio"
+                id="css"
+                name="fav_language"
+                value="CSS"
+                onclick="New()"
+              />
+              <label for="css" id="css1">Sub Equipment</label><br />
+              <div class="radio_select" id="selectrad1">
+                <select name="exdepart" id="exdepart">
+                  <!-- Append Data here -->
+                </select>
+              </div>
             </div>
-            <div class="centered-container">
-              <div class="name">Description</div>
-                <input class="input-dept" type="text" placeholder="" id="description" required>
-            </div>
-            <div class="centered-container">
+          </div>
+
+          <input class="input-dept" type="hidden" placeholder="" id="pid" />
+          <input class="input-dept" type="hidden" placeholder="" id="process" />
+
+          <div class="centered-container">
+            <div class="name">Tool Name</div>
+            <input
+              class="input-dept"
+              type="text"
+              placeholder=""
+              id="name"
+              required
+            />
+          </div>
+
+          <div class="centered-container">
+            <div class="name">Description</div>
+            <input
+              class="input-dept"
+              type="text"
+              placeholder=""
+              id="description"
+              required
+            />
+          </div>
+          <!-- <div class="centered-container">
               <div class="name">IMAGE</div>
                 <input class="input-dept" type="file" placeholder="" id="image" required>
-            </div>
-            <div class="centered-container">
-              <div class="name">Date Purchased</div>
-                <input class="input-dept" type="text" placeholder="" id="datepurchase" required>
-            </div>
-            <div class="centered-container">
-              <div class="name">Date Used/Decommissioned</div>
-                <input class="input-dept" type="text" placeholder="" id="dateud" required>
-            </div>
-            <div class="centered-container">
-              <div class="name">Model</div>
-                <input class="input-dept" type="text" placeholder="" id="model" required>
-            </div>
-            <div class="centered-container">
-              <div class="name">Serial Number</div>
-                <input class="input-dept" type="text" placeholder="" id="serialnumber" required>
-            </div>
+            </div> -->
+          <div class="centered-container">
+            <div class="name">Date Purchased</div>
+            <input
+              class="input-dept"
+              type="date"
+              placeholder=""
+              id="datepurchase"
+              required
+            />
+          </div>
+          <div class="centered-container">
+            <div class="name">Date Used / Decommissioned</div>
+            <input
+              class="input-dept"
+              type="date"
+              placeholder=""
+              id="dateud"
+              required
+            />
+          </div>
+          <div class="centered-container">
+            <div class="name">Model</div>
+            <input
+              class="input-dept"
+              type="text"
+              placeholder=""
+              id="model"
+              required
+            />
+          </div>
+          <div class="centered-container">
+            <div class="name">Serial Number</div>
+            <input
+              class="input-dept"
+              type="text"
+              placeholder=""
+              id="serialnumber"
+              required
+            />
+          </div>
 
-            <!-- UPLOAD FILES OR MANUALS HERE -->
-            <div class="centered-container">
+          <!-- UPLOAD FILES OR MANUALS HERE -->
+          <!-- <div class="centered-container">
               <div class="name">MANUALS/FILES</div>
                 <input class="input-dept" type="file" placeholder="" id="MF" required>
-            </div>
+            </div> -->
 
-           
-            <div class="centered-container">
-                <button class="custom-button"><span class="material-icons-outlined" title="CREATE" >create</span></button>
-                <button class="custom-button" onclick="Cancel()">CANCEL</button>
-            </div>         
+          <div class="centered-container">
+            <button class="custom-button" id="add" onclick="Submit()">
+              <span class="material-icons-outlined" title="CREATE">create</span>
+            </button>
+            <button class="custom-button" id="update" onclick="Update()">
+              <span class="material-icons-outlined" title="CREATE">create</span>
+            </button>
+            <button class="custom-button" onclick="Cancel()">CANCEL</button>
+          </div>
         </div>
       </div>
       <!--End Modal-->
-
-      <!--Update Modal-->
-      <div id="myModalassetupdate" class="modal">
-        <div class="modal-content">
-          <h2 class="h2h2">Edit Tools</h2>
-
-            <div class="centered-container">
-              <div class="name">Tool Name</div>
-                <input class="input-dept" type="text" placeholder="Name" id="name" required>
-            </div>
-            <div class="centered-container">
-              <div class="name">Code</div>
-                <input class="input-dept" type="text" placeholder="Code" id="username" required>
-            </div>
-            <div class="centered-container">
-              <div class="name">Status</div>
-                <input class="input-dept" type="text" placeholder="Tool Status" id="password" required>
-            </div>
-            <div class="centered-container">
-              <div class="name">Last Price</div>
-                <input class="input-dept" type="text" placeholder="Last Price" id="password" required>
-            </div>
-            <div class="centered-container">
-              <div class="name">Vendor</div>
-                <select id="accntType" required>
-                  <option value="">Vendor</option>
-                  <option value="Administrator">Ph Developers</option>
-                  <option value="User">Isuzu</option>
-              </select>
-            </div>
-            <div class="centered-container">
-              <div class="name">Barcode</div>
-                <input class="input-dept" type="text" placeholder="BARCODE" id="password" required>
-            </div>
-            <div class="centered-container">
-                <button class="custom-button"><span class="material-icons-outlined" title="CREATE" >create</span></button>
-                <button class="custom-button">CANCEL</button>
-            </div>         
-        </div>
-      </div>
-      <!--End edit Modal-->
-
     </div>
 
     <!--Start Modal Delete-->
-        <div id="myModaldelete" class="modal">
-        <div class="modal-content">
-            <h2 class="h2h2">ARE YOU SURE YOU WANT TO DELETE THIS?</h2>
-            <div class="centered-container">
-              <p class="h2black"></p>
-            </div>
-            <div class="centered-container">
-                <button class="custom-button"><span class="material-icons-outlined" title="Delete" >delete</span></button>
-                <button class="custom-button">CANCEL</button>
-            </div>
+
+    <div id="myModaldelete" class="modal">
+      <div class="modal-content">
+        <h2 class="h2h2">ARE YOU SURE YOU WANT TO DELETE THIS?</h2>
+        <div class="centered-container">
+          <p class="h2black" id="delid" hidden></p>
+          <p class="h2black" id="delprocess" hidden></p>
+          <p class="h2black" id="delname"></p>
         </div>
+        <div class="centered-container">
+          <button class="custom-button">
+            <span
+              class="material-icons-outlined"
+              title="Delete"
+              onclick="Remove()"
+              >delete</span
+            >
+          </button>
+          <button class="custom-button" onclick="Cancel()">CANCEL</button>
         </div>
+      </div>
+    </div>
     <!--Delete end modal-->
 
     <!-- Scripts -->
     <!-- ApexCharts -->
-    <script src="/assets/js/tools.js"></script>
-    <script src="/assets/js/dashboard.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.5/apexcharts.min.js"></script>
     <script
       src="https://code.jquery.com/jquery-3.6.1.min.js"
@@ -277,6 +334,491 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Custom JS -->
     <script>
+      $(document).ready(function () {
+        ToolTable();
+      });
+      function Part() {
+        $("#selectrad").show();
+        $("#selectrad1").hide();
+        $("#exdepart").val("");
+        getequipment();
+      }
+
+      // Select radion Button New
+      function New() {
+        $("#selectrad1").show();
+        $("#selectrad").hide();
+        $("#exloc").val("");
+        getsubequipment();
+      }
+
+      function getequipment() {
+        $("#exloc").empty();
+        $("#exloc").append(
+          `
+            <option value="">Select Equipment</option>
+            `
+        );
+        $.get("/api/get_equipment", function (index) {
+          var result = JSON.parse(index).item;
+          $.each(result, function (_, v) {
+            $("#exloc").append(
+              `
+            <option value="` +
+                v.ID +
+                `">` +
+                v.Name +
+                `</option>
+            `
+            );
+          });
+        });
+      }
+
+      function getsubequipment() {
+        $("#exdepart").empty();
+        $("#exdepart").append(
+          `
+            <option value="">Select Equipment</option>
+            `
+        );
+        $.get("/api/get_equipment", function (index) {
+          var result = JSON.parse(index).equipment;
+          $.each(result, function (_, v) {
+            $("#exdepart").append(
+              `
+            <option value="` +
+                v.ID +
+                `">` +
+                v.Name +
+                `</option>
+            `
+            );
+          });
+        });
+      }
+
+      function ToolTable() {
+        $("tbody").empty();
+        $.get("/api/get_tools", function (index) {
+          var result = JSON.parse(index).item;
+          $.each(result, function (_, v) {
+            $("tbody").append(
+              `
+              <tr>
+              <td>` +
+                v.Name +
+                `</td>
+                <td>` +
+                v.Description +
+                `</td>
+                      <td>` +
+                v.Equipment.Name +
+                `</td>
+                      <td>` +
+                v.Model +
+                `</td>
+                <td>` +
+                v.SerialNumber +
+                `</td>
+                <td>` +
+                v.DatePurchase +
+                `</td>
+                <td>` +
+                v.DateUsed +
+                `</td>
+               
+                <td>
+                  <button class="custom-button">
+                    <span class="material-icons-outlined" title="Update Department" onclick="Modify(${v.ID})">create</span>
+                  </button>
+                  <button class="custom-button delete" >
+                    <span class="material-icons-outlined" title="Delete" onclick="Delete(${v.ID})">delete</span>
+                  </button>
+                </td>
+                      </tr>
+            `
+            );
+          });
+          var data = JSON.parse(index).tools;
+          datacount = 0;
+          $.each(data, function (_, k) {
+            $("tbody").append(
+              `
+              <tr>
+                <td>` +
+                k.Name +
+                `</td>
+                <td>` +
+                k.Description +
+                `</td>
+                      <td>` +
+                k.EquipmentList.Name +
+                `</td>
+                      <td>` +
+                k.Model +
+                `</td>
+                <td>` +
+                k.SerialNumber +
+                `</td>
+                <td>` +
+                k.DatePurchase +
+                `</td>
+                <td>` +
+                k.DateUsed +
+                `</td>
+                  <td>
+                  <button class="custom-button">
+                    <span class="material-icons-outlined" title="Update Department" onclick="Modify1(${k.ID})">create</span>
+                  </button>
+                  <button class="custom-button delete" >
+                    <span class="material-icons-outlined" title="Delete" onclick="Delete1(${k.ID})">delete</span>
+                  </button>
+                </td>
+
+                </tr>
+              `
+            );
+          });
+        });
+      }
+
+      function Submit() {
+        var rad1 = $('input[name="fav_language"]:checked').val();
+
+        if (rad1 == null) {
+          // No Selection of Radio Button
+          Swal.fire({
+            toast: true,
+            position: "center",
+            icon: "warning",
+            title: "Please Select Selection!",
+            showConfirmButton: false,
+            timer: 3000,
+          });
+        } else if (rad1 == "HTML") {
+          // Part of Radio Button Selected
+          var exloc = $("#exloc").val();
+          var name = $("#name").val();
+          var desc = $("#description").val();
+          var datep = $("#datepurchase").val();
+          var dateu = $("#dateud").val();
+          var model = $("#model").val();
+          var serialnumber = $("#serialnumber").val();
+
+          if (
+            exloc == "" ||
+            name == "" ||
+            desc == "" ||
+            datep == "" ||
+            dateu == "" ||
+            model == "" ||
+            serialnumber == ""
+          ) {
+            Swal.fire({
+              toast: true,
+              position: "center",
+              icon: "warning",
+              title: "Please Complete Required Details!",
+              showConfirmButton: false,
+              timer: 3000,
+            });
+          } else {
+            $.ajax({
+              url: "/api/tools",
+              data: {
+                name: name,
+                description: desc,
+                id: exloc,
+                process: "exist",
+                dateu: dateu,
+                model: model,
+                datep: datep,
+                serialnumber: serialnumber,
+              },
+              success: function () {
+                Swal.fire({
+                  toast: true,
+                  position: "center",
+                  icon: "success",
+                  title: "New Tools Added",
+                  showConfirmButton: false,
+                  timer: 3000,
+                }).then(function () {
+                  window.location.reload();
+                });
+              },
+            });
+          }
+        } else if (rad1 == "CSS") {
+          // New Location
+          var exdepart = $("#exdepart").val();
+
+          var name = $("#name").val();
+          var desc = $("#description").val();
+          var datep = $("#datepurchase").val();
+          var dateu = $("#dateud").val();
+          var model = $("#model").val();
+          var serialnumber = $("#serialnumber").val();
+
+          if (
+            exdepart == "" ||
+            name == "" ||
+            desc == "" ||
+            datep == "" ||
+            dateu == "" ||
+            model == "" ||
+            serialnumber == ""
+          ) {
+            Swal.fire({
+              toast: true,
+              position: "center",
+              icon: "warning",
+              title: "Please Complete Required Details!",
+              showConfirmButton: false,
+              timer: 3000,
+            });
+          } else {
+            $.ajax({
+              url: "/api/tools",
+              data: {
+                name: name,
+                description: desc,
+                id: exdepart,
+                process: "new",
+                dateu: dateu,
+                model: model,
+                datep: datep,
+                serialnumber: serialnumber,
+              },
+              success: function () {
+                Swal.fire({
+                  toast: true,
+                  position: "center",
+                  icon: "success",
+                  title: "New Tools Added",
+                  showConfirmButton: false,
+                  timer: 3000,
+                }).then(function () {
+                  window.location.reload();
+                });
+              },
+            });
+          }
+        }
+      }
+
+      // Edit Button in Main Location
+      function Modify(id) {
+        var modalasset = document.getElementById("myModal");
+        modalasset.style.display = "block";
+        $("#modaltitle").html("Update tools");
+        $("#add").hide();
+        $("#update").show();
+        $(".radio").hide();
+
+        $.get("/api/get_tools", function (index) {
+          var result = JSON.parse(index).item;
+          $.each(result, function (_, v) {
+            if (v.ID == id) {
+              $("#pid").val(v.ID);
+              $("#name").val(v.Name);
+              $("#description").val(v.Description);
+              $("#datepurchase").val(v.DatePurchase);
+              $("#dateud").val(v.DateUsed);
+              $("#model").val(v.Model);
+              $("#serialnumber").val(v.SerialNumber);
+              $("#process").val("exist");
+            }
+          });
+        });
+      }
+
+      // Edit Button in Main SubLocation
+      function Modify1(id) {
+        var modalasset = document.getElementById("myModal");
+        modalasset.style.display = "block";
+        $("#modaltitle").html("Update tools");
+        $("#add").hide();
+        $("#update").show();
+        $(".radio").hide();
+
+        $.get("/api/get_tools", function (index) {
+          var result = JSON.parse(index).tools;
+          $.each(result, function (_, v) {
+            if (v.ID == id) {
+              $("#pid").val(v.ID);
+              $("#name").val(v.Name);
+              $("#description").val(v.Description);
+              $("#process").val("new");
+              $("#datepurchase").val(v.DatePurchase);
+              $("#dateud").val(v.DateUsed);
+              $("#model").val(v.Model);
+              $("#serialnumber").val(v.SerialNumber);
+              $("#process").val("new");
+            }
+          });
+        });
+      }
+
+      function Update() {
+        var pid = $("#pid").val();
+        var process = $("#process").val();
+        var name = $("#name").val();
+        var desc = $("#description").val();
+        var datep = $("#datepurchase").val();
+        var dateu = $("#dateud").val();
+        var model = $("#model").val();
+        var serialnumber = $("#serialnumber").val();
+        if (process == "exist") {
+          if (
+            name == "" ||
+            desc == "" ||
+            datep == "" ||
+            dateu == "" ||
+            model == "" ||
+            serialnumber == ""
+          ) {
+            Swal.fire({
+              toast: true,
+              position: "center",
+              icon: "warning",
+              title: "Please Complete Required Details!",
+              showConfirmButton: false,
+              timer: 3000,
+            });
+          } else {
+            $.ajax({
+              url: "/api/edit_tools",
+              data: {
+                process: process,
+                pid: pid,
+                name: name,
+                description: desc,
+                dateu: dateu,
+                model: model,
+                datep: datep,
+                serialnumber: serialnumber,
+              },
+              success: function () {
+                Swal.fire({
+                  toast: true,
+                  position: "center",
+                  icon: "success",
+                  title: "Tools Details Updated",
+                  showConfirmButton: false,
+                  timer: 3000,
+                }).then(function () {
+                  window.location.reload();
+                });
+              },
+            });
+          }
+        } else {
+          if (
+            name == "" ||
+            desc == "" ||
+            datep == "" ||
+            dateu == "" ||
+            model == "" ||
+            serialnumber == ""
+          ) {
+            Swal.fire({
+              toast: true,
+              position: "center",
+              icon: "warning",
+              title: "Please Complete Required Details!",
+              showConfirmButton: false,
+              timer: 3000,
+            });
+          } else {
+            $.ajax({
+              url: "/api/edit_tools",
+              data: {
+                process: process,
+                pid: pid,
+                name: name,
+                description: desc,
+                dateu: dateu,
+                model: model,
+                datep: datep,
+                serialnumber: serialnumber,
+              },
+              success: function () {
+                Swal.fire({
+                  toast: true,
+                  position: "center",
+                  icon: "success",
+                  title: "Tools Details Updated",
+                  showConfirmButton: false,
+                  timer: 3000,
+                }).then(function () {
+                  window.location.reload();
+                });
+              },
+            });
+          }
+        }
+      }
+
+      // Delete to Main Location
+      function Delete(id) {
+        var modaldelete = document.getElementById("myModaldelete");
+        modaldelete.style.display = "block";
+        $.get("/api/get_tools", function (index) {
+          var result = JSON.parse(index).item;
+          $.each(result, function (_, v) {
+            if (v.ID == id) {
+              $("#delid").html(v.ID);
+              $("#delname").html(v.Name);
+              $("#delprocess").html("exist");
+            }
+          });
+        });
+      }
+
+      // Delete to SubLocation
+      function Delete1(id) {
+        var modaldelete = document.getElementById("myModaldelete");
+        modaldelete.style.display = "block";
+        $.get("/api/get_tools", function (index) {
+          var result = JSON.parse(index).tools;
+          $.each(result, function (_, v) {
+            if (v.ID == id) {
+              $("#delid").html(v.ID);
+              $("#delname").html(v.Name);
+              $("#delprocess").html("new");
+            }
+          });
+        });
+      }
+
+      // Delete Function
+
+      function Remove() {
+        var id = $("#delid").html();
+        var process = $("#delprocess").html();
+        $.ajax({
+          url: "/api/delete_tools",
+          data: {
+            id: id,
+            process: process,
+          },
+          success: function () {
+            Swal.fire({
+              toast: true,
+              position: "center",
+              icon: "success",
+              title: "Delete Tools Successful",
+              showConfirmButton: false,
+              timer: 3000,
+            }).then(function () {
+              window.location.reload();
+            });
+          },
+        });
+      }
+
       function Cancel() {
         var modalasset = document.getElementById("myModal");
         modalasset.style.display = "none";
@@ -284,67 +826,74 @@
         modaldelete.style.display = "none";
       }
     </script>
-    
+
     <!--ADD asset JS-->
-        <script>
-            var openModalBtnasset = document.getElementById("openModalBtnasset");
-        var closeModalBtnasset = document.getElementById("closeModalBtnasset");
-        var modalasset = document.getElementById("myModal");
+    <script>
+      var openModalBtnasset = document.getElementById("openModalBtnasset");
+      var closeModalBtnasset = document.getElementById("closeModalBtnasset");
+      var modalasset = document.getElementById("myModal");
 
-        openModalBtnasset.addEventListener("click", function() {
+      openModalBtnasset.addEventListener("click", function () {
         modalasset.style.display = "block";
-        });
+        $("#add").show();
+        $("#update").hide();
+        $("#modaltitle").html("Add Tools");
+      });
 
-        closeModalBtnasset.addEventListener("click", function() {
+      closeModalBtnasset.addEventListener("click", function () {
         modalasset.style.display = "none";
-        });
+      });
 
-        window.addEventListener("click", function(event) {
+      window.addEventListener("click", function (event) {
         if (event.target == modalasset) {
-            modalasset.style.display = "none";
+          modalasset.style.display = "none";
         }
-        });
-        </script>
+      });
+    </script>
 
     <!--EDIT USER JS-->
     <script>
-       var openModalBtnassetupdate = document.getElementById("openModalBtnassetupdate");
-        var closeModalBtnassetupdate = document.getElementById("closeModalBtnassetupdate");
-        var modalassetupdate = document.getElementById("myModalassetupdate");
+      var openModalBtnassetupdate = document.getElementById(
+        "openModalBtnassetupdate"
+      );
+      var closeModalBtnassetupdate = document.getElementById(
+        "closeModalBtnassetupdate"
+      );
+      var modalassetupdate = document.getElementById("myModalassetupdate");
 
-        openModalBtnassetupdate.addEventListener("click", function() {
+      openModalBtnassetupdate.addEventListener("click", function () {
         modalassetupdate.style.display = "block";
-        });
+      });
 
-        closeModalBtnassetupdate.addEventListener("click", function() {
+      closeModalBtnassetupdate.addEventListener("click", function () {
         modalassetupdate.style.display = "none";
-        });
+      });
 
-        window.addEventListener("click", function(event) {
+      window.addEventListener("click", function (event) {
         if (event.target == modalassetupdate) {
-            modalassetupdate.style.display = "none";
+          modalassetupdate.style.display = "none";
         }
-        });
+      });
     </script>
     <!--DELETE USER JS-->
     <script>
-        var openModalBtndelete = document.getElementById("openModalBtndelete");
-        var closeModalBtndelete = document.getElementById("closeModalBtndelete");
-        var modaldelete = document.getElementById("myModaldelete");
+      var openModalBtndelete = document.getElementById("openModalBtndelete");
+      var closeModalBtndelete = document.getElementById("closeModalBtndelete");
+      var modaldelete = document.getElementById("myModaldelete");
 
-        openModalBtndelete.addEventListener("click", function() {
+      openModalBtndelete.addEventListener("click", function () {
         modaldelete.style.display = "block";
-        });
+      });
 
-        closeModalBtndelete.addEventListener("click", function() {
+      closeModalBtndelete.addEventListener("click", function () {
         modaldelete.style.display = "none";
-        });
+      });
 
-        window.addEventListener("click", function(event) {
+      window.addEventListener("click", function (event) {
         if (event.target == modaledit) {
-            modaldelete.style.display = "none";
+          modaldelete.style.display = "none";
         }
-        });  
+      });
     </script>
   </body>
 </html>

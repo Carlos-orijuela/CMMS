@@ -100,8 +100,11 @@ func MigrateDB() {
 	loclist := models.LocationList{}
 	equipment := models.Equipment{}
 	equipmentlist := models.EquipmentList{}
+	tools := models.Tools{}
+	toolslist := models.ToolsList{}
+
 	db := GormDB()
-	db.AutoMigrate(&user, &group, &permission, &permlist, &grouplist, &facility, &facilitylist, &location, &loclist,&equipment,&equipmentlist)
+	db.AutoMigrate(&user, &group, &permission, &permlist, &grouplist, &facility, &facilitylist, &location, &loclist,&equipment,&equipmentlist,&tools,&toolslist)
 }
 
 func CreateGroup() {
